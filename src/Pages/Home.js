@@ -398,7 +398,7 @@ const Home = () => {
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
-              Rishi Bhattachali
+              Rishi Bhattasali
             </h2>
             <p className="mt-2 text-center text-sm leading-relaxed text-zinc-600 dark:text-zinc-500">
               Machine Learning
