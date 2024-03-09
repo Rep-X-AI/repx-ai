@@ -35,12 +35,12 @@ const Home = () => {
               </span>
             </Link>
             <div className="flex items-center lg:order-2">
-              <Link
-                to={page}
+              <button
                 className="button-border-gradient relative rounded-lg text-white text-sm flex items-center gap-1.5 py-2 px-5 mx-3 shadow-button hover:button-gradient-hover"
+                disabled="true"
               >
                 Get started
-              </Link>
+              </button>
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
@@ -227,12 +227,12 @@ const Home = () => {
               outcomes effortlessly with cutting-edge image processing and NLP
               technologies.
             </p>
-            <Link
-              to={page}
+            <button
               className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
+              disabled="true"
             >
               Get Started
-            </Link>
+            </button>
           </div>
         </div>
         <div className="pt-10 opacity-80">

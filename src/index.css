@@ -5,6 +5,7 @@
 body{
   background-color: rgb(3 0 23);
   scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
 }
 
 
