@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useAuth } from '../Context/AuthContext';
 
 
-const DashboardHome = ({ loginDays }) => {
+const DashboardHome = () => {
   const { currentUser } = useAuth();
-  let x = currentUser.uid;
 
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
