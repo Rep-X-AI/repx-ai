@@ -249,8 +249,7 @@ const Home = () => {
             <span className="hero-subtitle-gradient relative mb-4 font-medium text-sm inline-flex items-center gap-2 py-2 px-6 rounded-full">
               <img src="/icon-title.svg" alt="icon" />
               <span className="hero-subtitle-text">
-                {" "}
-                Some of Main Features{" "}
+                {" "}Some of Main Features{" "}
               </span>
             </span>
             <h2 className="text-white mb-4.5 text-2xl font-bold tracking-wide sm:text-4xl xl:text-heading-2">
@@ -274,11 +273,10 @@ const Home = () => {
                     <img src="/icon-01.svg" alt="icon" />
                   </span>
                   <h4 className="font-semibold text-lg text-white mb-4">
-                    Intelligent Writing Assistance
+                    Online Exams and Assignments
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Our AI writing tool analyzes your content, suggests
-                    improvements,
+                  Functionality to create assignments where multiple students can post their Reports
                   </p>
                 </div>
               </div>
@@ -290,10 +288,10 @@ const Home = () => {
                     <img src="/icon-02.svg" alt="icon" />
                   </span>
                   <h4 className="font-semibold text-lg text-white mb-4">
-                    Grammar and Spell Check
+                    Approapriate Marking
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Say goodbye to embarrassing typos and grammar mistakes
+                  Enables the Teacher to calculate marks of each Student and generate result for them.
                   </p>
                 </div>
               </div>
@@ -305,11 +303,10 @@ const Home = () => {
                     <img src="/icon-03.svg" alt="icon" />
                   </span>
                   <h4 className="font-semibold text-lg text-white mb-4">
-                    Plagiarism Detection
+                    Browse History
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Originality is key, and our AI writing tool helps you
-                    maintain it
+                  Students and teachers can view their attended and authored exam histories, respectively.
                   </p>
                 </div>
               </div>
@@ -324,11 +321,10 @@ const Home = () => {
                     <img src="/icon-04.svg" alt="icon" />
                   </span>
                   <h4 className="font-semibold text-lg text-white mb-4">
-                    Voice to Text Conversion
+                    Diagram Analyser
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Transform your spoken words into written text easily &amp;
-                    effortlessly
+                  Analyzes reports using teacher-inputted keywords, diagrams, and equations, then assesses them.
                   </p>
                 </div>
               </div>
@@ -340,11 +336,10 @@ const Home = () => {
                     <img src="/icon-05.svg" alt="icon" />
                   </span>
                   <h4 className="font-semibold text-lg text-white mb-4">
-                    Style and Tone Adaptation
+                    Sentimental Extra Grading
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Whether you need a professional, or positive tone it has
-                    everyone
+                    Also grades the reports based on the sentiment of the content and the teacher's feedback.
                   </p>
                 </div>
               </div>
