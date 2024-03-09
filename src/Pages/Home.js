@@ -12,6 +12,13 @@ const Home = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const [activeLink, setActiveLink] = useState("home");
+
+  const handleActiveLink = (link) => {
+    setActiveLink(link);
+  };
+
+
   return (
     <>
       <header>
@@ -79,8 +86,9 @@ const Home = () => {
                   <li>
                     <a
                       href="#home"
-                      className="block py-2 pr-4 pl-3 text-white rounded text-center hover:nav-gradient nav-gradient"
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "home" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                       aria-current="page"
+                      onClick={() => handleActiveLink("home")}
                     >
                       Home
                     </a>
@@ -88,8 +96,9 @@ const Home = () => {
                   <li>
                     <a
                       href="#about"
-                      className="block py-2 pr-4 pl-3 text-white rounded text-center"
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "about" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                       aria-current="page"
+                      onClick={() => handleActiveLink("about")}
                     >
                       About
                     </a>
@@ -97,8 +106,9 @@ const Home = () => {
                   <li>
                     <a
                       href="#features"
-                      className="block py-2 pr-4 pl-3 text-white rounded text-center"
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "features" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                       aria-current="page"
+                      onClick={() => handleActiveLink("features")}
                     >
                       Features
                     </a>
@@ -106,8 +116,9 @@ const Home = () => {
                   <li>
                     <a
                       href="#team"
-                      className="block py-2 pr-4 pl-3 text-white rounded text-center"
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "team" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                       aria-current="page"
+                      onClick={() => handleActiveLink("team")}
                     >
                       Team
                     </a>
@@ -115,8 +126,9 @@ const Home = () => {
                   <li>
                     <a
                       href="#contact"
-                      className="block py-2 pr-4 pl-3 text-white rounded text-center"
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "contact" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                       aria-current="page"
+                      onClick={() => handleActiveLink("contact")}
                     >
                       Contact
                     </a>
@@ -126,40 +138,46 @@ const Home = () => {
             )}
             <div
               className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-              id="mobile-menu-2"
-            >
+              id="mobile-menu-2">
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>
                   <a
                     href="#home"
-                    className="block px-3 rounded hover:nav-gradient nav-gradient text-white"
+                    className={`block px-3 rounded ${activeLink === "home" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
                     aria-current="page"
+                    onClick={() => handleActiveLink("home")}
                   >
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className="block px-3 rounded text-gray-400">
+                  <a href="#about" className={`block px-3 rounded ${activeLink === "about" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                  onClick={() => handleActiveLink("about")}
+                  >
                     About
                   </a>
                 </li>
                 <li>
                   <a
                     href="#features"
-                    className="block px-3 rounded text-gray-400"
+                    className={`block px-3 rounded ${activeLink === "features" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                    onClick={() => handleActiveLink("features")}
                   >
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#team" className="block px-3 rounded text-gray-400">
+                  <a href="#team" className={`block px-3 rounded ${activeLink === "team" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                  onClick={() => handleActiveLink("team")}
+                  >
                     Team
                   </a>
                 </li>
                 <li>
                   <a
                     href="#contact"
-                    className="block px-3 rounded text-gray-400"
+                    className={`block px-3 rounded ${activeLink === "contact" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                    onClick={() => handleActiveLink("contact")}
                   >
                     Contact
                   </a>
@@ -173,7 +191,7 @@ const Home = () => {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative overflow-hidden z-10 pt-28  md:pt-32 xl:pt-40"
+        className="relative overflow-hidden z-10 pt-28 md:pt-32 xl:pt-36"
       >
         <div className="max-w-7xl mx-auto">
           <div className="absolute -z-10 pointer-events-none inset-0 overflow-hidden -mx-28">
@@ -225,7 +243,7 @@ const Home = () => {
       {/* Features Section */}
       <section
         id="features"
-        className="overflow-hidden pt-16 md:pt-24 xl:pt-32">
+        className="overflow-hidden pt-28 md:pt-32 xl:pt-36">
         <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
           <div className="text-center">
             <span className="hero-subtitle-gradient relative mb-4 font-medium text-sm inline-flex items-center gap-2 py-2 px-6 rounded-full">
@@ -250,7 +268,7 @@ const Home = () => {
 
             <div className="flex flex-wrap justify-center">
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="relative rounded-lg group overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="relative rounded-lg lg:rounded-none group overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-01.svg" alt="icon" />
@@ -266,7 +284,7 @@ const Home = () => {
               </div>
 
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="group rounded-lg relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="group rounded-lg lg:rounded-none relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-02.svg" alt="icon" />
@@ -281,7 +299,7 @@ const Home = () => {
               </div>
 
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="group rounded-lg relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="group rounded-lg lg:rounded-none relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-03.svg" alt="icon" />
@@ -300,7 +318,7 @@ const Home = () => {
 
             <div className="flex flex-wrap justify-center">
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="group rounded-lg relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="group rounded-lg lg:rounded-none relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1 rotate-180"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-04.svg" alt="icon" />
@@ -316,7 +334,7 @@ const Home = () => {
               </div>
 
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="group rounded-lg relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="group rounded-lg lg:rounded-none relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1 rotate-180"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-05.svg" alt="icon" />
@@ -332,7 +350,7 @@ const Home = () => {
               </div>
 
               <div className="w-full sm:w-1/2 lg:w-1/3">
-                <div className="group rounded-lg relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
+                <div className="group rounded-lg lg:rounded-none relative overflow-hidden text-center py-8 sm:py-10 xl:py-15 px-4 lg:px-8 xl:px-13">
                   <span className="group-hover:opacity-100 opacity-0 features-bg absolute w-full h-full left-0 top-0 -z-1 rotate-180"></span>
                   <span className="icon-border relative max-w-[80px] w-full h-20 rounded-full inline-flex items-center justify-center mb-8 mx-auto">
                     <img src="/icon-06.svg" alt="icon" />
@@ -353,7 +371,7 @@ const Home = () => {
       {/* Team Section */}
       <section
         id="team"
-        className="overflow-hidden min-h-screen pt-16 md:pt-24 xl:pt-32">
+        className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36">
         <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
           <div className="text-center">
             <span className="hero-subtitle-gradient relative mb-4 font-medium text-sm inline-flex items-center gap-2 py-2 px-6 rounded-full">
@@ -462,3 +480,6 @@ const Home = () => {
     </>
   );
 };
+
+
+export default Home;
