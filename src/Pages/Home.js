@@ -446,7 +446,7 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/PretishaSahoo" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/team-01.jpg" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img src="/pretisha.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
