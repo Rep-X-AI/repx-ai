@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   const { currentUser } = useAuth();
@@ -18,7 +19,6 @@ const Home = () => {
     setActiveLink(link);
   };
 
-
   return (
     <>
       <header>
@@ -35,12 +35,13 @@ const Home = () => {
               </span>
             </Link>
             <div className="flex items-center lg:order-2">
-              <button
+              <Link
+                to={page}
                 className="button-border-gradient relative rounded-lg text-white text-sm flex items-center gap-1.5 py-2 px-5 mx-3 shadow-button hover:button-gradient-hover"
                 disabled="true"
               >
                 Get started
-              </button>
+              </Link>
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
@@ -86,7 +87,11 @@ const Home = () => {
                   <li>
                     <a
                       href="#home"
-                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "home" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${
+                        activeLink === "home"
+                          ? "text-white hover:nav-gradient nav-gradient"
+                          : "text-gray-400"
+                      }`}
                       aria-current="page"
                       onClick={() => handleActiveLink("home")}
                     >
@@ -96,7 +101,11 @@ const Home = () => {
                   <li>
                     <a
                       href="#about"
-                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "about" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${
+                        activeLink === "about"
+                          ? "text-white hover:nav-gradient nav-gradient"
+                          : "text-gray-400"
+                      }`}
                       aria-current="page"
                       onClick={() => handleActiveLink("about")}
                     >
@@ -106,7 +115,11 @@ const Home = () => {
                   <li>
                     <a
                       href="#features"
-                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "features" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${
+                        activeLink === "features"
+                          ? "text-white hover:nav-gradient nav-gradient"
+                          : "text-gray-400"
+                      }`}
                       aria-current="page"
                       onClick={() => handleActiveLink("features")}
                     >
@@ -116,7 +129,11 @@ const Home = () => {
                   <li>
                     <a
                       href="#team"
-                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "team" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${
+                        activeLink === "team"
+                          ? "text-white hover:nav-gradient nav-gradient"
+                          : "text-gray-400"
+                      }`}
                       aria-current="page"
                       onClick={() => handleActiveLink("team")}
                     >
@@ -126,7 +143,11 @@ const Home = () => {
                   <li>
                     <a
                       href="#contact"
-                      className={`block py-2 pr-4 pl-3 rounded text-center ${activeLink === "contact" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                      className={`block py-2 pr-4 pl-3 rounded text-center ${
+                        activeLink === "contact"
+                          ? "text-white hover:nav-gradient nav-gradient"
+                          : "text-gray-400"
+                      }`}
                       aria-current="page"
                       onClick={() => handleActiveLink("contact")}
                     >
@@ -138,12 +159,17 @@ const Home = () => {
             )}
             <div
               className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-              id="mobile-menu-2">
+              id="mobile-menu-2"
+            >
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>
                   <a
                     href="#home"
-                    className={`block px-3 rounded ${activeLink === "home" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                    className={`block px-3 rounded ${
+                      activeLink === "home"
+                        ? "text-white hover:nav-gradient nav-gradient"
+                        : "text-gray-400"
+                    }`}
                     aria-current="page"
                     onClick={() => handleActiveLink("home")}
                   >
@@ -151,8 +177,14 @@ const Home = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#about" className={`block px-3 rounded ${activeLink === "about" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
-                  onClick={() => handleActiveLink("about")}
+                  <a
+                    href="#about"
+                    className={`block px-3 rounded ${
+                      activeLink === "about"
+                        ? "text-white hover:nav-gradient nav-gradient"
+                        : "text-gray-400"
+                    }`}
+                    onClick={() => handleActiveLink("about")}
                   >
                     About
                   </a>
@@ -160,15 +192,25 @@ const Home = () => {
                 <li>
                   <a
                     href="#features"
-                    className={`block px-3 rounded ${activeLink === "features" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                    className={`block px-3 rounded ${
+                      activeLink === "features"
+                        ? "text-white hover:nav-gradient nav-gradient"
+                        : "text-gray-400"
+                    }`}
                     onClick={() => handleActiveLink("features")}
                   >
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#team" className={`block px-3 rounded ${activeLink === "team" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
-                  onClick={() => handleActiveLink("team")}
+                  <a
+                    href="#team"
+                    className={`block px-3 rounded ${
+                      activeLink === "team"
+                        ? "text-white hover:nav-gradient nav-gradient"
+                        : "text-gray-400"
+                    }`}
+                    onClick={() => handleActiveLink("team")}
                   >
                     Team
                   </a>
@@ -176,7 +218,11 @@ const Home = () => {
                 <li>
                   <a
                     href="#contact"
-                    className={`block px-3 rounded ${activeLink === "contact" ? 'text-white hover:nav-gradient nav-gradient' : 'text-gray-400'}`}
+                    className={`block px-3 rounded ${
+                      activeLink === "contact"
+                        ? "text-white hover:nav-gradient nav-gradient"
+                        : "text-gray-400"
+                    }`}
                     onClick={() => handleActiveLink("contact")}
                   >
                     Contact
@@ -218,21 +264,29 @@ const Home = () => {
               </span>
             </a>
             <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl">
-              Revolutionizing Education: AI Insights for Exceptional Student
-              Reports
+             Revolutionizing Education 
+              <br/>
+
+              <div className="neww mt-5">
+                <span className="head-p text-center"> AI Insights for Exceptional Student Report</span>
+              </div>
             </h1>
-            <p className="max-w-[500px] mx-auto mb-9 font-medium md:text-lg text-gray-400">
+            <p
+              className="max-w-[500px] mx-auto mt-12 mb-9 font-medium md:text-lg text-gray-400 relative "
+              id="lild"
+            >
               Experience education redefined. Our AI analyzes reports with
               precision, offering personalized insights. Elevate learning
               outcomes effortlessly with cutting-edge image processing and NLP
               technologies.
             </p>
-            <button
+            <Link
+              to={page}
               className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
               disabled="true"
             >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
         <div className="pt-10 opacity-80">
@@ -243,13 +297,15 @@ const Home = () => {
       {/* Features Section */}
       <section
         id="features"
-        className="overflow-hidden pt-28 md:pt-32 xl:pt-36">
+        className="overflow-hidden pt-28 md:pt-32 xl:pt-36"
+      >
         <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
           <div className="text-center">
             <span className="hero-subtitle-gradient relative mb-4 font-medium text-sm inline-flex items-center gap-2 py-2 px-6 rounded-full">
               <img src="/icon-title.svg" alt="icon" />
               <span className="hero-subtitle-text">
-                {" "}Some of Main Features{" "}
+                {" "}
+                Some of Main Features{" "}
               </span>
             </span>
             <h2 className="text-white mb-4.5 text-2xl font-bold tracking-wide sm:text-4xl xl:text-heading-2">
@@ -276,7 +332,8 @@ const Home = () => {
                     Online Exams and Assignments
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                  Functionality to create assignments where multiple students can post their Reports
+                    Functionality to create assignments where multiple students
+                    can post their Reports
                   </p>
                 </div>
               </div>
@@ -291,7 +348,8 @@ const Home = () => {
                     Approapriate Marking
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                  Enables the Teacher to calculate marks of each Student and generate result for them.
+                    Enables the Teacher to calculate marks of each Student and
+                    generate result for them.
                   </p>
                 </div>
               </div>
@@ -306,7 +364,8 @@ const Home = () => {
                     Browse History
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                  Students and teachers can view their attended and authored exam histories, respectively.
+                    Students and teachers can view their attended and authored
+                    exam histories, respectively.
                   </p>
                 </div>
               </div>
@@ -324,7 +383,8 @@ const Home = () => {
                     Diagram Analyser
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                  Analyzes reports using teacher-inputted keywords, diagrams, and equations, then assesses them.
+                    Analyzes reports using teacher-inputted keywords, diagrams,
+                    and equations, then assesses them.
                   </p>
                 </div>
               </div>
@@ -339,7 +399,8 @@ const Home = () => {
                     Sentimental Extra Grading
                   </h4>
                   <p className="font-medium text-gray-400/80">
-                    Also grades the reports based on the sentiment of the content and the teacher's feedback.
+                    Also grades the reports based on the sentiment of the
+                    content and the teacher's feedback.
                   </p>
                 </div>
               </div>
@@ -366,7 +427,8 @@ const Home = () => {
       {/* Team Section */}
       <section
         id="team"
-        className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36">
+        className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36"
+      >
         <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
           <div className="text-center">
             <span className="hero-subtitle-gradient relative mb-4 font-medium text-sm inline-flex items-center gap-2 py-2 px-6 rounded-full">
@@ -380,7 +442,8 @@ const Home = () => {
               Meet Our Team
             </h2>
             <p className="max-w-[714px] mx-auto mb-5 font-medium text-gray-400/90 mt-2.5">
-              Our team is made up of talented and passionate individuals who are dedicated to making a difference in the world of education.
+              Our team is made up of talented and passionate individuals who are
+              dedicated to making a difference in the world of education.
             </p>
           </div>
         </div>
@@ -389,7 +452,11 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/Rishi2403" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/rishi.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/rishi.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -403,11 +470,15 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/priyanshudutta04" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/priyangshu.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/priyangshu.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
-            Priyanshu Dutta
+              Priyanshu Dutta
             </h2>
             <p className="mt-2 text-center text-sm leading-relaxed text-zinc-600 dark:text-zinc-500">
               App Development
@@ -417,7 +488,11 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/SatyakiDey75" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/satyaki.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/satyaki.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -431,7 +506,11 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/subhadeeproy3902" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/subha.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/subha.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -445,7 +524,11 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/ArunavaCoderEm" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/arunava.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/arunava.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -459,7 +542,11 @@ const Home = () => {
           <div className="mx-auto mb-6 w-full p-4 sm:mb-0 sm:w-1/4 sm:p-10">
             <a href="https://github.com/PretishaSahoo" rel="noreferrer">
               <div className="mx-auto aspect-square h-48 w-48 overflow-hidden rounded-full border border-zinc-200 shadow-md transition-all duration-150 ease-in-out hover:scale-110 hover:shadow-xl active:scale-95 dark:border-zinc-800">
-                <img src="/pretisha.webp" alt="team1" className="h-48 w-48 rounded-full object-cover object-center" />
+                <img
+                  src="/pretisha.webp"
+                  alt="team1"
+                  className="h-48 w-48 rounded-full object-cover object-center"
+                />
               </div>
             </a>
             <h2 className="mt-5 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100">
@@ -472,9 +559,9 @@ const Home = () => {
         </div>
       </section>
 
+      <Footer />
     </>
   );
 };
-
 
 export default Home;
