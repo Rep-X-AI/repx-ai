@@ -1269,6 +1269,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz#2cbcf822bf3764c9658c4d2e568bd0c0cb748016"
   integrity sha512-+OJ9konv95ClSTOJCmMZqpd5+YGsB2S+x6w3E1oaM8UuR5j8nTNHYSz8c9BEPGDOCMQYIEEGlVPj/VY64iTbGw==
 
+"@dotmind/react-use-pwa@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@dotmind/react-use-pwa/-/react-use-pwa-1.0.4.tgz#09cbeaae7e06f28e338f8861723e69daa3ea1092"
+  integrity sha512-qZauJLQu9hbdy6eAIm49YfI+8Dxty9tr8Zmv99M4rV37zwT7LVSdohXlGmFXXo19v5YV/Ig0Mnn5hRGPCxWDrA==
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
@@ -4337,11 +4342,6 @@ destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.2.0.tgz#4803735509ad8be552934c67df614f94e66fa015"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
-
-detect-browser@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/detect-browser/-/detect-browser-5.2.0.tgz#c9cd5afa96a6a19fda0bbe9e9be48a6b6e1e9c97"
-  integrity sha512-tr7XntDAu50BVENgQfajMLzacmSe34D+qZc4zjnniz0ZVuw/TZcLcyxHQjYpJTM36sGEkZZlYLnIM1hH7alTMA==
 
 detect-newline@^3.0.0:
   version "3.1.0"
@@ -9917,13 +9917,6 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
-
-use-pwa@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/use-pwa/-/use-pwa-1.1.0.tgz#9e248e95c2f3764ef1cd667bcc4eb78cd7215462"
-  integrity sha512-26xIt/T/lMc3mD2iDSpbRz0SnicCo+w1VfHY8nCsBl+cRYtLLTwI8EkqXN7QZ1EtihAXSPdh11o5UgFkTikFgQ==
-  dependencies:
-    detect-browser "5.2.0"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
