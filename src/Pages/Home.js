@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
+import InstallButton from "../Components/InstallButton";
 
 const Home = () => {
   const { currentUser } = useAuth();
@@ -58,9 +59,9 @@ const Home = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
                 <svg
@@ -70,9 +71,9 @@ const Home = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
@@ -264,11 +265,13 @@ const Home = () => {
               </span>
             </a>
             <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl">
-             Revolutionizing Education 
-              <br/>
-
+              Revolutionizing Education
+              <br />
               <div className="neww mt-5">
-                <span className="head-p text-center"> AI Insights for Exceptional Student Report</span>
+                <span className="head-p text-center">
+                  {" "}
+                  AI Insights for Exceptional Student Report
+                </span>
               </div>
             </h1>
             <p
@@ -280,13 +283,16 @@ const Home = () => {
               outcomes effortlessly with cutting-edge image processing and NLP
               technologies.
             </p>
-            <Link
-              to={page}
-              className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
-              disabled="true"
-            >
-              Get Started
-            </Link>
+            <div className="flex flex-wrap justify-center items-center gap-8">
+              <Link
+                to={page}
+                className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
+                disabled="true"
+              >
+                Get Started
+              </Link>
+              <InstallButton />
+            </div>
           </div>
         </div>
         <div className="pt-10 opacity-80">
@@ -400,7 +406,7 @@ const Home = () => {
                   </h4>
                   <p className="font-medium text-gray-400/80">
                     Also grades the reports based on the sentiment of the
-                    content and the teacher's feedback.
+                    content and the teacher&apos;s feedback.
                   </p>
                 </div>
               </div>
