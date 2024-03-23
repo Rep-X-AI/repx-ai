@@ -39,7 +39,7 @@ const Home = () => {
               <Link
                 to={page}
                 className="button-border-gradient relative rounded-lg text-white text-sm flex items-center gap-1.5 py-2 px-5 mx-3 shadow-button hover:button-gradient-hover"
-                disabled="true"
+                disabled={true}
               >
                 Get started
               </Link>
@@ -287,7 +287,7 @@ const Home = () => {
               <Link
                 to={page}
                 className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
-                disabled="true"
+                disabled={true}
               >
                 Get Started
               </Link>
