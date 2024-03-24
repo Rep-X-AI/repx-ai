@@ -21,7 +21,7 @@ const Signup = () => {
   async function handleGoogleSignUp() {
     try {
       await googleSignUp();
-      history("/dashboard");
+      history("/role");
     } catch (error) {
       console.error("Google Sign Up failed:", error);
     }

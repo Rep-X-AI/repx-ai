@@ -17,7 +17,7 @@ const Login = () => {
   async function handleGoogleSignUp() {
     try {
       await googleSignUp();
-      history("/dashboard");
+      history("/role");
     } catch (error) {
       console.error("Google Sign Up failed:", error);
     }
@@ -36,7 +36,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history("/dashboard");
+      history("/role");
     } catch (error) {
       console.error("Signup failed:", error);
       if (error.code === "auth/invalid-login-credentials") {

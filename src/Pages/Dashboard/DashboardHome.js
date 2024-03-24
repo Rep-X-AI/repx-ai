@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAuth } from '../Context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 
 
-const DashboardHome = () => {
+const DashboardHome = ({role}) => {
   const { currentUser } = useAuth();
 
   const currentTime = new Date();
@@ -23,6 +23,7 @@ const DashboardHome = () => {
   return (
     <>
       <div className="p-6 pt-24 min-h-screen lg:ml-64">
+        <p className='text-white'>{role}</p>
         <div className='bg-gradient-to-tr to-purple-600 from-indigo-800 overflow-hidden p-4 md:p-6 rounded mb-8 relative'>
           <div className='hidden lg:block mr-16 -mt-4 top-0 right-0 absolute pointer-events-none'>
             <img src="/idk.webp" alt="Illustration of a person working on a computer" className="w-64 h-64 object-cover placeholder pb-28" />

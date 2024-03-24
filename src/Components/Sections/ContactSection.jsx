@@ -1,4 +1,5 @@
 import React from 'react'
+import "./contact.css"
 
 const ContactSection = () => {
   return (
@@ -23,10 +24,10 @@ const ContactSection = () => {
         </div>
 
         <div className="contact-container">
-          <div className="form">
+          <div className="contactform">
             <div className="contact-info">
-              <h3 className="title">Let's get in touch</h3>
-              <p className="text">
+              <h3 className="contact-title">Let's get in touch</h3>
+              <p className="contact-text">
                 Please provide your information and any inquiries you may have in the forms ...
               </p>
 
@@ -61,19 +62,19 @@ const ContactSection = () => {
               <span className="circle two"></span>
 
               <form action="https://api.web3forms.com/submit" method="POST" autocomplete="off">
-                <h3 className="title">Contact us</h3>
+                <h3 className="contact-title">Contact us</h3>
                 <input type="hidden" name="access_key" value="bbee8533-7366-46ef-9df0-951885581974"></input>
                 <div className="input-container">
-                  <input type="text" name="name" className="input" placeholder='Username' required />
+                  <input type="text" name="name" className="contact-input" placeholder='Username' required />
                 </div>
                 <div className="input-container">
-                  <input type="email" name="email" className="input" placeholder='Email - abcd@gmail.com' required />
+                  <input type="email" name="email" className="contact-input" placeholder='Email - abcd@gmail.com' required />
                 </div>
                 <div className="input-container">
-                  <input type="tel" name="phone" className="input" placeholder='Phone - 2233445566' required />
+                  <input type="tel" name="phone" className="contact-input" placeholder='Phone - 2233445566' required />
                 </div>
                 <div className="input-container textarea">
-                  <textarea name="message" className="input" placeholder='Write your message here ...' required></textarea>
+                  <textarea name="message" className="contact-input" placeholder='Write your message here ...' required></textarea>
                 </div>
                 <button type="submit" value="Send" className="btn">Send</button>
               </form>

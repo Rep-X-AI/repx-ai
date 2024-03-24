@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import Footer from "../Components/Footer";
-import TeamSection from "../Components/TeamSection";
-import HeroSection from "../Components/HeroSection";
-import AboutSection from "../Components/AboutSection";
-import FeaturesSection from "../Components/FeaturesSection";
+import TeamSection from "../Components/Sections/TeamSection";
+import HeroSection from "../Components/Sections/HeroSection";
+import AboutSection from "../Components/Sections/AboutSection";
+import FeaturesSection from "../Components/Sections/FeaturesSection";
 import Navbar from "../Components/Navbar";
-import ContactSection from "../Components/ContactSection";
+import ContactSection from "../Components/Sections/ContactSection";
 
 const Home = () => {
   const { currentUser } = useAuth();
