@@ -21,7 +21,9 @@ const Signup = () => {
   async function handleGoogleSignUp() {
     try {
       await googleSignUp();
-      history("/role");
+      setTimeout(() => {
+        history("/role");
+      }, 2000);
     } catch (error) {
       console.error("Google Sign Up failed:", error);
     }
@@ -53,6 +55,7 @@ const Signup = () => {
       emailRef.current.value = "";
       passwordRef.current.value = "";
       passwordConfirmRef.current.value = "";
+      history("/login");
     } catch (error) {
       console.error("Signup failed:", error);
       if (error.code === "auth/email-already-in-use") {
