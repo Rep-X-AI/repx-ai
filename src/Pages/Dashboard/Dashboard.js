@@ -32,6 +32,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
+    console.log(nodeEnv);
     const baseUrl =
       nodeEnv === "production"
         ? "https://repx-ai-backend.vercel.app"

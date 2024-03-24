@@ -61,7 +61,7 @@ const ContactSection = () => {
               <span className="circle one"></span>
               <span className="circle two"></span>
 
-              <form action="https://api.web3forms.com/submit" method="POST" autocomplete="off">
+              <form action="https://api.web3forms.com/submit" method="POST" autoComplete="off">
                 <h3 className="contact-title">Contact us</h3>
                 <input type="hidden" name="access_key" value="bbee8533-7366-46ef-9df0-951885581974"></input>
                 <div className="input-container">

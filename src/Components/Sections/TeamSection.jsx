@@ -26,7 +26,7 @@ const TeamSection = () => {
         </div>
       </div>
 
-      <div class="teams-cards-container">
+      <div className="teams-cards-container">
         <TeamPic
           name="Rishi Bhattasali"
           designation="Machine Learning"

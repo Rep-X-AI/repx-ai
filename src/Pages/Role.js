@@ -35,6 +35,7 @@ const Role = () => {
 
   const createUser = async ({ role }) => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
+    console.log(nodeEnv);
     const baseUrl =
       nodeEnv === "production"
         ? "https://repx-ai-backend.vercel.app"
