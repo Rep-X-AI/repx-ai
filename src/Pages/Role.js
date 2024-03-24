@@ -54,9 +54,7 @@ const Role = () => {
         }
       );
       console.log(response.data);
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 3000);
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }
