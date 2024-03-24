@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import InstallButton from './InstallButton'
 
 const HeroSection = ({ page }) => {
   return (
@@ -51,7 +50,7 @@ const HeroSection = ({ page }) => {
             outcomes effortlessly with cutting-edge image processing and NLP
             technologies.
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8">
+          {/*<div className="flex flex-wrap justify-center items-center gap-8">*/}
           <Link
             to={page}
             className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
@@ -59,8 +58,8 @@ const HeroSection = ({ page }) => {
           >
             Get Started
           </Link>
-          <InstallButton />
-          </div>
+          {/*<InstallButton />*/}
+          {/*</div>*/}
         </div>
       </div>
       <div className="pt-10 opacity-80">

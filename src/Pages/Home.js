@@ -6,6 +6,7 @@ import HeroSection from "../Components/HeroSection";
 import AboutSection from "../Components/AboutSection";
 import FeaturesSection from "../Components/FeaturesSection";
 import Navbar from "../Components/Navbar";
+import ContactSection from "../Components/ContactSection";
 
 const Home = () => {
   const { currentUser } = useAuth();
@@ -40,6 +41,8 @@ const Home = () => {
       <FeaturesSection />
 
       <TeamSection />
+
+      <ContactSection />
 
       <Footer />
     </>
