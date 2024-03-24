@@ -1,26 +1,27 @@
 {
-  "short_name": "Repx AI",
-  "name": "Repx AI",
+  "theme_color": "#a362fe",
+  "background_color": "#000a33",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
+      "purpose": "any",
       "sizes": "512x512",
+      "src": "icon512_rounded.png",
       "type": "image/png"
     }
   ],
-  "start_url": "/",
-  "scope": "/",
+  "orientation": "any",
   "display": "standalone",
-  "theme_color": "#6e25ed ",
-  "background_color": "#030017"
+  "dir": "auto",
+  "lang": "en-US",
+  "description": "Repx AI - A platform for evaluating and improving our education system.",
+  "scope": "/",
+  "start_url": "/",
+  "short_name": "Repx AI",
+  "name": "Repx AI"
 }
