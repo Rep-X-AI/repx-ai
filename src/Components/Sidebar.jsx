@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
-const Sidebar = () => {
+const Sidebar = ({ role }) => {
   const location = useLocation();
 
   const { currentUser, logout } = useAuth()
@@ -37,7 +37,7 @@ const Sidebar = () => {
   return (
     <>
       <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700">
-        <div className="px-3 py-3 pb-4 lg:px-5 lg:pl-3">
+        <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
               <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 text-sm rounded-lg lg:hidden  focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
@@ -47,12 +47,14 @@ const Sidebar = () => {
                   <path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                 </svg>
               </button>
-              <Link
-                to="/dashboard"
-                className="flex pl-4 items-center"
-              >
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-                  Repx AI
+              <Link to="/dashboard" className="flex pl-4 items-center">
+                <img
+                  src="/repx-logo.webp"
+                  className="mr-0 h-9"
+                  alt="Flowbite Logo"
+                />
+                <span className="self-center pt-2 text-xl font-bold tracking-wide whitespace-nowrap text-white">
+                  epx AI
                 </span>
               </Link>
             </div>
@@ -68,10 +70,13 @@ const Sidebar = () => {
                 {isOpen &&
                   <div className="z-50 absolute top-12 right-1 lg:right-3 my-4 text-base list-none  divide-y rounded shadow bg-gray-700 divide-gray-600" id="dropdown-user">
                     <div className="px-4 py-3" role="none">
-                      <p className="text-sm text-white" role="none">
+                      <p className="text-sm my-1 text-white" role="none">
                         {currentUser.displayName}
                       </p>
-                      <p className="text-sm font-medium  truncate text-gray-300" role="none">
+                      <p className="text-sm my-1 text-white tracking-wider" role="none">
+                        {(role).toUpperCase()}
+                      </p>
+                      <p className="text-sm my-1 font-medium truncate text-gray-300" role="none">
                         {currentUser.email}
                       </p>
                     </div>
@@ -105,6 +110,14 @@ const Sidebar = () => {
               <span className="ms-3">Dashboard</span>
             </CustomLink>
 
+            <CustomLink to="/dashboard/create-assignment">
+              <svg className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+              </svg>
+              <span className="ms-3">Create Assignment</span>
+            </CustomLink>
+
             <CustomLink to="/dashboard/evaluate">
               <svg className="flex-shrink-0 w-5 h-5 text-gray-300 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                 <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
@@ -114,7 +127,7 @@ const Sidebar = () => {
             </CustomLink>
 
             <CustomLink to="/dashboard/history">
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-days" className="svg-inline--fa fa-calendar-days w-5 h-5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"></path></svg>
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="calendar-days" className="svg-inline--fa fa-calendar-days w-5 h-5" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"></path></svg>
               <span className="ms-3">History</span>
             </CustomLink>
           </ul>

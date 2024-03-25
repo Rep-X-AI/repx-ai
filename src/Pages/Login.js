@@ -1,16 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
+
+  const { currentUser } = useAuth();
+  const history = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      history("/role");
+    }
+  }, [currentUser, history]);
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   const { googleSignUp, isSigningIn } = useAuth();
 
@@ -40,7 +49,7 @@ const Login = () => {
       await login(emailRef.current.value, passwordRef.current.value);
       setTimeout(() => {
         history("/role");
-      }, 2000);
+      }, 900);
     } catch (error) {
       console.error("Signup failed:", error);
       if (error.code === "auth/invalid-login-credentials") {
