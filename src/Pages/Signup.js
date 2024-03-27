@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +6,14 @@ import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Signup = () => {
   const history = useNavigate();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      history("/role");
+    }
+  }, [currentUser, history]);
+
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -23,7 +31,7 @@ const Signup = () => {
       await googleSignUp();
       setTimeout(() => {
         history("/role");
-      }, 2000);
+      }, 900);
     } catch (error) {
       console.error("Google Sign Up failed:", error);
     }
