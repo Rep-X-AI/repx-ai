@@ -76,7 +76,7 @@ export default function DatePicker() {
   };
   return (
     <div className="datepicker-container">
-      <input type="text" className="bg-gradient-to-b from-purple-100 to-purple-400 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent" placeholder="Select date here" onClick={toggleDatePicker} />
+      <input type="text" className="bg-gradient-to-b from-purple-100 to-purple-400 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent date-input" placeholder="Select date here" onClick={toggleDatePicker} />
 
       {isDatePickerOpen && (
         <div className="datepicker">
