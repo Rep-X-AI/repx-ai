@@ -166,7 +166,7 @@ function CustomLink({ to, children, ...props }) {
     <li>
       <Link
         to={to} {...props}
-        className={isActive ? "flex items-center p-2 bg-gradient-to-tr from-indigo-700 to-purple-500 text-white rounded-lg group" : "flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"}
+        className={isActive ? "flex items-center p-2 hero-button-gradient text-white rounded-lg group" : "flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group"}
       >
         {children}
       </Link>
