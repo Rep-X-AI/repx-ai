@@ -1,0 +1,36 @@
+/* Don't Delete the css file  */
+
+.selected {
+    background: mediumpurple;
+    color: #fff;
+}
+
+.dates {
+    color: gray;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.dates p {
+    padding-left: 5px;
+}
+
+.next {
+    background: rgb(178, 143, 247);
+    cursor: pointer;
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.prev {
+    background: rgb(178, 143, 247);
+    cursor: pointer;
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+select option:hover {
+    background: rgb(178, 143, 247);
+}

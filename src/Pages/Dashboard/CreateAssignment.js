@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Date.css'
 
 export default function CreateAssignment() {
 
@@ -17,7 +17,7 @@ export default function CreateAssignment() {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const datesArray = [];
     for (let i = 0; i < firstDayOfMonth; i++) {
-      datesArray.push(<button key={`empty-${i}`} className="empty"></button>);
+      datesArray.push(<p key={`empty-${i}`} className="empty"></p>);
     }
     for (let day = 1; day <= daysInMonth; day++) {
       const isToday =
@@ -29,13 +29,13 @@ export default function CreateAssignment() {
         selectedDate.getFullYear() === year &&
         selectedDate.getMonth() === month;
       datesArray.push(
-        <button
+        <p
           key={day}
           className={`${isToday ? 'today' : ''} ${selected ? 'selected' : ''}`}
           onClick={() => handleDateClick(day)}
         >
           {day}
-        </button>
+        </p>
       );
     }
     return datesArray;
@@ -98,13 +98,15 @@ export default function CreateAssignment() {
 
         <div className="grid mt-2 gap-2 sm:gap-6 md:grid-cols-2">
           <div>
+            {/* {Date PIcker Start} */}
+            
             <div className="datepicker-container">
               <input type="text" className="bg-gradient-to-b from-purple-100 to-purple-300 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent date-input" placeholder="Select date here" onClick={toggleDatePicker} />
 
               {isDatePickerOpen && (
                 <div className="datepicker">
                   <div className="datepicker-header">
-                    <button className="prev" onClick={handlePrevMonth}>Prev</button>
+                    <p className="prev" onClick={handlePrevMonth}>Prev</p>
 
                     <div>
                       <select className="month-input" onChange={handleMonthChange} value={month}>
@@ -129,7 +131,7 @@ export default function CreateAssignment() {
                       />
                     </div>
 
-                    <button className="next" onClick={handleNextMonth}>Next</button>
+                    <p className="next" onClick={handleNextMonth}>Next</p>
                   </div>
 
                   <div className="days">
@@ -150,7 +152,10 @@ export default function CreateAssignment() {
                   </div>
                 </div>
               )}
-            </div>
+             </div>
+
+            {/* Date Picker End */}
+
           </div>
           <div>
             <input name="totalMarks" id="totalMarks" type="number" className="bg-gradient-to-b from-purple-100 to-purple-300 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent" required autoComplete="off" min={0} max={1000} placeholder="Total Marks" />
