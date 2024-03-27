@@ -7,8 +7,14 @@ export default function CreateAssignment() {
   const [year, setYear] = useState(selectedDate.getFullYear());
   const [month, setMonth] = useState(selectedDate.getMonth());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const currentDate = new Date();
+
   const handleDateClick = (day) => {
     const newDate = new Date(year, month, day);
+    if (newDate < currentDate) {
+      alert("Please select a date after today.");
+      return;
+    }
     setSelectedDate(newDate);
   };
   const displayDates = () => {
