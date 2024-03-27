@@ -48,7 +48,7 @@ export default function DatePicker() {
   };
 
   const handleMonthChange = (e) => {
-    setMonth(e.target.selectedIndex);
+    setMonth(parseInt(e.target.value));
   };
 
   const handleYearChange = (e) => {
@@ -88,6 +88,9 @@ export default function DatePicker() {
     }
   };
 
+  const currentMonthIndex = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="datepicker-container">
       <input
@@ -100,24 +103,19 @@ export default function DatePicker() {
       {isDatePickerOpen && (
         <div className="datepicker">
           <div className="datepicker-header">
-            <button className={`prev ${year === new Date().getFullYear() && month === new Date().getMonth() ? 'current-month' : 'other-month'}`} onClick={handlePrevMonth}>
+            <button className={`prev ${year === currentYear && month === currentMonthIndex ? 'current-month' : 'other-month'}`} onClick={handlePrevMonth}>
               Prev
             </button>
 
             <div>
               <select className="month-input" onChange={handleMonthChange} value={month}>
-                <option value={0}>January</option>
-                <option value={1}>February</option>
-                <option value={2}>March</option>
-                <option value={3}>April</option>
-                <option value={4}>May</option>
-                <option value={5}>June</option>
-                <option value={6}>July</option>
-                <option value={7}>August</option>
-                <option value={8}>September</option>
-                <option value={9}>October</option>
-                <option value={10}>November</option>
-                <option value={11}>December</option>
+                {[...Array(12).keys()]
+                  .slice(currentMonthIndex)
+                  .map((index) => (
+                    <option key={index} value={index}>
+                      {new Date(year, index).toLocaleString('default', { month: 'long' })}
+                    </option>
+                  ))}
               </select>
               <input type="number" className="year-input" onChange={handleYearChange} value={year} />
             </div>

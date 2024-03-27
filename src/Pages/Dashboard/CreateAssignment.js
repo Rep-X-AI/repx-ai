@@ -44,7 +44,7 @@ export default function CreateAssignment() {
     return datesArray;
   };
   const handleMonthChange = (e) => {
-    setMonth(e.target.selectedIndex);
+    setMonth(parseInt(e.target.value));
   };
   const handleYearChange = (e) => {
     setYear(parseInt(e.target.value));
@@ -78,6 +78,9 @@ export default function CreateAssignment() {
     }
   };
 
+  const currentMonthIndex = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="w-full flex flex-col">
       <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
@@ -99,6 +102,7 @@ export default function CreateAssignment() {
 
         <div className="grid mt-2 gap-2 sm:gap-6 md:grid-cols-2">
           <div>
+
             {/* {Date PIcker Start} */}
             
             <div className="datepicker-container">
@@ -110,20 +114,17 @@ export default function CreateAssignment() {
                   <p className="prev" onClick={handlePrevMonth}>Prev</p>
 
                     <div>
+                      
                       <select className="month-input" onChange={handleMonthChange} value={month}>
-                        <option value={0}>January</option>
-                        <option value={1}>February</option>
-                        <option value={2}>March</option>
-                        <option value={3}>April</option>
-                        <option value={4}>May</option>
-                        <option value={5}>June</option>
-                        <option value={6}>July</option>
-                        <option value={7}>August</option>
-                        <option value={8}>September</option>
-                        <option value={9}>October</option>
-                        <option value={10}>November</option>
-                        <option value={11}>December</option>
+                        {[...Array(12).keys()]
+                          .slice(currentMonthIndex)
+                          .map((index) => (
+                            <option key={index} value={index}>
+                              {new Date(year, index).toLocaleString('default', { month: 'long' })}
+                            </option>
+                          ))}
                       </select>
+
                       <input
                         type="number"
                         className="year-input"
