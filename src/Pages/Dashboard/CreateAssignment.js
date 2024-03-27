@@ -129,6 +129,7 @@ export default function CreateAssignment() {
                         className="year-input"
                         onChange={handleYearChange}
                         value={year}
+                        min={new Date().getFullYear()}
                       />
                     </div>
 
