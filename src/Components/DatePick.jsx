@@ -5,45 +5,56 @@ export default function DatePicker() {
   const [year, setYear] = useState(selectedDate.getFullYear());
   const [month, setMonth] = useState(selectedDate.getMonth());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+
   const handleDateClick = (day) => {
     const newDate = new Date(year, month, day);
     setSelectedDate(newDate);
   };
+
   const displayDates = () => {
     const currentDate = new Date();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const datesArray = [];
+
     for (let i = 0; i < firstDayOfMonth; i++) {
       datesArray.push(<button key={`empty-${i}`} className="empty"></button>);
     }
+
     for (let day = 1; day <= daysInMonth; day++) {
-      const isToday =
-        currentDate.getDate() === day &&
-        currentDate.getFullYear() === year &&
-        currentDate.getMonth() === month;
-      const selected =
-        selectedDate.getDate() === day &&
-        selectedDate.getFullYear() === year &&
-        selectedDate.getMonth() === month;
-      datesArray.push(
-        <button
-          key={day}
-          className={`${isToday ? 'today' : ''} ${selected ? 'selected' : ''}`}
-          onClick={() => handleDateClick(day)}
-        >
-          {day}
-        </button>
-      );
+      const currentDateOfMonth = new Date(year, month, day);
+      if (currentDateOfMonth >= currentDate) {
+        const isToday =
+          currentDate.getDate() === day &&
+          currentDate.getFullYear() === year &&
+          currentDate.getMonth() === month;
+        const selected =
+          selectedDate.getDate() === day &&
+          selectedDate.getFullYear() === year &&
+          selectedDate.getMonth() === month;
+        datesArray.push(
+          <button
+            key={day}
+            className={`${isToday ? 'today' : ''} ${selected ? 'selected' : ''}`}
+            onClick={() => handleDateClick(day)}
+          >
+            {day}
+          </button>
+        );
+      }
     }
+
     return datesArray;
   };
+
   const handleMonthChange = (e) => {
     setMonth(e.target.selectedIndex);
   };
+
   const handleYearChange = (e) => {
     setYear(parseInt(e.target.value));
   };
+
   const handleApply = () => {
     document.querySelector('.date-input').value = selectedDate.toLocaleDateString('en-US', {
       day: '2-digit',
@@ -52,12 +63,15 @@ export default function DatePicker() {
     });
     setIsDatePickerOpen(false);
   };
+
   const handleCancel = () => {
     setIsDatePickerOpen(false);
   };
+
   const toggleDatePicker = () => {
     setIsDatePickerOpen(!isDatePickerOpen);
   };
+
   const handleNextMonth = () => {
     if (month === 11) {
       setYear(year + 1);
@@ -66,22 +80,29 @@ export default function DatePicker() {
       setMonth(month + 1);
     }
   };
+
   const handlePrevMonth = () => {
-    if (month === 0) {
-      setYear(year - 1);
-      setMonth(11);
-    } else {
+    const currentDate = new Date();
+    if (year > currentDate.getFullYear() || (year === currentDate.getFullYear() && month > currentDate.getMonth())) {
       setMonth(month - 1);
     }
   };
+
   return (
     <div className="datepicker-container">
-      <input type="text" className="bg-gradient-to-b from-purple-100 to-purple-400 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent date-input" placeholder="Select date here" onClick={toggleDatePicker} />
+      <input
+        type="text"
+        className="bg-gradient-to-b from-purple-100 to-purple-400 text-black relative rounded-lg outline-none text-lg flex items-center gap-1.5 py-2 px-5 w-full border-2 border-[#030017] placeholder:text-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent date-input"
+        placeholder="Select date here"
+        onClick={toggleDatePicker}
+      />
 
       {isDatePickerOpen && (
         <div className="datepicker">
           <div className="datepicker-header">
-            <button className="prev" onClick={handlePrevMonth}>Prev</button>
+            <button className={`prev ${year === new Date().getFullYear() && month === new Date().getMonth() ? 'current-month' : 'other-month'}`} onClick={handlePrevMonth}>
+              Prev
+            </button>
 
             <div>
               <select className="month-input" onChange={handleMonthChange} value={month}>
@@ -98,15 +119,12 @@ export default function DatePicker() {
                 <option value={10}>November</option>
                 <option value={11}>December</option>
               </select>
-              <input
-                type="number"
-                className="year-input"
-                onChange={handleYearChange}
-                value={year}
-              />
+              <input type="number" className="year-input" onChange={handleYearChange} value={year} />
             </div>
 
-            <button className="next" onClick={handleNextMonth}>Next</button>
+            <button className="next" onClick={handleNextMonth}>
+              Next
+            </button>
           </div>
 
           <div className="days">
@@ -122,11 +140,15 @@ export default function DatePicker() {
           <div className="dates">{displayDates()}</div>
 
           <div className="datepicker-footer">
-            <button className="cancel" onClick={handleCancel}>Cancel</button>
-            <button className="apply" onClick={handleApply}>Apply</button>
+            <button className="cancel" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button className="apply" onClick={handleApply}>
+              Apply
+            </button>
           </div>
         </div>
       )}
     </div>
   );
-};
+}

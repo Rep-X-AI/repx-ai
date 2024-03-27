@@ -7,14 +7,8 @@ export default function CreateAssignment() {
   const [year, setYear] = useState(selectedDate.getFullYear());
   const [month, setMonth] = useState(selectedDate.getMonth());
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const currentDate = new Date();
-
   const handleDateClick = (day) => {
     const newDate = new Date(year, month, day);
-    if (newDate < currentDate) {
-      alert("Please select a date after today.");
-      return;
-    }
     setSelectedDate(newDate);
   };
   const displayDates = () => {
@@ -26,23 +20,26 @@ export default function CreateAssignment() {
       datesArray.push(<p key={`empty-${i}`} className="empty"></p>);
     }
     for (let day = 1; day <= daysInMonth; day++) {
-      const isToday =
-        currentDate.getDate() === day &&
-        currentDate.getFullYear() === year &&
-        currentDate.getMonth() === month;
-      const selected =
-        selectedDate.getDate() === day &&
-        selectedDate.getFullYear() === year &&
-        selectedDate.getMonth() === month;
-      datesArray.push(
-        <p
-          key={day}
-          className={`${isToday ? 'today' : ''} ${selected ? 'selected' : ''}`}
-          onClick={() => handleDateClick(day)}
-        >
-          {day}
-        </p>
-      );
+      const currentDateOfMonth = new Date(year, month, day);
+      if (currentDateOfMonth >= currentDate) {
+        const isToday =
+          currentDate.getDate() === day &&
+          currentDate.getFullYear() === year &&
+          currentDate.getMonth() === month;
+        const selected =
+          selectedDate.getDate() === day &&
+          selectedDate.getFullYear() === year &&
+          selectedDate.getMonth() === month;
+        datesArray.push(
+          <p
+            key={day}
+            className={`${isToday ? 'today' : ''} ${selected ? 'selected' : ''}`}
+            onClick={() => handleDateClick(day)}
+          >
+            {day}
+          </p>
+        );
+      }
     }
     return datesArray;
   };
@@ -75,10 +72,8 @@ export default function CreateAssignment() {
     }
   };
   const handlePrevMonth = () => {
-    if (month === 0) {
-      setYear(year - 1);
-      setMonth(11);
-    } else {
+    const currentDate = new Date();
+    if (year > currentDate.getFullYear() || (year === currentDate.getFullYear() && month > currentDate.getMonth())) {
       setMonth(month - 1);
     }
   };
@@ -112,7 +107,7 @@ export default function CreateAssignment() {
               {isDatePickerOpen && (
                 <div className="datepicker">
                   <div className="datepicker-header">
-                    <p className="prev" onClick={handlePrevMonth}>Prev</p>
+                  <p className="prev" onClick={handlePrevMonth}>Prev</p>
 
                     <div>
                       <select className="month-input" onChange={handleMonthChange} value={month}>
