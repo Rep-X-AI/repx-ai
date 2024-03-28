@@ -7,6 +7,7 @@ import Loading from "../../Components/Loading/Loading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CreateAssignment from "./CreateAssignment";
+import Upgrade from "./Upgrade";
 
 
 const Dashboard = () => {
@@ -75,6 +76,7 @@ const Dashboard = () => {
       <Routes>
         <Route path="/" element={<DashboardHome role={role} />} />
         <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
+        <Route path="/upgrade-to-pro" element={<Upgrade/>} />
       </Routes>
       </div>
     </>
