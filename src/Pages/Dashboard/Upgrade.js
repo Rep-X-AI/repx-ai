@@ -47,7 +47,7 @@ export default function Upgrade() {
             </div>
             
             <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
-                <h3 className="mb-4 text-2xl font-semibold">Yearly</h3>
+                <h3 className="mb-4 text-2xl font-bold">Yearly</h3>
                 <p className="font-light text-gray-900 sm:text-lg dark:text-gray-900">Ditch the chaos : Stay organized & connected with your class with this yearly plan.</p>
                 <div className="flex justify-center items-baseline my-8">
                     <span className="mr-2 text-5xl font-extrabold">₹3200</span>
