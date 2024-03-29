@@ -1,5 +1,6 @@
 import React from 'react';
 import jsonData from '../sampleData/sampleAssignments.json';
+import usersData from '../sampleData/SampleUsers.json'; 
 
 const GradesTable = () => {
   const assignmentStyle = {
@@ -19,10 +20,12 @@ const GradesTable = () => {
   };
 
   const { Assignments } = jsonData;
-  const Assignment = Assignments[3]; 
 
-  console.log("Assignment:", Assignment);
+  const Assignment = Assignments[2]; 
 
+  const users = usersData.Users || []; 
+
+  const teacher = users.find(user => user.useruid === Assignment?.createdBy);
 
   return (
     <div className="flex flex-col md:flex-row p-3">
@@ -45,7 +48,7 @@ const GradesTable = () => {
             <div className="flex flex-column">
               <div className="assignment mb-4 px-4">
                 <h3 className="text-white font-bold">Teacher Name</h3>
-                <p className="text-white">{Assignment?.createdBy}</p>
+                <p className="text-white">{teacher?.name}</p>
               </div>
               <div className="deadline mb-4 px-4">
                 <h3 className="text-white font-bold">Deadline</h3>
@@ -65,16 +68,20 @@ const GradesTable = () => {
             <div className="student text-grey font-bold">Student Name</div>
             <div className="grade text-grey">Marks Obtained</div>
           </div>
-          {console.log("Assignment:", Assignment)}
           {Assignment && Assignment.submissions && Assignment.submissions.length > 0 ? (
-            Assignment.submissions.map((submission, index) => (
-              <section key={index} className="students-grades card-section p-2">
-                <div className="student-grade flex justify-between p-4" style={{ background: 'linear-gradient(to bottom, rgb(252 231 243), rgb(253 242 248), rgb(252 231 243))', borderRadius: '5px', margin: "0px" }}>
-                  <div className="student text-grey font-bold">{submission.student}</div>
-                  <div className="grade text-grey">{submission.marks}</div>
-                </div>
-              </section>
-            ))
+            Assignment.submissions.map((submission, index) => {
+
+              const user = users.find(user => user.useruid === submission.student);
+            
+              return (
+                <section key={index} className="students-grades card-section p-2">
+                  <div className="student-grade flex justify-between p-4" style={{ background: 'linear-gradient(to bottom, rgb(252 231 243), rgb(253 242 248), rgb(252 231 243))', borderRadius: '5px', margin: "0px" }}>
+                    <div className="student text-grey font-bold">{user.name}</div>
+                    <div className="grade text-grey">{submission.marks}</div>
+                  </div>
+                </section>
+              );
+            })
           ) : (
             <p className = "students-grades card-section p-4 mx-6" style={{ background: 'linear-gradient(to bottom, rgb(252 231 243), rgb(253 242 248), rgb(252 231 243))', borderRadius: '5px', margin: "0px" }}>No submissions yet .</p>
           )}
