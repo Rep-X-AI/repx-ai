@@ -29,10 +29,8 @@ const GradesTable = () => {
 
   return (
     <div className="flex flex-col md:flex-row p-3">
-      {/* Empty div taking 1/6 of the screen on desktop and hidden on mobile */}
-      <div className="hidden md:block md:w-1/6"></div>
 
-      <div className="flex flex-col justify-center items-center w-full md:w-5/6 " style={{marginTop:"100px",marginBottom:"100px"}}>
+      <div className="flex flex-col justify-center items-center w-full md:w-100 " style={{marginTop:"20px",marginBottom:"20px"}}>
         {/* Assignment Details */}
         <div className="card bg-purple-300 w-full lg:w-5/6 rounded-lg shadow-lg mb-4" style={assignmentStyle}>
           <section className="assignment-details card-section p-6">
