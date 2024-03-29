@@ -38,11 +38,11 @@ const Dashboard = () => {
     const baseUrl =
       nodeEnv === "production"
         ? "https://repx-ai-backend.vercel.app"
-        : "http://localhost:5000";
+        : "http://localhost:8080";
     const getUser = async () => {
       try {
         const response = await axios.get(
-          baseUrl + "/api/users/getuser/" + currentUser?.uid,
+          baseUrl + "/api/users/fetchuser/" + currentUser?.uid,
           {
             withCredentials: true,
           }
