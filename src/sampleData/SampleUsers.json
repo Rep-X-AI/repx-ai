@@ -13,6 +13,14 @@
           "modelAnsUrl": "https://example.com/math_assignment_1_answers",
           "deadline": "2024-04-15T12:00:00Z",
           "students": ["student_1", "student_2", "student_3", "student_4", "student_5"]
+        },
+        {
+          "title": "History Project",
+          "desc": "Research and create a presentation on a historical event.",
+          "questionUrl": "https://example.com/history_project",
+          "modelAnsUrl": "https://example.com/history_project_presentation",
+          "deadline": "2024-04-25T12:00:00Z",
+          "students": ["student_16", "student_17", "student_18", "student_19", "student_20"]
         }
       ]
     },
@@ -29,6 +37,14 @@
           "modelAnsUrl": "https://example.com/english_essay_model",
           "deadline": "2024-04-18T12:00:00Z",
           "students": ["student_6", "student_7", "student_8", "student_9", "student_10"]
+        },
+        {
+          "title": "History Project",
+          "desc": "Research and create a presentation on a historical event.",
+          "questionUrl": "https://example.com/history_project",
+          "modelAnsUrl": "https://example.com/history_project_presentation",
+          "deadline": "2024-04-25T12:00:00Z",
+          "students": ["student_16", "student_17", "student_18", "student_19", "student_20"]
         }
       ]
     },
@@ -45,6 +61,14 @@
           "modelAnsUrl": "https://example.com/science_experiment_report",
           "deadline": "2024-04-20T12:00:00Z",
           "students": ["student_11", "student_12", "student_13", "student_14", "student_15"]
+        },
+        {
+          "title": "History Project",
+          "desc": "Research and create a presentation on a historical event.",
+          "questionUrl": "https://example.com/history_project",
+          "modelAnsUrl": "https://example.com/history_project_presentation",
+          "deadline": "2024-04-25T12:00:00Z",
+          "students": ["student_16", "student_17", "student_18", "student_19", "student_20"]
         }
       ]
     },
@@ -54,6 +78,14 @@
       "name": "Teacher Four",
       "role": "teacher",
       "assignments": [
+        {
+          "title": "History Project",
+          "desc": "Research and create a presentation on a historical event.",
+          "questionUrl": "https://example.com/history_project",
+          "modelAnsUrl": "https://example.com/history_project_presentation",
+          "deadline": "2024-04-25T12:00:00Z",
+          "students": ["student_16", "student_17", "student_18", "student_19", "student_20"]
+        },
         {
           "title": "History Project",
           "desc": "Research and create a presentation on a historical event.",
@@ -77,6 +109,13 @@
           "modelAnsUrl": "https://example.com/geography_assignment_report",
           "deadline": "2024-04-28T12:00:00Z",
           "students": ["student_1", "student_2", "student_3", "student_4", "student_5", "student_6", "student_7", "student_8", "student_9", "student_10", "student_11", "student_12", "student_13", "student_14", "student_15"]
+        },{
+          "title": "History Project",
+          "desc": "Research and create a presentation on a historical event.",
+          "questionUrl": "https://example.com/history_project",
+          "modelAnsUrl": "https://example.com/history_project_presentation",
+          "deadline": "2024-04-25T12:00:00Z",
+          "students": ["student_16", "student_17", "student_18", "student_19", "student_20"]
         }
       ]
     },
