@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CreateAssignment from "./CreateAssignment";
 import Upgrade from "./Upgrade";
+import Documentation from "./Documentation";
 
 
 const Dashboard = () => {
@@ -77,6 +78,7 @@ const Dashboard = () => {
         <Route path="/" element={<DashboardHome role={role} />} />
         <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
         <Route path="/upgrade-to-pro" element={<Upgrade/>} />
+        <Route path="/documentation" element={<Documentation/>} />
       </Routes>
       </div>
     </>
