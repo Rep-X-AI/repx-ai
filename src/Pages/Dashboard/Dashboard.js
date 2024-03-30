@@ -11,6 +11,7 @@ import Upgrade from "./Upgrade";
 import Documentation from "./Documentation";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
+import Changelog from "./Changelog";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -77,6 +78,7 @@ const Dashboard = () => {
       <div className="p-6 pt-24 min-h-screen lg:ml-64">
       <Routes>
         <Route path="/" element={<DashboardHome role={role} />} />
+        <Route path="/changelog" element={<Changelog />} />
         <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
         <Route path="/upgrade-to-pro" element={<Upgrade/>} />
         <Route path="/documentation" element={<Documentation/>} />
