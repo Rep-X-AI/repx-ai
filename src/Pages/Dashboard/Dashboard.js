@@ -11,6 +11,9 @@ import Upgrade from "./Upgrade";
 import Documentation from "./Documentation";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
+import Changelog from "./Changelog";
+import Assignment from './Assignment"; 
+//only for testing later logic to be written to access individual assignments 
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -79,6 +82,8 @@ const Dashboard = () => {
         <Route path="/" element={<DashboardHome role={role} />} />
         <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
         <Route path="/upgrade-to-pro" element={<Upgrade/>} />
+        <Route path="/changelog" element={<Changelog/>} />
+        <Route path="/assignment" element={<Assignment/>} /> 
         <Route path="/documentation" element={<Documentation/>} />
         <Route path="/documentation/teachdoc" element={<Teachdoc/>} />
         <Route path="/documentation/studoc" element={<Studoc/>} />
