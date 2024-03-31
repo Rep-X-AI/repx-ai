@@ -12,7 +12,7 @@ import Documentation from "./Documentation";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
 import Changelog from "./Changelog";
-import Assignment from './Assignment"; 
+import Assignment from  "./Assignment"; 
 //only for testing later logic to be written to access individual assignments 
 
 const Dashboard = () => {
