@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../Components/Sidebar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom"; 
 import DashboardHome from "./DashboardHome";
 import { useAuth } from "../../Context/AuthContext";
 import Loading from "../../Components/Loading/Loading";
@@ -12,13 +12,14 @@ import Documentation from "./Documentation";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
 import Changelog from "./Changelog";
-import Assignment from  "./Assignment"; 
-//only for testing later logic to be written to access individual assignments 
+import Assignment from "./Assignment"; 
+import GradeTables from '../GradesTable'
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
   const [showLoading, setShowLoading] = useState(true);
   const navigate = useNavigate();
+  const { id } = useParams(); 
 
   const [role, setRole] = useState("");
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
     }
   }, [currentUser, navigate]);
 
-  console.log(currentUser?.uid);
+  // console.log(currentUser?.uid);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,7 +40,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
-    console.log(nodeEnv);
+    //console.log(nodeEnv);
     const baseUrl =
       nodeEnv === "production"
         ? "https://repx-ai-backend.vercel.app"
@@ -78,16 +79,17 @@ const Dashboard = () => {
     <>
       <Sidebar role={role} />
       <div className="p-6 pt-24 min-h-screen lg:ml-64">
-      <Routes>
-        <Route path="/" element={<DashboardHome role={role} />} />
-        <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
-        <Route path="/upgrade-to-pro" element={<Upgrade/>} />
-        <Route path="/changelog" element={<Changelog/>} />
-        <Route path="/assignment" element={<Assignment/>} /> 
-        <Route path="/documentation" element={<Documentation/>} />
-        <Route path="/documentation/teachdoc" element={<Teachdoc/>} />
-        <Route path="/documentation/studoc" element={<Studoc/>} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<DashboardHome role={role} />} />
+          <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
+          <Route path="/upgrade-to-pro" element={<Upgrade />} />
+          <Route path="/gradetable" element={<GradeTables />} />
+          <Route path="/changelog" element={<Changelog />} />
+          <Route path={`/assignment/:id`} element={<Assignment />} />
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/documentation/teachdoc" element={<Teachdoc />} />
+          <Route path="/documentation/studoc" element={<Studoc />} />
+        </Routes>
       </div>
     </>
   );
