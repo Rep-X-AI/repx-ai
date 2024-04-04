@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Date.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useAuth } from "../../Context/AuthContext";
 
 export default function CreateAssignment() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -17,6 +18,10 @@ export default function CreateAssignment() {
   const [questionPaper, setQuestionPaper] = useState(null);
   const [answerPaper, setAnswerPaper] = useState(null);
   const [description, setDescription] = useState("");
+
+  const nodeEnv = process.env.REACT_APP_NODE_ENV;
+  const baseUrl = nodeEnv === "production" ? "https://repx-ai-backend.vercel.app/": "http://localhost:8080";
+
 
   const handleFileUpload = (event, setFileName, setFileState) => {
     event.preventDefault();
@@ -69,17 +74,31 @@ export default function CreateAssignment() {
     setDescription(e.target.value);
   };
 
+  const { currentUser } = useAuth();
+
+  const create = async (data) => {
+    try {
+        const response = await axios.post(`${baseUrl}/api/assignments/create`, data,);
+        // console.log(response.data); 
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
-      name: assignmentName,
-      date: date,
-      marks: marks,
+      title: assignmentName,
       desc: description,
-      QuestionPDF: questionPaper,
-      AnswerPDF: answerPaper,
+      questionUrl: questionFileName,
+      modelAnsUrl: modelFileName,
+      createdBy:currentUser?.uid,
+      // date: date,
+      marks: marks,
+      students:[currentUser?.uid]
     };
-    console.log(formData);
+    create(formData);
     setAssignmentName("");
     setDate(new Date(Date.now()).toLocaleDateString("en-GB"));
     setMarks(0);
@@ -423,20 +442,20 @@ export default function CreateAssignment() {
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   {modelFileName === "" && (
                     <svg
-                      className="w-8 h-8 mb-4 text-gray-800"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 20 16"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                      />
-                    </svg>
+                    className="w-8 h-8 mb-4 text-gray-800"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
                   )}
                   {modelFileName ? (
                     <>
@@ -451,7 +470,6 @@ export default function CreateAssignment() {
                         />
                       </svg>
                       <p className="mb-2 text-sm text-gray-950">
-                        <FontAwesomeIcon icon="fa-regular fa-file-lines" />
                         {modelFileName}
                       </p>
                     </>
