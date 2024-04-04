@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { Link,useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Assignment() {
+
+  const { state } = useLocation();
+  const { code, deadline, title, desc, role, createdBy } = state;
+
   const assignmentStyle = {
     borderRadius: "4px",
     color: "#ffffff",
@@ -66,6 +72,7 @@ export default function Assignment() {
     setFileName("");
   };
 
+
   return (
     <div>
       <div className="flex flex-col md:flex-row p-3">
@@ -80,22 +87,23 @@ export default function Assignment() {
           >
             <section className="assignment-details card-section p-6">
               <h2 className="text-white text-lg font-bold mb-4 px-4">
-                Assignment Details
+                Assignment Code
+                <p className="text-white">{code}</p>
               </h2>
               <div className="assignment mb-4 px-4">
                 <h3 className="text-white font-bold">Assignment Name</h3>
-                <p className="text-white">PUT TITLE HERE LATER</p>
+                <p className="text-white">{title}</p>
               </div>
               <div className="assignment mb-4 px-4">
                 <h3 className="text-white font-bold">Assignment Description</h3>
                 <p className="text-white">
-                  PUT ASSIGNMENT DESCRIPTION HERE LATER
+                  {desc}
                 </p>
               </div>
               <div className="flex flex-column">
                 <div className="assignment mb-4 px-4">
                   <h3 className="text-white font-bold">Teacher Name</h3>
-                  <p className="text-white">ADD ASSIGNMENT CREATED BY</p>
+                  <p className="text-white">{createdBy}</p>
                 </div>
                 <div className="deadline mb-4 px-4">
                   <h3 className="text-white font-bold">Deadline</h3>
@@ -106,16 +114,32 @@ export default function Assignment() {
                   <p className="text-white">ASSGNMENT TOTAL MARKS</p>
                 </div>
               </div>
+              <div className="flex flex-column ">
+                <svg
+                  className=""
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 448 512"
+                >
+                  <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                </svg>
+              </div>
             </section>
           </div>
 
-          <div className="bg-indigo-100 w-full lg:w-5/6 rounded-lg shadow-lg mb-4 ">
+          {(role==='student') && <div className="bg-indigo-100 w-full lg:w-5/6 rounded-lg shadow-lg mb-4 ">
             <div className="text-center">
               <form
                 className="bg-indigo-100 p-4 rounded-lg shadow-md"
                 onSubmit={handleSubmit}
               >
-               
                 <div className="mb-2 ">
                   <div className=" mt-2 text-black ">
                     <div
@@ -162,7 +186,7 @@ export default function Assignment() {
                           </>
                         ) : (
                           <>
-                            <p className="mb-2 text-sm text-gray-950 items-center" >
+                            <p className="mb-2 text-sm text-gray-950 items-center">
                               <span className="font-semibold">
                                 Click to upload your Assignment
                               </span>{" "}
@@ -199,7 +223,18 @@ export default function Assignment() {
                 </div>
               </form>
             </div>
-          </div>
+          </div>}
+
+          { (role==='teacher') && <div className="bg-indigo-100 w-full lg:w-5/6 rounded-lg shadow-lg mb-4 p-6 text-center ">
+            <p className="font-semibold ">Assignments Submitted till now :0</p>
+            <p className="font-semibold ">Assignments Pending :0</p>
+            <p className="font-bold p-4">Evaluate quickly with the power of AI</p>
+            <button className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80">
+              <Link to="/dashboard/evaluate">
+                Evaluate Now!
+              </Link>
+            </button>
+          </div>}
         </div>
       </div>
     </div>
