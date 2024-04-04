@@ -12,9 +12,6 @@ export default function CreateAssignment() {
   const [modelFileName, setModelFileName] = useState("");
   const [assignmentName, setAssignmentName] = useState("");
   const [marks, setMarks] = useState(0);
-  const [date, setDate] = useState(
-    new Date(Date.now()).toLocaleDateString("en-GB")
-  );
   const [questionPaper, setQuestionPaper] = useState(null);
   const [answerPaper, setAnswerPaper] = useState(null);
   const [description, setDescription] = useState("");
@@ -59,11 +56,6 @@ export default function CreateAssignment() {
     setAssignmentName(e.target.value);
   };
 
-  const dateChange = (e) => {
-    e.preventDefault();
-    setDate(e.target.value);
-  };
-
   const marksChange = (e) => {
     e.preventDefault();
     setMarks(e.target.value);
@@ -94,13 +86,13 @@ export default function CreateAssignment() {
       questionUrl: questionFileName,
       modelAnsUrl: modelFileName,
       createdBy:currentUser?.uid,
-      // date: date,
+      // date: selectedDate,
       marks: marks,
       students:[currentUser?.uid]
     };
     create(formData);
     setAssignmentName("");
-    setDate(new Date(Date.now()).toLocaleDateString("en-GB"));
+    setSelectedDate(new Date(Date.now()).toLocaleDateString("en-GB"));
     setMarks(0);
     setAnswerPaper(null);
     setQuestionPaper(null);
@@ -250,8 +242,8 @@ export default function CreateAssignment() {
                 placeholder="Select date here"
                 onClick={toggleDatePicker}
                 required
-                value={date}
-                onChange={dateChange}
+                value={selectedDate.toLocaleDateString("en-GB")}
+                onChange={handleDateClick}
               />
 
               {isDatePickerOpen && (
