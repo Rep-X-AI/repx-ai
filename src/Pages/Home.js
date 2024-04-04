@@ -42,7 +42,7 @@ const Home = () => {
 
       <TeamSection />
 
-      <ContactSection />
+      <ContactSection title="Let's chat - Hit us up !" />
 
       <Footer />
     </>
