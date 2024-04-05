@@ -15,10 +15,13 @@ export default function CreateAssignment() {
   const [questionPaper, setQuestionPaper] = useState(null);
   const [answerPaper, setAnswerPaper] = useState(null);
   const [description, setDescription] = useState("");
+  var FormData = require("form-data");
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
-  const baseUrl = nodeEnv === "production" ? "https://repx-ai-backend.vercel.app": "http://localhost:8080";
-
+  const baseUrl =
+    nodeEnv === "production"
+      ? "https://repx-ai-backend.vercel.app"
+      : "http://localhost:8080";
 
   const handleFileUpload = (event, setFileName, setFileState) => {
     event.preventDefault();
@@ -70,52 +73,66 @@ export default function CreateAssignment() {
 
   const create = async (data) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/assignments/create`, data);
+      const response = await axios.post(
+        `${baseUrl}/api/assignments/create`,
+        data
+      );
     } catch (error) {
-        console.error('Error:', error);
+      console.error("Error:", error);
     }
-};
+  };
+  
+  
 
-const uploadFile = async (file) => {
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
-    const response = await axios.post(`${baseUrl}/api/assignments/uploadfiles`, formData);
-    if (response && response.data && response.data.fileName) {
-      return response.data.fileName; 
-    } else {
-      throw new Error('Invalid response or filename not found');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const qfile = await uploadFile(questionPaper);
-    const ansfile = await uploadFile(answerPaper);
-    const formData = {
-      title: assignmentName,
-      desc: description,
-      questionUrl: qfile?qfile:"nothing", 
-      modelAnsUrl: ansfile?ansfile:"nothing", 
-      createdBy:currentUser?.uid,
-      // date: selectedDate,
-      marks: marks,
-      students:[]
-    };
+    try {
+      const data = new FormData();
+      data.append("file", questionPaper);
+      data.append("file", answerPaper);
+      var config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://api.pdfrest.com/upload",
+        headers: {
+          "Api-Key": process.env.REACT_APP_FILE_API_KEY,
+        },
+        data: data,
+      };
 
-    create(formData);
+      axios(config)
+        .then(function (response) {
+          const qfile = "https://api.pdfrest.com/resource/" + response.data.files[0].id + "?format=file";
+          const ansfile = "https://api.pdfrest.com/resource/" + response.data.files[1].id + "?format=file";
 
-    setAssignmentName("");
-    setSelectedDate(new Date());
-    setMarks(0);
-    setAnswerPaper(null);
-    setQuestionPaper(null);
-    setDescription("");
-    setQuestionFileName("");
-    setModelFileName("");
+          const formData = {
+            title: assignmentName,
+            desc: description,
+            questionUrl: qfile ? qfile : "nothing",
+            modelAnsUrl: ansfile ? ansfile : "nothing",
+            createdBy: currentUser?.uid,
+            // date: selectedDate,
+            marks: marks,
+            students: [],
+          };
+
+          create(formData);
+
+          setAssignmentName("");
+          setSelectedDate(new Date());
+          setMarks(0);
+          setAnswerPaper(null);
+          setQuestionPaper(null);
+          setDescription("");
+          setQuestionFileName("");
+          setModelFileName("");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleDateClick = (day) => {
@@ -451,20 +468,20 @@ const uploadFile = async (file) => {
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   {modelFileName === "" && (
                     <svg
-                    className="w-8 h-8 mb-4 text-gray-800"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 16"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                    />
-                  </svg>
+                      className="w-8 h-8 mb-4 text-gray-800"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
                   )}
                   {modelFileName ? (
                     <>
