@@ -88,6 +88,7 @@ const Dashboard = () => {
           <Route path="/changelog" element={<Changelog />} />
           <Route path={`/assignment/:${id}`} element={<Assignment />} />
           <Route path="/documentation" element={<Documentation />} />
+          <Route path="/support" element={<Help />} />
           <Route path="/documentation/teachdoc" element={<Teachdoc />} />
           <Route path="/documentation/studoc" element={<Studoc />} />
         </Routes>

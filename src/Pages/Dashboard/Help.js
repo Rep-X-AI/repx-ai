@@ -9,8 +9,8 @@ export default function Help() {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
-  const accordionTitles = ["How can I signup for RepxAI ?", "How does the AI evaluation process work ?", "I'm experiencing issues with uploading reports. What should I do ?"];
-  const accordionContent = ["To join RepxAI, visit our homepage and hit 'Get Started'. You'll be taken to a 'sign-up' page where you fill in your name, email, password, and role (like student, teacher). After hitting Sign Up, you'll land on your customized dashboard tailored to your role. From there, you can dive into everything RepxAI offers, whether it is submitting reports, evaluating submissions, or managing accounts.", "As students upload their answers, our AI system assesses their handwriting and compares the content with the model answer provided by the teacher. It evaluates the alignment of key points and keywords, rewarding higher marks for answers that closely resemble the teacher's model. This approach ensures a fair and accurate evaluation process, reflecting students' understanding and adherence to expected standards.", "As a student, once you log in with your student role, you can access your assignments by joining a class using the provided class code. Within your dashboard, you'll find an 'Upload Assignment' section where you can easily submit your work. Simply click on the 'Upload Assignment' button, select the file from your device, and upload it directly to your dashboard. This streamlined process ensures that your assignments are promptly submitted and accessible to your teacher for evaluation."];
+  const accordionTitles = ["How can I signup for RepxAI ?", "How does the AI evaluation process work ?", "I'm experiencing issues with uploading reports. What should I do ?","What are the limitations of the AI system ?","Are there any best practices for optimizing my reports for AI evaluation ?"];
+  const accordionContent = ["To join RepxAI, visit our homepage and hit 'Get Started'. You'll be taken to a 'sign-up' page where you fill in your name, email, password, and role (like student, teacher). After hitting Sign Up, you'll land on your customized dashboard tailored to your role. From there, you can dive into everything RepxAI offers, whether it is submitting reports, evaluating submissions, or managing accounts.", "As students upload their answers, our AI system assesses their handwriting and compares the content with the model answer provided by the teacher. It evaluates the alignment of key points and keywords, rewarding higher marks for answers that closely resemble the teacher's model. This approach ensures a fair and accurate evaluation process, reflecting students' understanding and adherence to expected standards.", "As a student, once you log in with your student role, you can access your assignments by joining a class using the provided class code. Within your dashboard, you'll find an 'Upload Assignment' section where you can easily submit your work. Simply click on the 'Upload Assignment' button, select the file from your device, and upload it directly to your dashboard. This streamlined process ensures that your assignments are promptly submitted and accessible to your teacher for evaluation.","While our AI system excels at extracting text from handwritten reports, it encounters challenges in accurately evaluating images within these reports. As a result, image evaluation may be less precise, requiring users to exercise caution when interpreting results.","The AI evaluation is based on a teacher model answer, which typically reflects responses from textbooks or reputable internet sources. Consequently, providing accurate answers aligned with these sources will likely result in a favorable evaluation for students."];
 
   return (
     <div className="w-full flex flex-col">
@@ -34,7 +34,7 @@ export default function Help() {
 
             <li className='m-4 list-disc text-lg tracking-tight font-semibold text-gray-900 dark:text-white text-left marker:text-violet-500'>
             <div id="accordion-collapse" data-accordion="collapse">
-              {[1, 2, 3].map((accordionIndex) => (
+              {[1, 2, 3, 4, 5].map((accordionIndex) => (
                 <div key={accordionIndex}>
                   <h2 id={`accordion-collapse-heading-${accordionIndex}`}>
                     <button
@@ -65,6 +65,7 @@ export default function Help() {
               ))}
             </div>
           </li>
+
           <Contact title='Any Other Doubts ?'/>
           </div>
         </div>
