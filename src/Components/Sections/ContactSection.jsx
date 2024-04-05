@@ -1,7 +1,7 @@
 import React from 'react'
 import "./contact.css"
 
-const ContactSection = () => {
+const ContactSection = (props) => {
   return (
     <section id="contact" className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36">
       <>
@@ -11,7 +11,7 @@ const ContactSection = () => {
               <img src="/icon-title.svg" alt="icon" />
               <span className="hero-subtitle-text">
                 {" "}
-                Let's chat - hit us up!{" "}
+                {props.title}{" "}
               </span>
             </span>
             <h2 className="text-white mb-4.5 text-2xl font-bold tracking-wide sm:text-4xl xl:text-heading-2">
@@ -33,11 +33,11 @@ const ContactSection = () => {
 
               <div className="info">
                 <div className="information">
-                  <p>Our Email<br /><span id='contt'>repxaicontact@gmail.com</span></p>
+                  <p>Our Email<br /><li id='contt'>repxaicontact@gmail.com</li></p>
                 </div>
                 <div className="information">
 
-                  <p>Our Phone<br /><span id='contt'>+13 22334-55664</span></p>
+                  <p>Our Phone<br /><li id='contt'>+13 22334-55664</li></p>
                 </div>
               </div>
 

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import CreateAssignment from "./CreateAssignment";
 import Upgrade from "./Upgrade";
 import Documentation from "./Documentation";
+import Help from "./Help";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
 import Changelog from "./Changelog";
