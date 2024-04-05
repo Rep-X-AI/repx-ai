@@ -21,14 +21,14 @@ export default function Documentation() {
             <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
                 <h3 className="mb-4 text-2xl font-bold">Using as a teacher ?</h3>
                 <p className="font-light text-gray-900 sm:text-lg dark:text-gray-900">After one signs up as a teacher role they must follow the steps ...</p>
-                <img src='../tead.svg' className='h-44 mt-5 opacity-70'/>
+                <img alt="image" src='../tead.svg' className='h-44 mt-5 opacity-70'/>
                 <Link to='/dashboard/documentation/teachdoc' className="hero-button-gradient rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mt-4">Teacher Docs</Link>
             </div>
             
             <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
                 <h3 className="mb-4 text-2xl font-bold">Using as a student ?</h3>
                 <p className="font-light text-gray-900 sm:text-lg dark:text-gray-900">After one signs up as a student role they must follow the steps ...</p>
-                <img src='../stud.svg' className='h-44 mt-5 opacity-70'/>
+                <img alt="imge" src='../stud.svg' className='h-44 mt-5 opacity-70'/>
                 <Link to='/dashboard/documentation/studoc' className="hero-button-gradient mt-4 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95">Student Docs</Link>
             </div>     
           </div>
