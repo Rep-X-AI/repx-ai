@@ -95,7 +95,7 @@ export default function CreateAssignment() {
         maxBodyLength: Infinity,
         url: "https://api.pdfrest.com/upload",
         headers: {
-          "Api-Key": process.env.REACT_APP_FILE_API_KEY,
+          "Api-Key": process.env.FILE_API_KEY,
         },
         data: data,
       };
