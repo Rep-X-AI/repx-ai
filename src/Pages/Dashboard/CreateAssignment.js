@@ -17,7 +17,7 @@ export default function CreateAssignment() {
   const [description, setDescription] = useState("");
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
-  const baseUrl = nodeEnv === "production" ? "https://repx-ai-backend.vercel.app/": "http://localhost:8080";
+  const baseUrl = nodeEnv === "production" ? "https://repx-ai-backend.vercel.app": "http://localhost:8080";
 
 
   const handleFileUpload = (event, setFileName, setFileState) => {
