@@ -53,13 +53,13 @@ const Dashboard = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data);
+        //console.log(response.data);
         if (!response.data.exists) {
           console.log("User not present in database");
           navigate("/role");
         }
         else {
-          console.log("User role is already set");
+          //console.log("User role is already set");
           setRole(response.data.role);
         }
       } catch (error) {
@@ -85,7 +85,7 @@ const Dashboard = () => {
           <Route path="/upgrade-to-pro" element={<Upgrade />} />
           <Route path="/gradetable" element={<GradeTables />} />
           <Route path="/changelog" element={<Changelog />} />
-          <Route path={`/assignment/:id`} element={<Assignment />} />
+          <Route path={`/assignment/:${id}`} element={<Assignment />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/documentation/teachdoc" element={<Teachdoc />} />
           <Route path="/documentation/studoc" element={<Studoc />} />

@@ -70,29 +70,46 @@ export default function CreateAssignment() {
 
   const create = async (data) => {
     try {
-        const response = await axios.post(`${baseUrl}/api/assignments/create`, data,);
-        // console.log(response.data); 
+        const response = await axios.post(`${baseUrl}/api/assignments/create`, data);
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
+const uploadFile = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await axios.post(`${baseUrl}/api/assignments/uploadfiles`, formData);
+    if (response && response.data && response.data.fileName) {
+      return response.data.fileName; 
+    } else {
+      throw new Error('Invalid response or filename not found');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const qfile = await uploadFile(questionPaper);
+    const ansfile = await uploadFile(answerPaper);
     const formData = {
       title: assignmentName,
       desc: description,
-      questionUrl: questionFileName,
-      modelAnsUrl: modelFileName,
+      questionUrl: qfile?qfile:"nothing", 
+      modelAnsUrl: ansfile?ansfile:"nothing", 
       createdBy:currentUser?.uid,
       // date: selectedDate,
       marks: marks,
-      students:[currentUser?.uid]
+      students:[]
     };
+
     create(formData);
+
     setAssignmentName("");
-    setSelectedDate(new Date(Date.now()).toLocaleDateString("en-GB"));
+    setSelectedDate(new Date());
     setMarks(0);
     setAnswerPaper(null);
     setQuestionPaper(null);
@@ -179,7 +196,7 @@ export default function CreateAssignment() {
   };
 
   const currentMonthIndex = new Date().getMonth();
-  // const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="w-full flex flex-col">

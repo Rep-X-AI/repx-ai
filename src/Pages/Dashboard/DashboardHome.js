@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth } from '../../Context/AuthContext';
+import AllAssignments from './AllAssignments'
 
 
 const DashboardHome = ({ role }) => {
@@ -30,6 +31,7 @@ const DashboardHome = ({ role }) => {
           <p className='text-slate-100'>Welcome to your dashboard. Scroll to see what's happening with your projects today:</p>
         </div>
       </div>
+      <AllAssignments role={role}></AllAssignments>
     </>
   )
 }
