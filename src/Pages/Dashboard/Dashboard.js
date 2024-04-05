@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import CreateAssignment from "./CreateAssignment";
 import Upgrade from "./Upgrade";
 import Documentation from "./Documentation";
+import Help from "./Help";
 import Teachdoc from "../Teachdoc";
 import Studoc from "../Studoc";
 
@@ -82,6 +83,7 @@ const Dashboard = () => {
         <Route path="/documentation" element={<Documentation/>} />
         <Route path="/documentation/teachdoc" element={<Teachdoc/>} />
         <Route path="/documentation/studoc" element={<Studoc/>} />
+        <Route path="/support" element={<Help/>} />
       </Routes>
       </div>
     </>
