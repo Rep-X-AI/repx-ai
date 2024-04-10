@@ -15,6 +15,7 @@ import Studoc from "../Studoc";
 import Changelog from "./Changelog";
 import Assignment from "./Assignment"; 
 import GradeTables from '../GradesTable'
+import JoinAssignment from "./JoinAssignment";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -86,7 +87,8 @@ const Dashboard = () => {
           <Route path="/upgrade-to-pro" element={<Upgrade />} />
           <Route path="/gradetable" element={<GradeTables />} />
           <Route path="/changelog" element={<Changelog />} />
-          <Route path={`/assignment/:${id}`} element={<Assignment />} />
+          <Route path="/join-assignment" element={<JoinAssignment/>} />
+          <Route path={`/assignment/:id`} element={<Assignment role={role} />} />
           <Route path="/documentation" element={<Documentation />} />
           <Route path="/support" element={<Help />} />
           <Route path="/documentation/teachdoc" element={<Teachdoc />} />

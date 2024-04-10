@@ -109,7 +109,7 @@ export default function CreateAssignment() {
             questionUrl: qfile ? qfile : "nothing",
             modelAnsUrl: ansfile ? ansfile : "nothing",
             createdBy: currentUser?.uid,
-            // date: selectedDate,
+            deadline: selectedDate,
             marks: marks,
             students: [],
           };

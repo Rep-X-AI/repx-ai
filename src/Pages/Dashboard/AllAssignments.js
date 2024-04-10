@@ -25,6 +25,7 @@ export default function AllAssignments({ role }) {
                   if (response.data.assignments && response.data.assignments.length > 0) {
                       console.log("Assignments Data:", response.data.assignments); 
                       setAssignments(response.data.assignments);
+                      console.log(response.data.assignments)
                   } else {
                       console.log("No assignments data found.");
                   }
@@ -43,7 +44,7 @@ export default function AllAssignments({ role }) {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 p-4">
           {assignments.map((assignment, index) => (
-            <AssignmentCard key={index} code={assignment._id}  title={assignment.title} desc={assignment.desc} role={role} createdBy={assignment.teacher}/>
+            <AssignmentCard key={index} code={assignment.code}  title={assignment.title} desc={assignment.desc} role={role} createdBy={assignment.teacher} deadline={assignment.deadline}/>
           ))}
         </div>
     );
