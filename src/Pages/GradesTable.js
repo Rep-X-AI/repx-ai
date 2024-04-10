@@ -38,13 +38,13 @@ const GradesTable = () => {
             <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white lg:text-center md:text-center sm:text-center">Assignment Details</h2>
         <div className="flex flex-col mb-10 p-6 mx-auto max-w-full text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
           <section className="m-auto">
-            <li className="assignment mb-4 px-4 list-disc">
+            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
               <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Title</h3>
-              <p className="text-violet-800 text-left font-semibold text-xl ml-4">{Assignment?.title}</p>
+              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{Assignment?.title}</p>
             </li>
-            <li className="assignment mb-4 px-4">
+            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
               <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
-              <p className="text-violet-800 text-left font-semibold text-xl ml-4">{Assignment?.desc}</p>
+              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{Assignment?.desc}</p>
             </li>
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
