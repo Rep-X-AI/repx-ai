@@ -46,7 +46,7 @@ const GradesTable = () => {
               <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
               <p className="text-violet-800 text-left font-semibold text-xl ml-4">{Assignment?.desc}</p>
             </li>
-            <div className="grid mt-5 lg:grid-cols-3 sm:grid-cols-2 md:grid-cols-2">
+            <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
                 <p className="text-violet-800 font-semibold text-lg">{teacher?.name}</p>
