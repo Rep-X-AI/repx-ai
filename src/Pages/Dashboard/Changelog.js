@@ -4,23 +4,27 @@ const ChangelogPage = () => {
   return (
     <>
       <div className="px-4 pt-10 pb-16 sm:px-6 md:px-8">
-      <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl  p-2">Changelog</h1>
-      <hr />
-        <div className="mb-2 space-y-5 text-left text-lg">
-          <p>Check out whats new on Javaistic.</p>
-        </div>
+      <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
+            {" "}
+            Changelog{" "}
+          </h1>
+          <p className="mb-3 mt-2 text-lg font-normal text-purple-300 lg:text-xl text-left">
+            See what we're working on !
+          </p>
+          <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
+
         <section className="text-gray-600 ">
           <div className="container mx-auto py-12">
             <div className="flex flex-col items-start rounded-xl  sm:items-center">
               <ol className="relative w-full border-l border-gray-200 dark:border-gray-700">
                 <li className="mb-10 ml-6">
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-200 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
-                      className="h-3 w-3 fill-current text-blue-600 dark:text-blue-400"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
                     >
                       <path
                         fill-rule="evenodd"
@@ -31,7 +35,7 @@ const ChangelogPage = () => {
                   </span>
                   <h3 className="mb-1 flex items-center text-lg font-semibold text-gray-900 dark:text-white">
                     Repx AI v1.7.0
-                    <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-200 dark:text-blue-800">
+                    <span className="font-semibold mr-2 ml-5 jff mb-1 rounded bg-blue-100 px-2.5 py-0.5 text-sm text-blue-800 dark:bg-blue-200 dark:text-violet-800">
                       Latest
                     </span>
                   </h3>
@@ -45,13 +49,13 @@ const ChangelogPage = () => {
               </ol>
               <ol className="relative w-full border-l border-gray-200 dark:border-gray-700">
                 <li className="mb-10 ml-6">
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-200 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
-                      className="h-3 w-3 fill-current text-blue-600 dark:text-blue-400"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
                     >
                       <path
                         fill-rule="evenodd"
@@ -71,13 +75,13 @@ const ChangelogPage = () => {
                   </p>
                 </li>
                 <li className="mb-10 ml-6">
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-200 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
-                      className="h-3 w-3 fill-current text-blue-600 dark:text-blue-400"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
                     >
                       <path
                         fill-rule="evenodd"
@@ -97,13 +101,13 @@ const ChangelogPage = () => {
                   </p>
                 </li>
                 <li className="mb-10 ml-6">
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-200 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
-                      className="h-3 w-3 fill-current text-blue-600 dark:text-blue-400"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
                     >
                       <path
                         fill-rule="evenodd"
@@ -123,13 +127,13 @@ const ChangelogPage = () => {
                   </p>
                 </li>
                 <li className="mb-10 ml-6">
-                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-200 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
-                      className="h-3 w-3 fill-current text-blue-600 dark:text-blue-400"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
                     >
                       <path
                         fill-rule="evenodd"
@@ -147,6 +151,23 @@ const ChangelogPage = () => {
                   <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
                     A smart i Classroom  easing out the workload of both Students and Teachers . Interactive dashboard , clean UI ,Eficient Handling of Assignments,and seemless navigation . Experience a transformative learning environment with Repx AI.
                   </p>
+                </li>
+                <li className="ml-6">
+                  <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-violet-300 ring-8 ring-violet-200 dark:bg-violet-700 dark:ring-gray-900">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      className="h-3 w-3 fill-current text-violet-600 dark:text-violet-300"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
                 </li>
               </ol>
             </div>
