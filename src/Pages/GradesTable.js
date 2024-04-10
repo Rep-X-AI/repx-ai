@@ -84,7 +84,7 @@ const GradesTable = () => {
                 <section key={index} className="students-grades card-section p-2">
                   <div className="student-grade flex justify-between p-4 bg-gradient-to-b from-purple-100 to-purple-400 items-center rounded-md">
                     <div className="student text-gray-900 font-bold items-center">{index+1}. {user.name}</div>
-                    <div className="grade text-white font-bold bg-violet-500 p-2 rounded-full">{submission.marks}</div>
+                    <div className="grade text-white font-bold bg-violet-700 p-2 rounded-full">{submission.marks}</div>
                   </div>
                 </section>
               );
