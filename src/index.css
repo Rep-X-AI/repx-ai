@@ -49,6 +49,11 @@ html {
   border-radius: 50px ;
 }
 
+.tyy {
+  background: rgba(113, 20, 113, 0.398);
+  border-radius: 50px ;
+}
+
 .emnie {
   transition: 0.3s;
 }
