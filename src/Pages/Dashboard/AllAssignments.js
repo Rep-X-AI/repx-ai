@@ -42,7 +42,7 @@ export default function AllAssignments({ role }) {
     
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-4 p-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
           {assignments.map((assignment, index) => (
             <AssignmentCard key={index} code={assignment.code}  title={assignment.title} desc={assignment.desc} role={role} createdBy={assignment.teacher} deadline={assignment.deadline}/>
           ))}
