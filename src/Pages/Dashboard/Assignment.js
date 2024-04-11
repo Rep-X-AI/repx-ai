@@ -252,19 +252,38 @@ export default function Assignment({ role }) {
   return (
     <>
       <div className="w-full max-w-screen-lg mx-auto p-4">
+        {role==='teacher' && (<>
+          <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
+          {" "}Your Assignments{" "}
+      </h1>
+      <p className="mb-3 mt-2 text-lg font-normal text-purple-300 lg:text-xl text-left">
+      Check and update your assignment details here.
+      </p>     
+        
+        </>)}
+        {role==='student' && (<>
+          <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
+          {" "}Your Assignments{" "}
+      </h1>
+      <p className="mb-3 mt-2 text-lg font-normal text-purple-300 lg:text-xl text-left">
+      Check and submit your assignment details here.
+      </p>     
+        
+        </>)}
+
+      <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
         <>
           {isModalOpen && (
-            <div className=" justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
-              <div className="relative w-auto my-6 mx-auto max-w-2xl">
+              <div className="mt-2">
                 {/* Modal content */}
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none bg-gradient-to-r from-purple-50 via-pink-50 to-purple-300">
+                <div className="flex flex-col p-6 mx-auto  text-center bg-gradient-to-b from-purple-300 to-purple-600 text-black border-2 rounded-lg">
                   {/* Modal header */}
 
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-5xl leading-none font-semibold outline-none focus:outline-none"
+                    className="ml-auto p-2 m-4 rounded-full bg-white"
                     onClick={closeModal}
                   >
-                    <span className="bg-transparent  font-bold text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    <span className="font-bold text-red-500 h-7 w-5 text-2xl block outline-none focus:outline-none">
                       X
                     </span>
                   </button>
@@ -272,11 +291,17 @@ export default function Assignment({ role }) {
                   {/* Modal body */}
 
                   <form
-                    className="w-full sm:px-12 lg:px-16 xl:px-24 flex flex-col flex-wrap text-xl mb-10 py-5"
+                    className="w-full sm:px-12 lg:px-16 xl:px-24 flex flex-col flex-wrap text-xl mb-10 py-5 px-9"
                     onSubmit={handleUpdate}
                   >
                     <div className="grid gap-2 sm:gap-6 md:grid-cols-2">
                       <div>
+                      <label
+                            htmlFor="deadline"
+                            className="block mb-2 font-medium text-violet-800"
+                          >
+                            Assignment Title
+                          </label>
                         <input
                           name="title"
                           id="title"
@@ -290,6 +315,12 @@ export default function Assignment({ role }) {
                         />
                       </div>
                       <div>
+                      <label
+                            htmlFor="deadline"
+                            className="block mb-2 font-medium text-violet-800"
+                          >
+                            Today's Date
+                          </label>
                         <input
                           name="creationDate"
                           id="creationDate"
@@ -311,9 +342,9 @@ export default function Assignment({ role }) {
                         {/* {Date PIcker Start} */}
 
                         <div className="datepicker-container">
-                          <label
+                        <label
                             htmlFor="deadline"
-                            className="block mb-2 font-medium text-purple-400"
+                            className="block mb-2 font-medium text-violet-800"
                           >
                             Select Deadline
                           </label>
@@ -398,12 +429,12 @@ export default function Assignment({ role }) {
                         {/* Date Picker End */}
                       </div>
                       <div>
-                        <label
-                          htmlFor="marks"
-                          className="block mb-2 font-medium text-purple-400"
-                        >
-                          Enter Total Marks
-                        </label>
+                      <label
+                            htmlFor="deadline"
+                            className="block mb-2 font-medium text-violet-800"
+                          >
+                            Total Marks
+                          </label>
                         <input
                           name="totalMarks"
                           id="totalMarks"
@@ -421,6 +452,12 @@ export default function Assignment({ role }) {
                     </div>
 
                     <div className="mt-3">
+                    <label
+                            htmlFor="deadline"
+                            className="block mb-2 font-medium text-violet-800"
+                          >
+                            Assignment Details
+                          </label>
                       <textarea
                         name="description"
                         id="description"
@@ -434,35 +471,56 @@ export default function Assignment({ role }) {
 
                     <button
                       type="submit"
-                      className="hero-button-gradient mt-3 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
+                      className="hero-button-gradient mt-5 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
                     >
                       Update Assignment
                     </button>
                   </form>
                 </div>
               </div>
-            </div>
           )}
 
+          <h1 className="text-white text-center text-3xl font-bold mb-3">Assignment Details</h1>
           {/* Assignment Details */}
-          <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 text-white p-6 rounded-lg shadow-lg mb-6">
-            <p className="text-lg text-zinc-200 mb-3">Assignment Code: {id}</p>
-            <p className="text-lg font-bold">{assignmentName}</p>
-            <p className="mb-4">{description}</p>
-            <p className="text-zinc-200">
-              Teacher: {createdBy || currentUser.displayName}
-            </p>
-            <p className="text-zinc-200">
-              Deadline: {new Date(selectedDate).toLocaleDateString("en-GB")}
-            </p>
-            <p className="text-zinc-200">Marks: 100</p>
+          <div className="flex flex-col mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
+          <section className="m-auto mt-4">
+            <div className="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-1">
+            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
+              <h3 className="text-black text-2xl font-bold mb-3 lg:text-left lg:ml-5 sm:text-center md:text-center">Assignment Title</h3>
+              <p className="text-violet-800 text-center py-1 font-semibold  text-xl lg:ml-1 ty lg:w-3/4 sm:w-full">{assignmentName}</p>
+            </li>
+            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
+              <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center lg:ml-5 ">Assignment Code</h3>
+              <p className="text-violet-800 text-center  py-1 font-semibold  text-xl lg:ml-1 ty lg:w-full sm:w-full">{id}</p>
+            </li>
+            </div>
+            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
+              <h3 className="text-black text-2xl font-bold mb-3 lg:text-center mt-5 sm:text-center md:text-center">Assignment Details</h3>
+              <p className="text-violet-800 md:text-center lg:text-center font-semibold sm:text-center pr-4 text-xl">{description}</p>
+            </li>
+            <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
+              <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
+                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
+                <p className="text-violet-800 font-semibold text-lg">{currentUser.displayName}</p>
+              </li>
+              <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
+                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
+                <p className="text-violet-800 text-center  py-1 font-semibold  text-xl lg:ml-1 ty lg:mt-0 md:mt-0 sm:mt-3 lg:w-full sm:w-full">{new Date(selectedDate).toLocaleDateString("en-GB")}</p>
+              </li>
+              <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
+                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
+                <p className="text-violet-800 font-semibold text-lg">Marks : 100</p>
+              </li>
+        </div>
+        </section>
+      
             {role === "teacher" && (
               <>
-                <div className="flex flex-column justify-end">
+                <div className="flex flex-row m-auto lg:w-1/4 md:w-full sm:w-full mt-5 justify-center bg-violet-500 p-2 rounded-full mb-5">
                   <svg
-                    className=""
+                    className="cursor-pointer hover:fill-violet-800 transition-all"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 512 512"
                     onClick={openModal}
                   >
@@ -470,23 +528,27 @@ export default function Assignment({ role }) {
                   </svg>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 448 512"
+                    className="cursor-pointer hover:fill-violet-800 transition-all"
                     onClick={handleDelete}
                   >
                     <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                   </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg"fill="currentColor" viewBox="0 0 512 512" onClick={copyCode}>
+                  <svg xmlns="http://www.w3.org/2000/svg"fill="white" className="cursor-pointer hover:fill-violet-800 transition-all"viewBox="0 0 512 512" onClick={copyCode}>
                     <path d="M503.7 189.8L327.7 37.9C312.3 24.5 288 35.3 288 56v80.1C127.4 137.9 0 170.1 0 322.3c0 61.4 39.6 122.3 83.3 154.1 13.7 9.9 33.1-2.5 28.1-18.6C66.1 312.8 132.9 274.3 288 272.1V360c0 20.7 24.3 31.5 39.7 18.2l176-152c11.1-9.6 11.1-26.8 0-36.3z" />
                   </svg>
                 </div>
               </>
             )}
-          </div>
+            </div>
+
 
           {/* File Upload Section */}
           {role === "student" && (
-            <div className="bg-indigo-100 rounded-lg shadow-lg p-6 mb-6 text-center">
+            <>
+            <h1 className="text-white text-center text-3xl font-bold my-4">Upload Assignment</h1>
+            <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
               <form className=" p-4 rounded-lg " onSubmit={handleSubmit}>
                 <div className="mb-2">
                   <div className=" mt-2 text-black ">
@@ -557,38 +619,37 @@ export default function Assignment({ role }) {
                   </div>
                   <button
                     type="submit"
-                    className="mt-4 w-full bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 text-white text-xl font-semibold p-4 rounded-lg shadow-md hover:from-purple-600 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="hero-button-gradient w-full mt-4 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
                     onClick={handleSubmit}
                   >
                     Submit Assignment
                   </button>
-                  <button
-                    className="mt-4 w-full bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 text-white text-xl font-semibold  p-4 rounded-lg shadow-md hover:from-purple-600 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    onClick={handleCancel}
-                  >
-                    Cancel
-                  </button>
                 </div>
               </form>
             </div>
+            </>
           )}
         </>
 
         {/* Evaluation Section (Only for Teachers) */}
         {role === "teacher" && (
-          <div className="bg-indigo-100 rounded-lg shadow-lg p-6 text-center mb-6">
-            <p className="font-semibold mb-4">Assignments Submitted: 0</p>
-            <p className="font-semibold mb-4">Assignments Pending: 0</p>
-            <p className="font-bold mb-4">
+          <>
+            <h1 className="text-white text-center text-3xl font-bold my-3">Assignment Submissions</h1>
+          <div className="flex flex-col px-5 mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg py-5">
+            <div className="mb-5 grid lg:grid-cols-2 md:grid-cols-1 sm:-grid-cols-1 ">
+            <p className="font-semibold mb-4 text-xl">Assignments Filed : 0</p>
+            <p className="font-semibold mb-4 text-xl">Assignments Due : 0</p></div>
+          <p className="font-bold mb-4 text-violet-700 text-xl text-center">
               Evaluate quickly with the power of AI
             </p>
             <Link
               to="/dashboard/evaluate"
-              className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-600 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-400 inline-block"
+              className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
             >
               Evaluate Now!
             </Link>
           </div>
+          </>
         )}
       </div>
     </>

@@ -39,6 +39,16 @@ html {
   border-bottom-right-radius: 15px;
 }
 
+
+.try {
+  font-size: 18px;
+}
+
+.ty {
+  background: rgba(228, 65, 228, 0.398);
+  border-radius: 50px ;
+}
+
 .emnie {
   transition: 0.3s;
 }

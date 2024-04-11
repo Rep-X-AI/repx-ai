@@ -14,14 +14,16 @@ const AssignmentCard = ({ code, deadline, title, desc, role, createdBy }) => {
         
       >
         <div className="p-6">
-          <p className="text-xl text-left block bg-transparent py-2 px-2 rounded text-white font-bold mb-1">Assignment Code :<span className="text-black font-semibold text-md lg:ml-3">" {code} "</span></p>
-          <h2 className="text-xl block text-left bg-transparent py-2 px-2 rounded text-white font-bold mb-1">Assignment Title :<span className="text-black font-semibold mt-0 lg:ml-7">" {title} "</span></h2>
+          <div className="grid">
+          <p className="text-lg text-center block bg-transparent py-2 px-2 rounded text-white font-bold mb-1">: Assignment Code :</p><span className="try text-center text-white ty px-5 tracking-wide py-2 font-bold text-md ml-3">{code}</span></div>
+          <div className="grid">
+          <h2 className="text-lg block text-center bg-transparent py-2 px-2 rounded text-white font-bold mb-1">: Assignment Title :</h2><span className="try text-center text-white ty px-5 tracking-wide py-2 font-bold text-md ml-3">{title} </span></div>
           <h2 className="mb-2 text-center flex flex-col">
-            <span className="text-black block py-2 w-3/4 rounded bg-white mb-2 font-semibold text-xl mt-2 m-auto">Description</span>
-            <span className="text-center">" {desc.split(" ").slice(0, 8).join(" ")} ... "</span>
-            <p className="text-lg font-bold text-gray-200 text-center">
-            Deadline : <span className="text-violet-200 font-semibold">{new Date(deadline).toLocaleDateString("en-GB")}</span>
-          </p>
+            {/* <span className="text-lg text-left block bg-transparent py-2 px-2 rounded text-white font-bold mb-1">Description :</span>
+            <span className="text-center">" {desc.split(" ").slice(0, 8).join(" ")} ... "</span> */}
+            <p className="mt-2 text-lg font-bold text-gray-200 text-center mb-2">
+            : Deadline : </p> <span className="text-violet-200 ty p-2 ml-3 font-semibold">{new Date(deadline).toLocaleDateString("en-GB")}</span>
+         
             <button className="font-semibold hover:scale-95 transition-all duration-300 ease-in-out hover:opacity-80 text-center hero-button-gradient p-2 rounded mt-3 m-auto" onClick={handleClick}>View Assignment</button>
           </h2>
         </div>
