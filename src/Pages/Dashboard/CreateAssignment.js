@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Date.css";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAssignment() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -16,6 +17,8 @@ export default function CreateAssignment() {
   const [answerPaper, setAnswerPaper] = useState(null);
   const [description, setDescription] = useState("");
   var FormData = require("form-data");
+
+  const navigate = useNavigate()
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
   const baseUrl =
@@ -124,6 +127,9 @@ export default function CreateAssignment() {
           setDescription("");
           setQuestionFileName("");
           setModelFileName("");
+          setTimeout(() => {
+            navigate("/dashboard")
+          }, 1000);
         })
         .catch(function (error) {
           console.log(error);

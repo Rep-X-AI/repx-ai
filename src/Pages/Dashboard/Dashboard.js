@@ -85,7 +85,7 @@ const Dashboard = () => {
           <Route path="/" element={<DashboardHome role={role} />} />
           <Route path="/create-assignment" element={<CreateAssignment role={role} />} />
           <Route path="/upgrade-to-pro" element={<Upgrade />} />
-          <Route path="/gradetable" element={<GradeTables />} />
+          <Route path="/gradetable/:id" element={<GradeTables role={role} />} />
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/join-assignment" element={<JoinAssignment/>} />
           <Route path={`/assignment/:id`} element={<Assignment role={role} />} />

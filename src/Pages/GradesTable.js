@@ -1,8 +1,10 @@
-import React from 'react';
-import jsonData from '../sampleData/sampleAssignments.json';
-import usersData from '../sampleData/SampleUsers.json'; 
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const GradesTable = () => {
+const GradesTable = ({role}) => {
 
   const studentDetailsStyle = {
     maxHeight: 'calc(100vh - 300px)',
@@ -10,13 +12,62 @@ const GradesTable = () => {
     padding: "10px",
   };
 
-  const { Assignments } = jsonData;
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { currentUser } = useAuth();
 
-  const Assignment = Assignments[2]; 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [assignmentName, setAssignmentName] = useState("");
+  const [description, setDescription] = useState("");
+  const [createdBy, setCreatedBy] = useState("");
+  const [marks, setMarks] = useState(100);
+  const [submissions,setSubmissions] = useState([])
 
-  const users = usersData.Users || []; 
 
-  const teacher = users.find(user => user.useruid === Assignment?.createdBy);
+
+  const nodeEnv = process.env.REACT_APP_NODE_ENV;
+  const baseUrl =
+    nodeEnv === "production"
+      ? "https://repx-ai-backend.vercel.app"
+      : "http://localhost:8080";
+
+  
+      useEffect(() => {
+        const fetchAssignment = async () => {
+          try {
+            const response = await axios.get(
+              `${baseUrl}/api/assignments/get-assignment-${role}/${id}?uid=${currentUser.uid}`
+            );
+            if (!response) {
+              navigate("/assigment-not-found-or-not-registered");
+            }
+            setAssignmentName(response.data.title);
+            setDescription(response.data.desc);
+            setCreatedBy(response.data.createdBy);
+            setSelectedDate(new Date(response.data.deadline));
+          } catch (error) {
+            console.error("Error fetching assignment:", error);
+            navigate("/assigment-not-found-or-not-registered-in-the-assignment");
+          }
+        };
+        const fetchSubmission = async () => {
+          try {
+            const response = await axios.get(
+              `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
+            );
+            if(response.data){
+              setSubmissions(response.data);
+            }    
+          } catch (error) {
+            console.log(error)
+          }
+        }
+    
+        if (currentUser && currentUser.uid) {
+          fetchAssignment();
+          fetchSubmission();
+        }
+      }, [role, currentUser, baseUrl, id, navigate]);
 
   return (
     <>
@@ -40,24 +91,24 @@ const GradesTable = () => {
           <section className="m-auto">
             <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
               <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Title</h3>
-              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{Assignment?.title}</p>
+              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{assignmentName}</p>
             </li>
             <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
               <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
-              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{Assignment?.desc}</p>
+              <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{description}</p>
             </li>
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
-                <p className="text-violet-800 font-semibold text-lg">{teacher?.name}</p>
+                <p className="text-violet-800 font-semibold text-lg">{createdBy}</p>
               </li>
               <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
-                <p className="text-violet-800 font-semibold text-lg">{Assignment?.deadline}</p>
+                <p className="text-violet-800 font-semibold text-lg">{selectedDate.toLocaleDateString()}</p>
               </li>
               <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
-                <p className="text-violet-800 font-semibold text-lg">{Assignment?.totalMarks}</p>
+                <p className="text-violet-800 font-semibold text-lg">{marks}</p>
               </li>
             </div>
           </section>
@@ -72,19 +123,17 @@ const GradesTable = () => {
             <div className="student text-slate-200 text-left font-bold lg:text-lg sm:text-sm">Student Name</div>
             <div className="grade text-slate-200 font-bold lg:text-lg text-right sm:text-sm">Marks Obtained</div>
           </div>
-          </div>
+        </div>
         <div className="card bg-gray-800 w-full lg:w-5/6 justt m-auto" style={studentDetailsStyle}>
           <div className='mt-1'>
-          {Assignment && Assignment.submissions && Assignment.submissions.length > 0 ? (
-            Assignment.submissions.map((submission, index) => {
-
-              const user = users.find(user => user.useruid === submission.student);
+          {submissions && submissions.length > 0 ? (
+            submissions.map((submission, index) => {
             
               return (
                 <section key={index} className="students-grades card-section p-2">
                   <div className="student-grade flex justify-between p-4 bg-gradient-to-b from-purple-100 to-purple-400 items-center rounded-md">
-                    <div className="student text-gray-900 font-bold items-center">{index+1}. {user.name}</div>
-                    <div className="grade tracking-wide text-white font-bold bg-violet-700 p-2 rounded-full">{submission.marks}</div>
+                    <div className="student text-gray-900 font-bold items-center">{index+1}. {submission.student}</div>
+                    <div className="grade tracking-wide text-white font-bold bg-violet-700 p-2 rounded-full">{submission.marks===null?"Not Evaluated Yet":submission.marks}</div>
                   </div>
                 </section>
               );

@@ -18,6 +18,10 @@ export default function Assignment({ role }) {
   const [createdBy, setCreatedBy] = useState("");
   const [isEvaluated, setIsEvaluated] = useState(false);
   const [marks, setMarks] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [submissionsCount, setSubmissionsCount] = useState(0)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [question, setQuestion] = useState("")
 
   var FormData = require("form-data");
   const [file, setFile] = useState(null);
@@ -39,11 +43,22 @@ export default function Assignment({ role }) {
         if (!response) {
           navigate("/assigment-not-found-or-not-registered");
         }
+        console.log(response.data)
         setAssignmentName(response.data.title);
         setDescription(response.data.desc);
         setCreatedBy(response.data.createdBy);
         setSelectedDate(new Date(response.data.deadline));
         setIsEvaluated(response.data.isEvaluated);
+        setQuestion(response.data.questionUrl)
+        if(response.data.submissionCount){
+          setSubmissionsCount(response.data.submissionCount)
+        }
+        if(response.data.pendingCount ){
+          setPendingCount(response.data.pendingCount )
+        }
+        if(response.data.hasSubmitted){
+          setHasSubmitted(response.data.hasSubmitted)
+        }
       } catch (error) {
         console.error("Error fetching assignment:", error);
         navigate("/assigment-not-found-or-not-registered-in-the-assignment");
@@ -53,7 +68,7 @@ export default function Assignment({ role }) {
     if (currentUser && currentUser.uid) {
       fetchAssignment();
     }
-  }, [role, currentUser, baseUrl, id, navigate]);
+  }, [role, currentUser, baseUrl, id, navigate,hasSubmitted]);
 
   const handleFileUpload = (event, setFileName, setFileState) => {
     event.preventDefault();
@@ -79,6 +94,7 @@ export default function Assignment({ role }) {
       return;
     }
     setFileName(file.name);
+    console.log(file.name);
     setFileState(file);
   };
 
@@ -86,23 +102,65 @@ export default function Assignment({ role }) {
     event.preventDefault();
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit= async (e) => {
     e.preventDefault();
     if (!file) {
       alert("Please select a file to submit.");
       return;
     }
+    try {
+      const data = new FormData();
+      data.append("file", file)
+      var config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "https://api.pdfrest.com/upload",
+        headers: {
+          "Api-Key": process.env.REACT_APP_FILE_API_KEY,
+        },
+        data: data,
+      };
 
-    console.log({ file: file });
-    setFile(null);
-    setFileName("");
+      axios(config)
+        .then(function (response) {
+          const myfile = "https://api.pdfrest.com/resource/" + response.data.files[0].id + "?format=file";
+          const formData = {
+            uid:currentUser.uid ,
+            answerUrl:myfile
+          };
+
+          submit(formData);
+
+          setHasSubmitted(true);
+          setFile(null);
+          setFileName("");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    setFile(null);
-    setFileName("");
-  };
+
+  const submit = async (data) =>{
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/assignments/submitAssignment/${id}`,
+        data
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  // const handleCancel = (e) => {
+  //   e.preventDefault();
+  //   setFile(null);
+  //   setFileName("");
+  // };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -249,6 +307,39 @@ export default function Assignment({ role }) {
     alert("Code Copied to Clipboard")
   }
 
+  
+
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    try {
+      if (!question) {
+        console.error('Question URL is empty.');
+        return;
+      }
+      const config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url:question , 
+        headers: {
+          'Api-Key': process.env.REACT_APP_FILE_API_KEY, 
+          'Accept': 'application/json' ,
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+       axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } catch (error) {
+      console.error('Error retrieving resource:', error);
+    }
+  };
+  
+  
+
   return (
     <>
       <div className="w-full max-w-screen-lg mx-auto p-4">
@@ -264,10 +355,10 @@ export default function Assignment({ role }) {
         {role==='student' && (<>
           <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
           {" "}Your Assignments{" "}
-      </h1>
-      <p className="mb-3 mt-2 text-lg font-normal text-purple-300 lg:text-xl text-left">
-      Check and submit your assignment details here.
-      </p>     
+          </h1>
+          <p className="mb-3 mt-2 text-lg font-normal text-purple-300 lg:text-xl text-left">
+          Check and submit your assignment details here.
+          </p>     
         
         </>)}
 
@@ -501,7 +592,7 @@ export default function Assignment({ role }) {
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
-                <p className="text-violet-800 font-semibold text-lg">{currentUser.displayName}</p>
+                <p className="text-violet-800 font-semibold text-lg">{createdBy}</p>
               </li>
               <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
@@ -511,10 +602,10 @@ export default function Assignment({ role }) {
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
                 <p className="text-violet-800 font-semibold text-lg">Marks : 100</p>
               </li>
-        </div>
+            </div>
         </section>
       
-            {role === "teacher" && (
+            {role === "teacher"  && (
               <>
                 <div className="flex flex-row m-auto lg:w-1/4 md:w-full sm:w-full mt-5 justify-center bg-violet-500 p-2 rounded-full mb-5">
                   <svg
@@ -541,11 +632,28 @@ export default function Assignment({ role }) {
                 </div>
               </>
             )}
+
+              <div >
+                <button className="flex flex-row m-auto lg:w-1/4 md:w-full sm:w-full mt-5 justify-center bg-violet-500 p-2 rounded-full mb-5 text-white font-bold" onClick={handleDownload} >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-6 w-6 mr-2">
+                        <rect x="2" y="2" width="20" height="20" rx="4" ry="4" stroke="currentColor" strokeWidth="2" fill="none" />
+                        <line x1="12" y1="6" x2="12" y2="16" stroke="currentColor" strokeWidth="2" />
+                        <polyline points="9 13 12 16 15 13" stroke="currentColor" strokeWidth="2" fill="none" />
+                    </svg>
+                    <span>Download Question Paper</span>
+                </button>
+              </div>
+
+
+              <button  className="hero-button-gradient mt-3 rounded-lg p-2 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 m-auto w-full" onClick= {()=>{navigate(`/dashboard/gradeTable/${id}`)}}>
+                Show Grades!
+              </button>
+
             </div>
 
 
           {/* File Upload Section */}
-          {role === "student" && (
+          {role === "student" && !hasSubmitted  && 
             <>
             <h1 className="text-white text-center text-3xl font-bold my-4">Upload Assignment</h1>
             <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
@@ -554,8 +662,10 @@ export default function Assignment({ role }) {
                   <div className=" mt-2 text-black ">
                     <div
                       className="flex items-center justify-center w-full "
-                      onDrop={handleFileUpload}
-                      onDragOver={handleDragOver}
+                      onDrop={(event) =>
+                        handleFileUpload(event, setFileName, setFile)
+                      }
+                      onDragOver={(event) => handleDragOver(event)}
                     >
                       <label
                         htmlFor="file"
@@ -613,7 +723,7 @@ export default function Assignment({ role }) {
                         id="file"
                         name="file"
                         className="hidden"
-                        onChange={handleFileUpload}
+                        onChange={(event) => handleFileUpload(event, setFileName, setFile)}
                       />
                     </div>
                   </div>
@@ -628,8 +738,16 @@ export default function Assignment({ role }) {
               </form>
             </div>
             </>
-          )}
+          }
         </>
+
+        {role === "student" && hasSubmitted  && 
+            <>
+              <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
+              <h1 className="text-white text-center text-3xl font-bold my-4">Your Assignment has been succesfully submitted!</h1>
+              </div>
+            </>
+        }
 
         {/* Evaluation Section (Only for Teachers) */}
         {role === "teacher" && (
@@ -637,8 +755,8 @@ export default function Assignment({ role }) {
             <h1 className="text-white text-center text-3xl font-bold my-3">Assignment Submissions</h1>
           <div className="flex flex-col px-5 mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg py-5">
             <div className="mb-5 grid lg:grid-cols-2 md:grid-cols-1 sm:-grid-cols-1 ">
-            <p className="font-semibold mb-4 text-xl">Assignments Filed : 0</p>
-            <p className="font-semibold mb-4 text-xl">Assignments Due : 0</p></div>
+            <p className="font-semibold mb-4 text-xl">Assignments Filed : {submissionsCount}</p>
+            <p className="font-semibold mb-4 text-xl">Assignments Due : {pendingCount}</p></div>
           <p className="font-bold mb-4 text-violet-700 text-xl text-center">
               Evaluate quickly with the power of AI
             </p>
