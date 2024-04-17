@@ -42,10 +42,17 @@ export default function AllAssignments({ role }) {
     
 
     return (
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+      <>
+      {(!assignments.length) ? <h2 className="text-white text-3xl text-center font-thin m-auto">... No Assignments Found ...</h2>
+
+      :
+ <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+        
           {assignments.map((assignment, index) => (
             <AssignmentCard key={index} code={assignment.code}  title={assignment.title} desc={assignment.desc} role={role} createdBy={assignment.teacher} deadline={assignment.deadline}/>
           ))}
-        </div>
+      </div>
+      }
+      </>
     );
 }
