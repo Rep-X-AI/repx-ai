@@ -43,7 +43,7 @@ export default function AllAssignments({ role }) {
 
     return (
       <>
-      {(!assignments.length) ? <h2 className="text-white text-3xl text-center font-thin m-auto">... No Assignments Found ...</h2>
+      {(!assignments.length) ? <h2 className="mb-3 text-2xl font-normal text-purple-300 text-center mt-5">... No Assignments Found ...</h2>
 
       :
  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
