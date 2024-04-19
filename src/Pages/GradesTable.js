@@ -20,6 +20,7 @@ const GradesTable = ({role}) => {
   const [assignmentName, setAssignmentName] = useState("");
   const [description, setDescription] = useState("");
   const [createdBy, setCreatedBy] = useState("");
+  const [teacher, setTeacher] = useState("");
   const [marks, setMarks] = useState(100);
   const [submissions,setSubmissions] = useState([])
 
@@ -43,7 +44,7 @@ const GradesTable = ({role}) => {
             }
             setAssignmentName(response.data.title);
             setDescription(response.data.desc);
-            setCreatedBy(response.data.createdBy);
+            setTeacher(response.data.teacher);
             setSelectedDate(new Date(response.data.deadline));
           } catch (error) {
             console.error("Error fetching assignment:", error);
@@ -100,7 +101,7 @@ const GradesTable = ({role}) => {
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
-                <p className="text-violet-800 font-semibold text-lg">{createdBy}</p>
+                <p className="text-violet-800 font-semibold text-lg">{teacher}</p>
               </li>
               <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
