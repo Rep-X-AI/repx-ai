@@ -49,6 +49,7 @@ export default function Assignment({ role }) {
         setDescription(response.data.desc);
         setCreatedBy(response.data.createdBy);
         setTeacher(response.data.teacher);
+        setMarks(response.data.tmark);
         setSelectedDate(new Date(response.data.deadline));
         setIsEvaluated(response.data.isEvaluated);
         setQuestion(response.data.questionUrl)
@@ -604,7 +605,7 @@ export default function Assignment({ role }) {
               </li>
               <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
-                <p className="text-violet-800 font-semibold text-lg">Marks : 100</p>
+                <p className="text-violet-800 font-semibold text-lg">{marks}</p>
               </li>
             </div>
         </section>

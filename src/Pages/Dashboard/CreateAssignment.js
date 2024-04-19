@@ -114,7 +114,7 @@ export default function CreateAssignment() {
             createdBy: currentUser?.uid,
             teacherName: currentUser.displayName,
             deadline: selectedDate,
-            marks: marks,
+            tmarks: marks,
             students: [],
           };
 

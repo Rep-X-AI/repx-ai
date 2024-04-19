@@ -45,6 +45,7 @@ const GradesTable = ({role}) => {
             setAssignmentName(response.data.title);
             setDescription(response.data.desc);
             setTeacher(response.data.teacher);
+            setMarks(response.data.tmark);
             setSelectedDate(new Date(response.data.deadline));
           } catch (error) {
             console.error("Error fetching assignment:", error);
