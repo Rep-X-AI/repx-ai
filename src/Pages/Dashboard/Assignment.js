@@ -16,6 +16,7 @@ export default function Assignment({ role }) {
   const [assignmentName, setAssignmentName] = useState("");
   const [description, setDescription] = useState("");
   const [createdBy, setCreatedBy] = useState("");
+  const [teacher, setTeacher] = useState("");
   const [isEvaluated, setIsEvaluated] = useState(false);
   const [marks, setMarks] = useState(0);
   const [pendingCount, setPendingCount] = useState(0);
@@ -47,6 +48,7 @@ export default function Assignment({ role }) {
         setAssignmentName(response.data.title);
         setDescription(response.data.desc);
         setCreatedBy(response.data.createdBy);
+        setTeacher(response.data.teacher);
         setSelectedDate(new Date(response.data.deadline));
         setIsEvaluated(response.data.isEvaluated);
         setQuestion(response.data.questionUrl)
@@ -594,7 +596,7 @@ export default function Assignment({ role }) {
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
-                <p className="text-violet-800 font-semibold text-lg">{createdBy}</p>
+                <p className="text-violet-800 font-semibold text-lg">{teacher}</p>
               </li>
               <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
                 <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>

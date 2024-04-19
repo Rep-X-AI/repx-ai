@@ -112,6 +112,7 @@ export default function CreateAssignment() {
             questionUrl: qfile ? qfile : "nothing",
             modelAnsUrl: ansfile ? ansfile : "nothing",
             createdBy: currentUser?.uid,
+            teacherName: currentUser.displayName,
             deadline: selectedDate,
             marks: marks,
             students: [],
