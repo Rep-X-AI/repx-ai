@@ -167,6 +167,11 @@ export default function Assignment({ role }) {
 
   const openModal = () => {
     setIsModalOpen(true);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   const closeModal = () => {
@@ -370,7 +375,7 @@ export default function Assignment({ role }) {
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
         <>
           {isModalOpen && (
-              <div className="mt-2">
+              <div className="my-5">
                 {/* Modal content */}
                 <div className="flex flex-col p-6 mx-auto  text-center bg-gradient-to-b from-purple-300 to-purple-600 text-black border-2 rounded-lg">
                   {/* Modal header */}
