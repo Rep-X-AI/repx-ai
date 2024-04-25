@@ -25,6 +25,7 @@ export default function Assignment({ role }) {
   const [submissionsCount, setSubmissionsCount] = useState(0);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [question, setQuestion] = useState("");
+  const [answer,setAnswer] = useState("")
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +64,9 @@ export default function Assignment({ role }) {
         }
         if (response.data.hasSubmitted) {
           setHasSubmitted(response.data.hasSubmitted);
+        }
+        if(response.data.modelAnsUrl){
+          setAnswer(response.data.modelAnsUrl);
         }
       } catch (error) {
         console.error("Error fetching assignment:", error);
@@ -294,11 +298,12 @@ export default function Assignment({ role }) {
 
   const handleDelete = async () => {
     try {
+      await deleteFile(question);
+      await deleteFile(answer);
       await fetchSubmissions();
       (submission.map(async (sub) => {
         try {
         await deleteFile(sub.answerUrl);
-        await deleteFile(question);
           const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
           console.log(response.data);
           navigate("/dashboard");
@@ -809,8 +814,8 @@ export default function Assignment({ role }) {
         {role === "student" && hasSubmitted && (
           <>
             <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
-              <h1 className="text-violet-800 text-center lg:text-3xl md:text-2xl sm:text-xl font-bold my-4">
-                Your Assignment has been succesfully submitted !
+              <h1 className="text-white text-center text-3xl font-bold my-4">
+                Your Assignment has been succesfully submitted!
               </h1>
             </div>
           </>
