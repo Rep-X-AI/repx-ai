@@ -53,7 +53,7 @@ export default function JoinAssignment() {
             Enter class code provided by teacher.
           </p>
           <input
-            className="w-full bg-gradient-to-b from-purple-100 to-purple-300 text-black rounded-lg outline-none p-4 border-2 placeholder-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent mb-1"
+            className="w-full bg-gradient-to-b text-center font-semibold from-purple-100 to-purple-300 text-violet-800 rounded-lg outline-none p-4 border-2 placeholder-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent mb-1"
             type="text"
             placeholder="Assignment Code"
             value={code}

@@ -46,7 +46,7 @@ html {
 
 .ty {
   background: rgba(228, 65, 228, 0.398);
-  border-radius: 50px ;
+  border-radius: 10px ;
 }
 
 .tyy {
@@ -56,6 +56,10 @@ html {
 
 .emnie {
   transition: 0.3s;
+}
+
+.al {
+  box-shadow: 0 0 18px rgba(238, 130, 238, 0.54);
 }
 
 .emnie:hover {

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import upload from "../../Components/upload";
+import Alert from "../../Components/Alert";
 
 export default function CreateAssignment() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -17,6 +18,7 @@ export default function CreateAssignment() {
   const [questionPaper, setQuestionPaper] = useState(null);
   const [answerPaper, setAnswerPaper] = useState(null);
   const [description, setDescription] = useState("");
+  const [alert,setAlert] = useState(false);
   var FormData = require("form-data");
 
   const navigate = useNavigate()
@@ -89,7 +91,7 @@ export default function CreateAssignment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
+      setAlert(true); 
       const qfile = await upload(questionPaper);
       const ansfile = await upload(answerPaper);
      
@@ -106,7 +108,7 @@ export default function CreateAssignment() {
         };
 
         create(formData);
-
+        
         setAssignmentName("");
         setSelectedDate(new Date());
         setMarks(0);
@@ -115,10 +117,12 @@ export default function CreateAssignment() {
         setDescription("");
         setQuestionFileName("");
         setModelFileName("");
+
         setTimeout(() => {
+          setAlert(false);
           navigate("/dashboard")
-        }, 1000);
-          
+        }, 1000);  
+        
     } catch (error) {
       console.error("Error:", error);
     }
@@ -524,13 +528,19 @@ export default function CreateAssignment() {
             onChange={descChange}
           />
         </div>
-
+        <>
+        {alert && (
+          <Alert title="Redirecting To Dashboard When Assignment Created." desc="Your assignment has been created. You can update it from the dashboard if needed." />
+        )}
+        </>
+        {!alert && (
         <button
           type="submit"
           className="hero-button-gradient mt-3 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
         >
           Create Assignment
         </button>
+        )}
       </form>
     </div>
   );
