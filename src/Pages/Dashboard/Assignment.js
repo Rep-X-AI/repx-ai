@@ -115,6 +115,7 @@ export default function Assignment({ role }) {
       const formData = {
         uid: currentUser.uid,
         answerUrl: myfile,
+        studentname: currentUser.displayName
       };
 
       submit(formData);
