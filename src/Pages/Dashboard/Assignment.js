@@ -304,13 +304,13 @@ export default function Assignment({ role }) {
       (submission.map(async (sub) => {
         try {
         await deleteFile(sub.answerUrl);
-          const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
-          console.log(response.data);
-          navigate("/dashboard");
         } catch (error) {
           console.log(error.message)
         }
     }));
+    const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
+    console.log(response.data);
+    navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
     }
