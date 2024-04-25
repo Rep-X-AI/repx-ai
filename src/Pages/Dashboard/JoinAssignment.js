@@ -2,28 +2,33 @@ import axios from "axios";
 import React, { useState } from 'react';
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Alert from "../../Components/Alert";
 
 export default function JoinAssignment() {
 
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [code, setCode] = useState("");
+  const [alert,setAlert] = useState(false);
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     const baseUrl =nodeEnv === "production"? "https://repx-ai-backend.vercel.app": "http://localhost:8080";
     try {
+      setAlert(true);
       const info ={code:code ,uid:currentUser.uid}
       console.log(info)
+      setAlert(true);
       const response = await axios.post(`${baseUrl}/api/assignments/joinAssignment`,info)
       console.log(response);
       if(response && response.data.message){
         console.log("Joined Successfully")
         setCode("")
         setTimeout(() => {
+          setAlert(false);
           navigate('/dashboard')
-        }, 2000);
+        }, 1000);
       }
       
     } catch (error) {
@@ -59,9 +64,18 @@ export default function JoinAssignment() {
             value={code}
             onChange={handleChange}
           />
+
+        {alert && (
+          <Alert title="Redirecting To Dashboard When Assignment Joined." desc="Your assignment has been found and almost joined. Hold Tight !"/>
+        )}
+
+        {!alert && (
           <button type="submit" className="hero-button-gradient mt-3 rounded-lg py-4 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 m-auto w-full">
             Join Assignment
           </button>
+
+        )}
+
         </form>
       </div>
     </div>
