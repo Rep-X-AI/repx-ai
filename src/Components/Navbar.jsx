@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, page }) => {
+const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, page, getsta }) => {
   return (
     <header>
       <nav className="fixed z-50 mb-5 w-full px-4 lg:px-6 py-2.5 bg-transparent backdrop-blur-xl">
@@ -23,7 +23,7 @@ const Navbar = ({ activeLink, handleActiveLink, handleMenuToggle, isMenuOpen, pa
               className="button-border-gradient relative rounded-lg text-white text-sm flex items-center gap-1.5 py-2 px-5 mx-3 shadow-button hover:button-gradient-hover"
               disabled={true}
             >
-              Get started
+              {getsta}
             </Link>
             <button
               data-collapse-toggle="mobile-menu-2"

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const HeroSection = ({ page }) => {
+const HeroSection = ({ page, getsta }) => {
   return (
     <section
       id="home"
@@ -56,7 +56,7 @@ const HeroSection = ({ page }) => {
             className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
             disabled={true}
           >
-            Get Started
+            {getsta}
           </Link>
           {/*<InstallButton />*/}
           {/*</div>*/}

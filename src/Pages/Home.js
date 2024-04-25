@@ -12,6 +12,8 @@ const Home = () => {
   const { currentUser } = useAuth();
   const page = currentUser ? "/dashboard" : "/signup";
 
+  const getsta = currentUser ? 'Dashboard' : 'Get Started'
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -32,9 +34,10 @@ const Home = () => {
         handleActiveLink={handleActiveLink}
         handleMenuToggle={handleMenuToggle}
         page={page}
+        getsta={getsta}
       />
 
-      <HeroSection page={page} />
+      <HeroSection page={page} getsta={getsta} />
 
       <AboutSection />
 
