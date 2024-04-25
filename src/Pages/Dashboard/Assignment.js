@@ -335,7 +335,8 @@ export default function Assignment({ role }) {
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
         <>
           {isModalOpen && (
-              <div className="my-5">
+            <div className="my-5">
+                <h1 className="text-white text-center text-3xl font-bold mb-3">Update Assignment</h1>
                 {/* Modal content */}
                 <div className="flex flex-col p-6 mx-auto  text-center bg-gradient-to-b from-purple-300 to-purple-600 text-black border-2 rounded-lg">
                   {/* Modal header */}
@@ -541,8 +542,12 @@ export default function Assignment({ role }) {
               </div>
           )}
 
+          {!isModalOpen && (
+            <>
           <h1 className="text-white text-center text-3xl font-bold mb-3">Assignment Details</h1>
           {/* Assignment Details */}
+
+          
           <div className="flex flex-col mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
           <section className="m-auto mt-4">
             <div className="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-1">
@@ -620,7 +625,8 @@ export default function Assignment({ role }) {
               </button>
 
             </div>
-
+            </>
+            )}
 
           {/* File Upload Section */}
           {role === "student" && !hasSubmitted  && 
