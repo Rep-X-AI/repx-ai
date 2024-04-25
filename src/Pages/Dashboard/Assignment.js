@@ -814,7 +814,7 @@ export default function Assignment({ role }) {
         {role === "student" && hasSubmitted && (
           <>
             <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
-              <h1 className="text-white text-center text-3xl font-bold my-4">
+              <h1 className="text-violet-800 text-center lg:text-3xl md:text-2xl sm:text-xl font-bold my-4">
                 Your Assignment has been succesfully submitted!
               </h1>
             </div>
