@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import upload from "../../Components/upload";
+import deleteFile from '../../Components/delete'
 
 export default function Assignment({ role }) {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ export default function Assignment({ role }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [submission , setSubmission] = useState([]) ;
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
   const baseUrl =
@@ -139,12 +142,6 @@ export default function Assignment({ role }) {
     }
   };
 
-  // const handleCancel = (e) => {
-  //   e.preventDefault();
-  //   setFile(null);
-  //   setFileName("");
-  // };
-
   const openModal = () => {
     setIsModalOpen(true);
     window.scrollTo({
@@ -178,7 +175,7 @@ export default function Assignment({ role }) {
         title: assignmentName,
         desc: description,
         deadline: selectedDate,
-        //marks: marks,
+        tmarks: marks,
       };
       edit(formData);
       closeModal();
@@ -280,11 +277,35 @@ export default function Assignment({ role }) {
 
   const currentMonthIndex = new Date().getMonth();
 
+
+  const fetchSubmissions = async ()=>{
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
+      );
+      if(response.data){
+        console.log(response.data)
+        setSubmission(response.data);
+      }    
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
-      console.log(response.data);
-      navigate("/dashboard");
+      await fetchSubmissions();
+      (submission.map(async (sub) => {
+        try {
+        await deleteFile(sub.answerUrl);
+        await deleteFile(question);
+          const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
+          console.log(response.data);
+          navigate("/dashboard");
+        } catch (error) {
+          console.log(error.message)
+        }
+    }));
     } catch (error) {
       console.error("Error:", error);
     }
