@@ -3,6 +3,7 @@ import "./Date.css";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import upload from "../../Components/upload";
 
 export default function CreateAssignment() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -88,53 +89,36 @@ export default function CreateAssignment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = new FormData();
-      data.append("file", questionPaper);
-      data.append("file", answerPaper);
-      var config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: "https://api.pdfrest.com/upload",
-        headers: {
-          "Api-Key": process.env.REACT_APP_FILE_API_KEY,
-        },
-        data: data,
-      };
+      
+      const qfile = await upload(questionPaper);
+      const ansfile = await upload(answerPaper);
+     
+        const formData = {
+          title: assignmentName,
+          desc: description,
+          questionUrl: qfile ? qfile : "nothing",
+          modelAnsUrl: ansfile ? ansfile : "nothing",
+          createdBy: currentUser?.uid,
+          teacherName: currentUser.displayName,
+          deadline: selectedDate,
+          tmarks: marks,
+          students: [],
+        };
 
-      axios(config)
-        .then(function (response) {
-          const qfile = "https://api.pdfrest.com/resource/" + response.data.files[0].id + "?format=file";
-          const ansfile = "https://api.pdfrest.com/resource/" + response.data.files[1].id + "?format=file";
+        create(formData);
 
-          const formData = {
-            title: assignmentName,
-            desc: description,
-            questionUrl: qfile ? qfile : "nothing",
-            modelAnsUrl: ansfile ? ansfile : "nothing",
-            createdBy: currentUser?.uid,
-            teacherName: currentUser.displayName,
-            deadline: selectedDate,
-            tmarks: marks,
-            students: [],
-          };
-
-          create(formData);
-
-          setAssignmentName("");
-          setSelectedDate(new Date());
-          setMarks(0);
-          setAnswerPaper(null);
-          setQuestionPaper(null);
-          setDescription("");
-          setQuestionFileName("");
-          setModelFileName("");
-          setTimeout(() => {
-            navigate("/dashboard")
-          }, 1000);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        setAssignmentName("");
+        setSelectedDate(new Date());
+        setMarks(0);
+        setAnswerPaper(null);
+        setQuestionPaper(null);
+        setDescription("");
+        setQuestionFileName("");
+        setModelFileName("");
+        setTimeout(() => {
+          navigate("/dashboard")
+        }, 1000);
+          
     } catch (error) {
       console.error("Error:", error);
     }

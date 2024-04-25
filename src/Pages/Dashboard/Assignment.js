@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import upload from "../../Components/upload";
 
 export default function Assignment({ role }) {
   const navigate = useNavigate();
@@ -23,8 +24,6 @@ export default function Assignment({ role }) {
   const [submissionsCount, setSubmissionsCount] = useState(0)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [question, setQuestion] = useState("")
-
-  var FormData = require("form-data");
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -113,40 +112,22 @@ export default function Assignment({ role }) {
       return;
     }
     try {
-      const data = new FormData();
-      data.append("file", file)
-      var config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: "https://api.pdfrest.com/upload",
-        headers: {
-          "Api-Key": process.env.REACT_APP_FILE_API_KEY,
-        },
-        data: data,
+      const myfile = await upload(file);
+      const formData = {
+        uid:currentUser.uid ,
+        answerUrl:myfile
       };
 
-      axios(config)
-        .then(function (response) {
-          const myfile = "https://api.pdfrest.com/resource/" + response.data.files[0].id + "?format=file";
-          const formData = {
-            uid:currentUser.uid ,
-            answerUrl:myfile
-          };
+      submit(formData);
 
-          submit(formData);
-
-          setHasSubmitted(true);
-          setFile(null);
-          setFileName("");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      setHasSubmitted(true);
+      setFile(null);
+      setFileName("");
+        
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
 
   const submit = async (data) =>{
     try {
@@ -315,8 +296,6 @@ export default function Assignment({ role }) {
     alert("Code Copied to Clipboard")
   }
 
-  
-
   const handleDownload = async (e) => {
     e.preventDefault();
     try {
@@ -324,30 +303,11 @@ export default function Assignment({ role }) {
         console.error('Question URL is empty.');
         return;
       }
-      console.log(question)
-      window.location.href = question;
-      const config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url:question , 
-        headers: {
-          'Api-Key': process.env.REACT_APP_FILE_API_KEY, 
-          'Accept': 'application/json' ,
-          'Content-Type': 'multipart/form-data'
-        }
-      };
-       axios.request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      window.open(question, '_blank');
     } catch (error) {
       console.error('Error retrieving resource:', error);
     }
   };
-  
   
 
   return (
