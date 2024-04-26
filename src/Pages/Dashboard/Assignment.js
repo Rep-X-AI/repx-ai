@@ -30,8 +30,6 @@ export default function Assignment({ role }) {
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [submission , setSubmission] = useState([]) ;
-
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
   const baseUrl =
     nodeEnv === "production"
@@ -282,39 +280,52 @@ export default function Assignment({ role }) {
   const currentMonthIndex = new Date().getMonth();
 
 
-  const fetchSubmissions = async ()=>{
+ const fetchSubmissions = async ()=>{
     try {
       const response = await axios.get(
         `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
       );
       if(response.data){
-        console.log(response.data)
-        setSubmission(response.data);
+        return (response.data);
       }    
     } catch (error) {
       console.log(error)
     }
   }
 
+  const delSubmissions = async () => {
+    try {
+      const submissions = await fetchSubmissions();
+      console.log(submissions);
+  
+      for (const [index, sub] of submissions.entries()) {
+        console.log(`Deleting submission ${index}: ${sub.answerUrl}`);
+        await deleteFile(sub.answerUrl);
+        console.log(`Submission ${index} deleted successfully.`);
+      } 
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  
   const handleDelete = async () => {
     try {
+      
+      await delSubmissions();
+
       await deleteFile(question);
       await deleteFile(answer);
-      await fetchSubmissions();
-      (submission.map(async (sub) => {
-        try {
-        await deleteFile(sub.answerUrl);
-        } catch (error) {
-          console.log(error.message)
-        }
-    }));
-    const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
-    console.log(response.data);
-    navigate("/dashboard");
+  
+      const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
+      console.log(response.data);
+
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
+
 
   const copyCode = () => {
     navigator.clipboard.writeText(id);
