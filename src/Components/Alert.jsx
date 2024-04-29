@@ -15,7 +15,7 @@ export default function Alert (props) {
               </span>
             </div>
             <div className="ms-3">
-              <h3 className="text-gray-800 font-semibold">
+              <h3 className="text-gray-800 text-left font-semibold">
                 {props.title}
               </h3>
               <p className="text-sm text-gray-700">

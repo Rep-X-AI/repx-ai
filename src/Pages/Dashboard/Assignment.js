@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import upload from "../../Components/upload";
 import deleteFile from '../../Components/delete'
+import Alert from '../../Components/Alert'
 
 export default function Assignment({ role }) {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function Assignment({ role }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [delpress, setDelpress] = useState(true);
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
   const baseUrl =
@@ -310,7 +312,7 @@ export default function Assignment({ role }) {
   
   const handleDelete = async () => {
     try {
-      
+      setDelpress(false);
       await delSubmissions();
 
       await deleteFile(question);
@@ -320,6 +322,7 @@ export default function Assignment({ role }) {
       console.log(response.data);
 
       navigate("/dashboard");
+      setDelpress(true);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -641,10 +644,14 @@ export default function Assignment({ role }) {
                       </p>
                     </li>
                   </div>
+                  {!delpress && (
+                    <Alert title='Deleting Assignment.' desc='Once Assignment Is Deleted You Will Be Redirected To Dashboard.' />
+                  )}
                 </section>
 
                 {role === "teacher" && (
                   <>
+                  {delpress && (
                     <div className="flex flex-row m-auto lg:w-1/4 md:w-full sm:w-full mt-5 justify-center bg-violet-500 p-2 rounded-full mb-5">
                       <svg
                         className="cursor-pointer hover:fill-violet-600 transition-all"
@@ -664,6 +671,7 @@ export default function Assignment({ role }) {
                       >
                         <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                       </svg>
+                      
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="white"
@@ -674,9 +682,9 @@ export default function Assignment({ role }) {
                         <path d="M503.7 189.8L327.7 37.9C312.3 24.5 288 35.3 288 56v80.1C127.4 137.9 0 170.1 0 322.3c0 61.4 39.6 122.3 83.3 154.1 13.7 9.9 33.1-2.5 28.1-18.6C66.1 312.8 132.9 274.3 288 272.1V360c0 20.7 24.3 31.5 39.7 18.2l176-152c11.1-9.6 11.1-26.8 0-36.3z" />
                       </svg>
                     </div>
+                    )}
                   </>
                 )}
-
                 <div>
                   <button
                     className="flex flex-row m-auto lg:w-1/2 md:w-full sm:w-full mt-5 justify-center hover:bg-violet-600 transition-all duration-300 bg-violet-500 p-2 rounded-full mb-5 text-white font-bold"
