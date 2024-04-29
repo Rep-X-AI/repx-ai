@@ -9,30 +9,38 @@ export default function JoinAssignment() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [code, setCode] = useState("");
-  const [alert,setAlert] = useState(false);
+  const [alertt,setAlertt] = useState(false);
+  const [title,settitle] = useState("");
+  const [desc,setdesc] = useState("");
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     const baseUrl =nodeEnv === "production"? "https://repx-ai-backend.vercel.app": "http://localhost:8080";
     try {
-      setAlert(true);
       const info ={code:code ,uid:currentUser.uid}
       console.log(info)
-      setAlert(true);
       const response = await axios.post(`${baseUrl}/api/assignments/joinAssignment`,info)
+      settitle("Redirecting To Dashboard When Assignment Joined.");
+      setdesc("Your assignment has been found and almost joined. Hold Tight !")
       console.log(response);
       if(response && response.data.message){
+        setAlertt(true);
         console.log("Joined Successfully")
         setCode("")
         setTimeout(() => {
-          setAlert(false);
+          setAlertt(false);
           navigate('/dashboard')
         }, 1000);
       }
       
     } catch (error) {
-      alert("Invalid")
+      settitle("Not Valid !");
+      setdesc("Try Entering A Valid Code Provided By Teacher !")
+      setAlertt(true);
+      setTimeout(() => {
+        setAlertt(false);
+      }, 2000);
     }
   }
 
@@ -65,11 +73,11 @@ export default function JoinAssignment() {
             onChange={handleChange}
           />
 
-        {alert && (
-          <Alert title="Redirecting To Dashboard When Assignment Joined." desc="Your assignment has been found and almost joined. Hold Tight !"/>
+        {alertt && (
+          <Alert title={title} desc={desc}/>
         )}
 
-        {!alert && (
+        {!alertt && (
           <button type="submit" className="hero-button-gradient mt-3 rounded-lg py-4 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 m-auto w-full">
             Join Assignment
           </button>
