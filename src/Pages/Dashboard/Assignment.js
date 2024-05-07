@@ -27,6 +27,7 @@ export default function Assignment({ role }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer,setAnswer] = useState("")
+  const [diagram,setdiagram] = useState("")
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,6 +57,7 @@ export default function Assignment({ role }) {
         setSelectedDate(new Date(response.data.deadline));
         setIsEvaluated(response.data.isEvaluated);
         setQuestion(response.data.questionUrl);
+        setdiagram(response.data.diagramurl);
         if (response.data.submissionCount) {
           setSubmissionsCount(response.data.submissionCount);
         }
@@ -317,6 +319,7 @@ export default function Assignment({ role }) {
 
       await deleteFile(question);
       await deleteFile(answer);
+      await deleteFile(diagram);
   
       const response = await axios.delete(`${baseUrl}/api/assignments/${id}`);
       console.log(response.data);

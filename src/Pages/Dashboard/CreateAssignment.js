@@ -13,10 +13,12 @@ export default function CreateAssignment() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [questionFileName, setQuestionFileName] = useState("");
   const [modelFileName, setModelFileName] = useState("");
+  const [modeldiagFileName, setModelDiagFileName] = useState("");
   const [assignmentName, setAssignmentName] = useState("");
   const [marks, setMarks] = useState(0);
   const [questionPaper, setQuestionPaper] = useState(null);
   const [answerPaper, setAnswerPaper] = useState(null);
+  const [diagramPaper, setDiagramPaper] = useState(null);
   const [description, setDescription] = useState("");
   const [alert,setAlert] = useState(false);
   var FormData = require("form-data");
@@ -94,12 +96,14 @@ export default function CreateAssignment() {
       setAlert(true); 
       const qfile = await upload(questionPaper);
       const ansfile = await upload(answerPaper);
+      const diagram = await upload(diagramPaper);
      
         const formData = {
           title: assignmentName,
           desc: description,
           questionUrl: qfile ? qfile : "nothing",
           modelAnsUrl: ansfile ? ansfile : "nothing",
+          diagramurl : diagram ? diagram : "nothing",
           createdBy: currentUser?.uid,
           teacherName: currentUser.displayName,
           deadline: selectedDate,
@@ -114,9 +118,11 @@ export default function CreateAssignment() {
         setMarks(0);
         setAnswerPaper(null);
         setQuestionPaper(null);
+        setDiagramPaper(null);
         setDescription("");
         setQuestionFileName("");
         setModelFileName("");
+        setModelDiagFileName("");
 
         setTimeout(() => {
           setAlert(false);
@@ -516,6 +522,82 @@ export default function CreateAssignment() {
             </div>
           </div>
         </div>
+
+        <div className="my-5 w-4/5 m-auto">
+            <label
+              htmlFor="modeldiagURL"
+              className="block text-center mb-2 font-medium text-purple-400"
+            >
+              Model Diagram PDF
+            </label>
+            <div
+              className="flex items-center justify-center w-full"
+              onDrop={(event) =>
+                handleFileUpload(event, setModelDiagFileName, setDiagramPaper)
+              }
+              onDragOver={(event) => handleDragOver(event)}
+            >
+              <label
+                htmlFor="modeldiag-file"
+                className="flex flex-col items-center justify-center w-full h-40 border-2 rounded-lg cursor-pointer bg-gradient-to-b from-purple-100 to-purple-400 text-black"
+              >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  {modeldiagFileName === "" && (
+                    <svg
+                      className="w-8 h-8 mb-4 text-gray-800"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                  )}
+                  {modeldiagFileName ? (
+                    <>
+                      <svg
+                        className="w-8 h-8 mb-4 text-gray-800"
+                        viewBox="0 0 20 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill="#757575"
+                          d="M20,0H4C2.896,0,2,0.896,2,2v20c0,1.104,0.896,2,2,2h16c1.104,0,2-0.896,2-2V4C22,1.796,21.204,0,20,0z M14,2v5h5 L14,2z M20,22H4V2h5v7h7V22z"
+                        />
+                      </svg>
+                      <p className="mb-2 text-sm text-gray-950">
+                        {modeldiagFileName}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="mb-2 text-sm text-gray-950">
+                        <span className="font-semibold">Click to upload</span>{" "}
+                        or drag and drop
+                      </p>
+                      <p className="text-xs text-gray-950">
+                        PDF (under 500kb){" "}
+                      </p>
+                    </>
+                  )}
+                </div>
+                <input
+                  id="modeldiag-file"
+                  type="file"
+                  className="hidden"
+                  onChange={(event) =>
+                    handleFileUpload(event, setModelDiagFileName, setDiagramPaper)
+                  }
+                />
+              </label>
+            </div>
+          </div>
 
         <div className="mt-3">
           <textarea

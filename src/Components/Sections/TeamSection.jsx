@@ -35,7 +35,7 @@ const TeamSection = () => {
         />
         <TeamPic
           name="Priyanshu Dutta"
-          designation="App Development"
+          designation="Machine Learning"
           photo="priyangshu"
           link="https://github.com/priyanshudutta04"
         />
