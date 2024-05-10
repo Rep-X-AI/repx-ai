@@ -46,8 +46,8 @@ export default function CreateAssignment() {
       return;
     }
 
-    if (!file.type.includes("pdf")) {
-      alert("Please select a PDF file.");
+    if (!file.type.includes("pdf") && !file.type.includes("jpg") && !file.type.includes("jpeg") && !file.type.includes("png")) {
+      alert("Please select a correct file.");
       return;
     }
     if (file.size > 500 * 1024) {
@@ -523,12 +523,12 @@ export default function CreateAssignment() {
           </div>
         </div>
 
-        <div className="my-5 w-4/5 m-auto">
+        <div className="my-5 w-full m-auto">
             <label
               htmlFor="modeldiagURL"
               className="block text-center mb-2 font-medium text-purple-400"
             >
-              Model Diagram PDF
+              Model Diagram Image (jpg , jpeg , png)
             </label>
             <div
               className="flex items-center justify-center w-full"
