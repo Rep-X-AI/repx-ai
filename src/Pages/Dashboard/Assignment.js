@@ -312,9 +312,26 @@ export default function Assignment({ role }) {
     }
   };
   
+
+  const delMLserver = async (code) => {
+    const dataa = {
+      assignmentCode : code
+    }
+    console.log(dataa);
+    try {
+    const response = await axios.post('/deleteAssignment', dataa);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
+    }
+  }
+
   const handleDelete = async () => {
     try {
       setDelpress(false);
+
+      delMLserver(id);
+
       await delSubmissions();
 
       await deleteFile(question);

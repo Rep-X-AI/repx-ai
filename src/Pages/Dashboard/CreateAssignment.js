@@ -85,10 +85,27 @@ export default function CreateAssignment() {
         `${baseUrl}/api/assignments/create`,
         data
       );
+      return response.data.code;
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+
+  const createMLserver = async (code, ans, dia) => {
+    const dataa = {
+      assignmentCode : code,
+      modelAnswer : ans,
+      modelDiagram : dia
+    }
+    console.log(dataa);
+    try {
+    const response = await axios.post('/createAssignment', dataa);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
+    }
+  }
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,8 +128,12 @@ export default function CreateAssignment() {
           students: [],
         };
 
-        create(formData);
-        
+        const code = await create(formData)
+
+        console.log(code)
+
+        createMLserver(code, ansfile, diagram);
+
         setAssignmentName("");
         setSelectedDate(new Date());
         setMarks(0);
