@@ -104,7 +104,7 @@ export default function CreateAssignment() {
     }
     console.log(dataa);
     try {
-    const response = await axios.post(`${webUrl}/createAssignment`, dataa);
+    const response = await axios.post(`/createAssignment`, dataa);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);

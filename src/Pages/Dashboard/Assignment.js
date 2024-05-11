@@ -324,7 +324,7 @@ export default function Assignment({ role }) {
     }
     console.log(dataa);
     try {
-    const response = await axios.post(`${webUrl}/deleteAssignment`, dataa);
+    const response = await axios.post(`/deleteAssignment`, dataa);//${webUrl}
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
