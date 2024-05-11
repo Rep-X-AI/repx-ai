@@ -32,7 +32,7 @@ export default function CreateAssignment() {
       : "http://localhost:8080";
   const webUrl =
     nodeEnv === "production"
-      ? "https://repxai-dummy.vercel.app/"
+      ? "https://repxai-dummy.vercel.app"
       : "http://localhost:3000";
 
   const handleFileUpload = (event, setFileName, setFileState) => {

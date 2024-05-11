@@ -41,7 +41,7 @@ export default function Assignment({ role }) {
 
     const webUrl =
       nodeEnv === "production"
-        ? "https://repxai-dummy.vercel.app/"
+        ? "https://repxai-dummy.vercel.app"
         : "http://localhost:3000";
 
   useEffect(() => {
