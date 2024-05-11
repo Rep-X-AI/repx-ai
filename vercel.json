@@ -1,7 +1,10 @@
 {
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/createAssignment", "dest": "http://35.193.123.233/createAssignment" }
+      { "src": "/createAssignment", "dest": "http://35.193.123.233/createAssignment" },
+      { "src": "/deleteAssignments", "dest": "http://35.193.123.233/deleteAssignments" },
+      { "src": "/evaluateAssignment", "dest": "http://35.193.123.233/evaluateAssignment" }
     ]
   }
+  
   
