@@ -30,6 +30,10 @@ export default function CreateAssignment() {
     nodeEnv === "production"
       ? "https://repx-ai-backend.vercel.app"
       : "http://localhost:8080";
+  const webUrl =
+    nodeEnv === "production"
+      ? "https://repxai-dummy.vercel.app/"
+      : "http://localhost:3000";
 
   const handleFileUpload = (event, setFileName, setFileState) => {
     event.preventDefault();
@@ -100,7 +104,7 @@ export default function CreateAssignment() {
     }
     console.log(dataa);
     try {
-    const response = await axios.post('/createAssignment', dataa);
+    const response = await axios.post(`${webUrl}/createAssignment`, dataa);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);

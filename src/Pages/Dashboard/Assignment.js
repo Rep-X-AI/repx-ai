@@ -39,6 +39,11 @@ export default function Assignment({ role }) {
       ? "https://repx-ai-backend.vercel.app"
       : "http://localhost:8080";
 
+    const webUrl =
+      nodeEnv === "production"
+        ? "https://repxai-dummy.vercel.app/"
+        : "http://localhost:3000";
+
   useEffect(() => {
     const fetchAssignment = async () => {
       try {
@@ -319,7 +324,7 @@ export default function Assignment({ role }) {
     }
     console.log(dataa);
     try {
-    const response = await axios.post('/deleteAssignment', dataa);
+    const response = await axios.post(`${webUrl}/deleteAssignment`, dataa);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
