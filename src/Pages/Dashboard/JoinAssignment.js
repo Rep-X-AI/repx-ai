@@ -17,9 +17,10 @@ export default function JoinAssignment() {
     e.preventDefault();
     const nodeEnv = process.env.REACT_APP_NODE_ENV;
     const baseUrl =nodeEnv === "production"? "https://repx-ai-backend.vercel.app": "http://localhost:8080";
+
     try {
-      const info ={code:code ,uid:currentUser.uid}
-      console.log(info)
+      const info ={code:code ,uid:currentUser.uid, name:currentUser.displayName}
+    
       const response = await axios.post(`${baseUrl}/api/assignments/joinAssignment`,info)
       settitle("Redirecting To Dashboard When Assignment Joined.");
       setdesc("Your assignment has been found and almost joined. Hold Tight !")

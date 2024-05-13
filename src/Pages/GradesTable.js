@@ -23,7 +23,9 @@ const GradesTable = ({role}) => {
   const [teacher, setTeacher] = useState("");
   const [marks, setMarks] = useState(100);
   const [submissions,setSubmissions] = useState([])
-
+  const [notSubmitted , setNotSubmitted] = useState([])
+  const [editMarks,setEditMarks] = useState(0)
+  const [editModalVisibility , setEditModalVisibility ] = useState(false) ;
 
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
@@ -58,8 +60,14 @@ const GradesTable = ({role}) => {
               `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
             );
             if(response.data){
-              console.log(response.data)
-              setSubmissions(response.data);
+              //console.log(response.data)
+              if(role==='student'){
+                setSubmissions(response.data);
+              }
+              else if(role==='teacher'){
+                setSubmissions(response.data.submissions)
+                setNotSubmitted(response.data.notSubmittedStudents)
+              }
             }    
           } catch (error) {
             console.log(error)
@@ -70,7 +78,7 @@ const GradesTable = ({role}) => {
           fetchAssignment();
           fetchSubmission();
         }
-      }, [role, currentUser, baseUrl, id, navigate]);
+      }, [role, currentUser, baseUrl, id, navigate , submissions ]);
 
 
       const handleDownload = async (file) => {
@@ -86,6 +94,58 @@ const GradesTable = ({role}) => {
       };
 
 
+      const handleEvaluateMLServer = async () => {
+        try {
+            await Promise.all(submissions.map(async (submission) => {
+                const data = {
+                    studentAnswer: submission.answerUrl,
+                    assignmentCode: id,
+                    totalMarks: marks
+                };
+                console.log(data);
+                try {
+                    const response = await axios.post(`/evaluateAssignment`, data);
+                    if(response.data){
+                      console.log(response.data)
+                      try {
+                        const evaluationBody = {studentId:submission.student , marks : response.data.marks}
+                        const evaluationResponse = await axios.post(`${baseUrl}/api/assignments/evaluate/${id}` ,evaluationBody) ;    
+                        if(evaluationResponse.data){
+                          console.log(evaluationResponse.data)
+                        }
+                      } catch (error) {
+                        console.log(error.message)
+                      }  
+                    }
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }));
+        } catch (error) {
+            console.error(error);
+        }
+    };    
+
+    const handleEditMarks =async(studentId)=>{
+      try {
+        const editBody = {studentId:studentId , marks : editMarks};
+        const editResponse = await axios.post(`${baseUrl}/api/assignments/evaluate/${id}` ,editBody) ;   
+        if(editResponse){
+          console.log(editResponse.data)
+        } 
+        setEditMarks(0);
+        setEditModalVisibility(false);
+      } catch (error) {
+        console.log(error.message)
+      }
+      
+    }
+
+    const changeEditMarks = (e) =>{
+      setEditMarks(e.target.value)
+    }
+
+  
   return (
     <>
 
@@ -129,6 +189,11 @@ const GradesTable = ({role}) => {
               </li>
             </div>
           </section>
+
+          {role==='teacher' && <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95" onClick={handleEvaluateMLServer}>
+            Evaluate Now!
+          </button>}
+
         </div>
 
         {/* Students' Grades */}
@@ -153,6 +218,23 @@ const GradesTable = ({role}) => {
                     <div className="flex">
                     <svg  onClick={() => handleDownload(submission.answerUrl)}  className="w-12 mt-3 transition-all duration-300 hover:fill-violet-800 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
                     <div className="grade tracking-wide text-white font-bold bg-violet-700 p-2 rounded-md">{submission.marks===null?"Not Evaluated Yet":submission.marks}</div>
+                    { submission.marks!=null && 
+                    <svg
+                        className="cursor-pointer hover:fill-violet-600 transition-all"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="white"
+                        viewBox="0 0 512 512"
+                        onClick={()=>{setEditModalVisibility(true)}}
+                      >
+                        <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+                      </svg>
+                      }
+                      { submission.marks!=null &&  editModalVisibility && <>
+                       <input className="w-12 w-12 rounded-xl" type="text"  value ={editMarks} onChange={changeEditMarks}/>
+                       <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mx-2" onClick={ () => {handleEditMarks(submission.student) } }>Edit</button>
+                       <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 "  onClick={()=>{setEditModalVisibility(false)}} >Cancel</button>
+                       </>
+                      }      
                     </div>
                   </div>
                 </section>
@@ -162,6 +244,24 @@ const GradesTable = ({role}) => {
             <p className = "students-grades card-section p-4 mx-6 text-center font-sm text-xl text-violet-600" style={{ background: 'linear-gradient(to bottom, rgb(252 231 243), rgb(253 242 248), rgb(252 231 243))', borderRadius: '5px', margin: "0px" }}>No submissions yet .</p>
           )}
           </div>
+
+          <div className='mt-1'>
+          {notSubmitted && notSubmitted.length > 0 && (
+            notSubmitted.map((student ,index) => {
+              return (
+                <section key={index} className="students-grades card-section p-2">
+                  <div className="student-grade flex justify-between p-4 bg-gradient-to-b from-purple-100 to-purple-400 items-center rounded-md">
+                    <div className="student text-gray-900 font-bold items-center">{submissions.length + index+1}. {student}</div>
+                    <div className="flex">
+                    <div className="grade tracking-wide text-white font-bold bg-violet-700 p-2 rounded-md">Not Submitted yet</div>
+                    </div>
+                  </div>
+                </section>
+              );
+            })
+          )}
+          </div>
+
         </div>
         </div>
       </div>

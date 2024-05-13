@@ -25,9 +25,9 @@ export default function AllAssignments({ role }) {
                   if (response.data.assignments && response.data.assignments.length > 0) {
                       console.log("Assignments Data:", response.data.assignments); 
                       setAssignments(response.data.assignments);
-                      console.log(response.data.assignments)
+                      //console.log(response.data.assignments)
                   } else {
-                      console.log("No assignments data found.");
+                      //console.log("No assignments data found.");
                   }
               } catch (error) {
                   console.log("Error fetching assignments:", error);

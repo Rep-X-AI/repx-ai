@@ -20,7 +20,7 @@ export default function CreateAssignment() {
   const [answerPaper, setAnswerPaper] = useState(null);
   const [diagramPaper, setDiagramPaper] = useState(null);
   const [description, setDescription] = useState("");
-  const [alert,setAlert] = useState(false);
+  const [alertt,setAlert] = useState(false);
   var FormData = require("form-data");
 
   const navigate = useNavigate()
@@ -50,8 +50,8 @@ export default function CreateAssignment() {
       return;
     }
 
-    if (!file.type.includes("pdf") && !file.type.includes("jpg") && !file.type.includes("jpeg") && !file.type.includes("png")) {
-      alert("Please select a correct file.");
+    if (!file.type.includes("pdf") ) {
+      alert("Please select a PDF.");
       return;
     }
     if (file.size > 500 * 1024) {
@@ -61,6 +61,34 @@ export default function CreateAssignment() {
     setFileName(file.name);
     setFileState(file);
   };
+
+  const handleImageUpload = (event, setFileName, setFileState) => {
+    event.preventDefault();
+    let file;
+    if (event.target && event.target.files && event.target.files.length > 0) {
+      file = event.target.files[0];
+    } else if (
+      event.dataTransfer &&
+      event.dataTransfer.files &&
+      event.dataTransfer.files.length > 0
+    ) {
+      file = event.dataTransfer.files[0];
+    } else {
+      return;
+    }
+
+    if ( !file.type.includes("jpg") && !file.type.includes("jpeg") && !file.type.includes("png")) {
+      alert("Please select a correct Image Format.");
+      return;
+    }
+    if (file.size > 500 * 1024) {
+      alert("File size exceeds 500kb limit.");
+      return;
+    }
+    setFileName(file.name);
+    setFileState(file);
+  };
+
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -558,7 +586,7 @@ export default function CreateAssignment() {
             <div
               className="flex items-center justify-center w-full"
               onDrop={(event) =>
-                handleFileUpload(event, setModelDiagFileName, setDiagramPaper)
+                handleImageUpload(event, setModelDiagFileName, setDiagramPaper)
               }
               onDragOver={(event) => handleDragOver(event)}
             >
@@ -607,7 +635,7 @@ export default function CreateAssignment() {
                         or drag and drop
                       </p>
                       <p className="text-xs text-gray-950">
-                        PDF (under 500kb){" "}
+                      Image (jpg , jpeg , png){" "}
                       </p>
                     </>
                   )}
@@ -617,7 +645,7 @@ export default function CreateAssignment() {
                   type="file"
                   className="hidden"
                   onChange={(event) =>
-                    handleFileUpload(event, setModelDiagFileName, setDiagramPaper)
+                    handleImageUpload(event, setModelDiagFileName, setDiagramPaper)
                   }
                 />
               </label>
@@ -636,11 +664,11 @@ export default function CreateAssignment() {
           />
         </div>
         <>
-        {alert && (
+        {alertt && (
           <Alert title="Redirecting To Dashboard When Assignment Created." desc="Your assignment has been created. You can update it from the dashboard if needed." />
         )}
         </>
-        {!alert && (
+        {!alertt && (
         <button
           type="submit"
           className="hero-button-gradient mt-3 rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
