@@ -5,7 +5,7 @@ const TeamSection = () => {
   return (
     <section
       id="team"
-      className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36"
+      className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36" data-aos="fade-right" data-aos-duration="1000" data-aos-once="false"
     >
       <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
         <div className="text-center">

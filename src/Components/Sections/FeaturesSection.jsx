@@ -1,10 +1,14 @@
 import React from 'react'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const FeaturesSection = () => {
   return (
     <section
       id="features"
-      className="overflow-hidden pt-28 md:pt-32 xl:pt-36"
+      className="overflow-hidden pt-28 md:pt-32 xl:pt-36" data-aos="fade-up" data-aos-duration="500" data-aos-offset="50"
     >
       <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
         <div className="text-center">

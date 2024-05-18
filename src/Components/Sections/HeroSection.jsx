@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 const HeroSection = ({ page, getsta }) => {
+
   return (
     <section
       id="home"
@@ -24,14 +30,14 @@ const HeroSection = ({ page, getsta }) => {
         <div className="text-center">
           <a
             href="/#"
-            className="hero-subtitle-gradient hover:hero-subtitle-hover relative mb-5 font-medium text-sm inline-flex items-center gap-2 py-2 px-5 rounded-full"
+            className="hero-subtitle-gradient hover:hero-subtitle-hover relative mb-5 font-medium text-sm inline-flex items-center gap-2 py-2 px-5 rounded-full" data-aos="fade-up" data-aos-duration='500'
           >
             <img src="/icon-title.svg" alt="icon" />
-            <span className="hero-subtitle-text">
+            <span className="hero-subtitle-text" >
               Your Ultimate Report Evaluator!
             </span>
           </a>
-          <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl">
+          <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl" data-aos="fade-up" data-aos-offset="50">
             Revolutionizing Education
             <br />
             <div className="neww mt-5">
@@ -43,7 +49,7 @@ const HeroSection = ({ page, getsta }) => {
           </h1>
           <p
             className="max-w-[500px] mx-auto mt-12 mb-9 font-medium md:text-lg text-gray-400 relative "
-            id="lild"
+            id="lild"  data-aos="fade-up"
           >
             Experience education redefined. Our AI analyzes reports with
             precision, offering personalized insights. Elevate learning
@@ -52,7 +58,7 @@ const HeroSection = ({ page, getsta }) => {
           </p>
           {/*<div className="flex flex-wrap justify-center items-center gap-8">*/}
           <Link
-            to={page}
+            to={page} data-aos="fade-up"
             className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
             disabled={true}
           >
