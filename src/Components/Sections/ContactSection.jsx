@@ -3,7 +3,7 @@ import "./contact.css"
 
 const ContactSection = (props) => {
   return (
-    <section id="contact" className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36" data-aos="fade-up" data-aos-duration="500" data-aos-offset="50">
+    <section id="contact" className="overflow-hidden min-h-screen pt-28 md:pt-32 xl:pt-36" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
       <>
         <div className="max-w-[1222px] mx-auto px-4 sm:px-8 xl:px-0">
           <div className="text-center">
