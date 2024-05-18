@@ -78,7 +78,7 @@ const GradesTable = ({role}) => {
           fetchAssignment();
           fetchSubmission();
         }
-      }, [role, currentUser, baseUrl, id,  submissions ]);
+      }, [role, currentUser, baseUrl, id]);
 
 
       const handleDownload = async (file) => {
