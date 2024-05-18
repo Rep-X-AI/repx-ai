@@ -230,7 +230,7 @@ const GradesTable = ({role}) => {
                       </svg>
                       }
                       { submission.marks!=null &&  editModalVisibility && <>
-                       <input className="w-12 w-12 rounded-xl" type="text"  value ={editMarks} onChange={changeEditMarks}/>
+                       <input className="w-12 rounded-xl" type="text"  value ={editMarks} onChange={changeEditMarks}/>
                        <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mx-2" onClick={ () => {handleEditMarks(submission.student) } }>Edit</button>
                        <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 "  onClick={()=>{setEditModalVisibility(false)}} >Cancel</button>
                        </>
