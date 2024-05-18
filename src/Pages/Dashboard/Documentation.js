@@ -1,5 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function Documentation() {
   return (
@@ -12,7 +17,7 @@ export default function Documentation() {
       </p>
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
 
-      <section className="bg-transparent dark:bg-transparent">
+      <section className="bg-transparent dark:bg-transparent" data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
           <div className="py-8 px-6 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
               <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
                   <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">Here's a documentation to help you out.</h2>

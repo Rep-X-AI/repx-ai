@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../Components/Alert";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function JoinAssignment() {
 
@@ -63,10 +68,12 @@ export default function JoinAssignment() {
 
       <div className="w-full overflow-hidden h-96 max-w-3xl bg-transparent m-auto p-6 rounded-lg">
         <form className="mt-4" onSubmit={handleSubmit}>
-          <p className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
+          <p 
+          data-aos="fade-in" data-aos-duration="700" data-aos-offset="2"
+          className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
             Enter class code provided by teacher.
           </p>
-          <input
+          <input data-aos="fade-in" data-aos-duration="700" data-aos-offset="2"
             className="w-full bg-gradient-to-b text-center font-semibold from-purple-100 to-purple-300 text-violet-800 rounded-lg outline-none p-4 border-2 placeholder-gray-700 focus:ring-1 focus:ring-purple-400 focus:ring-offset-1 focus:ring-offset-transparent mb-1"
             type="text"
             placeholder="Assignment Code"
@@ -79,7 +86,9 @@ export default function JoinAssignment() {
         )}
 
         {!alertt && (
-          <button type="submit" className="hero-button-gradient mt-3 rounded-lg py-4 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 m-auto w-full">
+          <button
+          data-aos="fade-in" data-aos-duration="700" data-aos-offset="2"
+          type="submit" className="hero-button-gradient mt-3 rounded-lg py-4 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 m-auto w-full">
             Join Assignment
           </button>
 

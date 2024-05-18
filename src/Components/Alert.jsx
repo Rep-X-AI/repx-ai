@@ -1,9 +1,14 @@
 import React from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function Alert (props) {
   return (
     <>
-      <div className="space-y-5">
+      <div className="space-y-5" data-aos="zoom-in" data-aos-duration="700" data-aos-offset="2">
         <div className="bg-gradient-to-b from-purple-100 to-purple-400 mt-3 border-4 border-violet-500 rounded-lg p-4" role="alert">
           <div className="flex">
             <div className="flex-shrink-0">         

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Upgrade() {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col" >
       <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
           {" "}Upgrade To Pro{" "}
       </h1>
@@ -12,7 +12,7 @@ export default function Upgrade() {
       </p>
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
 
-      <section className="bg-transparent dark:bg-transparent">
+      <section className="bg-transparent dark:bg-transparent" data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
           <div className="py-8 px-6 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
               <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
                   <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">Effortless Engagement & Organization For Pros</h2>

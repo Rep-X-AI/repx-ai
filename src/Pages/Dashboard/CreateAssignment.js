@@ -5,6 +5,11 @@ import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import upload from "../../Components/upload";
 import Alert from "../../Components/Alert";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function CreateAssignment() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -278,7 +283,7 @@ export default function CreateAssignment() {
         your students.
       </p>
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
-      <form
+      <form data-aos="fade-in" data-aos-duration="700" data-aos-offset="2"
         className="w-full sm:px-16 lg:px-20 xl:px-40 flex flex-col flex-wrap text-xl mb-10 py-5"
         onSubmit={handleSubmit}
       >

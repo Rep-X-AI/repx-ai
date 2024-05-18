@@ -1,7 +1,11 @@
 import React from 'react'
 import { useAuth } from '../../Context/AuthContext';
 import AllAssignments from './AllAssignments'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+
+AOS.init();
 
 const DashboardHome = ({ role }) => {
   const { currentUser } = useAuth();
@@ -23,8 +27,8 @@ const DashboardHome = ({ role }) => {
 
   return (
     <>
-      <div className='bg-transparent overflow-hidden p-4 md:p-6 rounded mb-8 relative bg-cover' style={{ backgroundImage: "url(/dbbg.webp)" }}>
-        <div className='relative'>
+      <div className='bg-transparent overflow-hidden p-4 md:p-6 rounded mb-8 relative bg-cover' style={{ backgroundImage: "url(/dbbg.webp)" }} data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
+        <div className='relative' >
           <h1 className='text-white font-bold text-2xl md:text-3xl leading-snug mb-2'>
             {dynamicGreeting}
           </h1>

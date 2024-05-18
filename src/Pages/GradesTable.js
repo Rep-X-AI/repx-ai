@@ -3,6 +3,11 @@ import { useAuth } from "../Context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 const GradesTable = ({role}) => {
 
@@ -158,7 +163,7 @@ const GradesTable = ({role}) => {
           <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
 
 
-    <div className="flex flex-col md:flex-row p-3">
+    <div className="flex flex-col md:flex-row p-3" data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
 
       <div className="flex flex-col justify-center items-center w-full md:w-100 " style={{marginTop:"20px",marginBottom:"20px"}}>
 
@@ -167,24 +172,24 @@ const GradesTable = ({role}) => {
         <div className="flex flex-col mb-10 p-6 mx-auto max-w-full text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
           <section className="m-auto">
             <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
-              <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Title</h3>
+              <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Title</h3>
               <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{assignmentName}</p>
             </li>
             <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
-              <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
+              <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
               <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{description}</p>
             </li>
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
               <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
-                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
+                <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
                 <p className="text-violet-800 font-semibold text-lg">{teacher}</p>
               </li>
               <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
-                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
+                <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
                 <p className="text-violet-800 font-semibold text-lg">{selectedDate.toLocaleDateString()}</p>
               </li>
               <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
-                <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
+                <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
                 <p className="text-violet-800 font-semibold text-lg">{marks}</p>
               </li>
             </div>

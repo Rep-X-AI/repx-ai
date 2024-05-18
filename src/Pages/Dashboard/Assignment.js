@@ -7,6 +7,11 @@ import { useParams } from "react-router-dom";
 import upload from "../../Components/upload";
 import deleteFile from '../../Components/delete'
 import Alert from '../../Components/Alert'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function Assignment({ role }) {
   const navigate = useNavigate();
@@ -375,7 +380,7 @@ export default function Assignment({ role }) {
 
   return (
     <>
-      <div className="w-full max-w-screen-lg mx-auto p-4">
+      <div className="w-full max-w-screen-lg mx-auto p-4" data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
         {role === "teacher" && (
           <>
             <h1 className="text-3xl mb-1 text-left font-bold leading-none md:text-4xl lg:text-5xl pb-2 bg-gradient-to-bl from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent">
@@ -402,7 +407,7 @@ export default function Assignment({ role }) {
         <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
         <>
           {isModalOpen && (
-            <div className="my-5">
+            <div className="my-5" data-aos="fade-up" data-aos-duration="700" data-aos-offset="2">
               <h1 className="text-white text-center text-3xl font-bold mb-3">
                 Update Assignment
               </h1>
@@ -610,16 +615,17 @@ export default function Assignment({ role }) {
           )}
 
           {!isModalOpen && (
-            <>
+            <div data-aos="fade-down" data-aos-duration="700" data-aos-offset="2">
               <h1 className="text-white text-center text-3xl font-bold mb-3">
                 Assignment Details
               </h1>
               {/* Assignment Details */}
-              <div className="flex flex-col mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
+              <div    
+              className="flex flex-col mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
                 <section className="m-auto mt-4">
                   <div className="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-1">
                     <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
-                      <h3 className="text-black text-2xl font-bold mb-3 lg:text-left lg:ml-5 sm:text-center md:text-center">
+                      <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left lg:ml-5 sm:text-center md:text-center">
                         Assignment Title
                       </h3>
                       <p className="text-violet-800 text-center py-1 font-semibold  text-xl lg:ml-1 ty lg:w-3/4 sm:w-full">
@@ -627,7 +633,7 @@ export default function Assignment({ role }) {
                       </p>
                     </li>
                     <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
-                      <h3 className="text-black text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center lg:ml-5 ">
+                      <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center lg:ml-5 ">
                         Assignment Code
                       </h3>
                       <p className="text-violet-800 text-center  py-1 font-semibold  text-xl lg:ml-1 ty lg:w-full sm:w-full">
@@ -636,7 +642,7 @@ export default function Assignment({ role }) {
                     </li>
                   </div>
                   <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
-                    <h3 className="text-black text-2xl font-bold mb-3 lg:text-center mt-5 sm:text-center md:text-center">
+                    <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-center mt-5 sm:text-center md:text-center">
                       Assignment Details
                     </h3>
                     <p className="text-violet-800 md:text-center lg:text-center font-semibold sm:text-center pr-4 text-xl">
@@ -645,7 +651,7 @@ export default function Assignment({ role }) {
                   </li>
                   <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
                     <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
-                      <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">
+                      <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">
                         Teacher Name
                       </h3>
                       <p className="text-violet-800 font-semibold text-lg">
@@ -653,7 +659,7 @@ export default function Assignment({ role }) {
                       </p>
                     </li>
                     <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
-                      <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">
+                      <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">
                         Deadline
                       </h3>
                       <p className="text-violet-800 text-center  py-1 font-semibold  text-xl lg:ml-1 ty lg:mt-0 md:mt-0 sm:mt-3 lg:w-full sm:w-full">
@@ -661,7 +667,7 @@ export default function Assignment({ role }) {
                       </p>
                     </li>
                     <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
-                      <h3 className="text-black font-bold text-2xl lg:text-center md:text-left sm:text-left">
+                      <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">
                         Total Marks
                       </h3>
                       <p className="text-violet-800 font-semibold text-lg">
@@ -759,7 +765,7 @@ export default function Assignment({ role }) {
                   Show Grades
                 </button>
               </div>
-            </>
+            </div>
           )}
 
           {/* File Upload Section */}

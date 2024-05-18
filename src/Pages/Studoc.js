@@ -3,6 +3,11 @@ import s1 from './Dashboard/SSs/s1.png'
 import s2 from './Dashboard/SSs/s2.png'
 import s3 from './Dashboard/SSs/s3.png'
 import s4 from './Dashboard/SSs/s4.png'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 export default function Studoc() {
   return (
@@ -14,7 +19,7 @@ export default function Studoc() {
           Empowering students through educational resources online.
       </p>
       <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
-      <ul>
+      <ul data-aos="fade-in" data-aos-duration="700" data-aos-offset="2">
           <li className="list-disc mb-3 mt-2 text-lg font-normal text-white lg:text-l text-left ml-3">
             <p className='m-3 text-purple-300 text-xl'>Step 1</p>
             After creating your account and joining our vibrant community, you'll be whisked away to your personalized dashboard. Here, everything you need to excel in your student journey is conveniently organized at your fingertips.
