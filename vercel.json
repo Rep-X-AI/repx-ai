@@ -1,9 +1,9 @@
 {
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/createAssignment", "dest": "http://35.193.123.233/createAssignment" },
-      { "src": "/deleteAssignment", "dest": "http://35.193.123.233/deleteAssignment" },
-      { "src": "/evaluateAssignment", "dest": "http://35.193.123.233/evaluateAssignment" }
+      { "src": "/createAssignment", "dest": "http://34.30.189.207/createAssignment" },
+      { "src": "/deleteAssignment", "dest": "http://34.30.189.207/deleteAssignment" },
+      { "src": "/evaluateAssignment", "dest": "http://34.30.189.207/evaluateAssignment" }
     ]
   }
   
