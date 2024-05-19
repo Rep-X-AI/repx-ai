@@ -78,7 +78,7 @@ const Signup = () => {
   return (
     <>
       <div className="bg-gradient-to-t from-indigo-950 to-slate-900 h-screen flex flex-col items-center justify-center">
-        <div className="bg-gradient-to-t from-purple-300 to-blue-100 jff p-8 pt-6 rounded shadow-md w-96">
+        <div className="bg-gradient-to-t from-purple-300 to-purple-100 jff p-8 pt-6 rounded shadow-md w-96">
           <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
           {error && (
             <div
