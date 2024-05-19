@@ -114,6 +114,7 @@ const GradesTable = ({role}) => {
                       console.log(response.data)
                       try {
                         const evaluationBody = {studentId:submission.student , marks : response.data.marks}
+                        console.log(evaluationBody)
                         const evaluationResponse = await axios.post(`${baseUrl}/api/assignments/evaluate/${id}` ,evaluationBody) ;    
                         if(evaluationResponse.data){
                           console.log(evaluationResponse.data)
