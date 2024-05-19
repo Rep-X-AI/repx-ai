@@ -58,7 +58,7 @@ const HeroSection = ({ page, getsta }) => {
           </p>
           {/*<div className="flex flex-wrap justify-center items-center gap-8">*/}
           <Link
-            to={page} data-aos="fade-up"
+            to={page} data-aos="fade-up" data-aos-duration='1500'
             className="hero-button-gradient inline-flex rounded-lg py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80"
             disabled={true}
           >
