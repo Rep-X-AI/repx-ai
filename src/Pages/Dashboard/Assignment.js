@@ -889,12 +889,12 @@ export default function Assignment({ role }) {
               <p className="font-bold mb-4 text-violet-700 text-xl text-center">
                 Evaluate quickly with the power of AI
               </p>
-              // <Link
-              //   to="/dashboard/evaluate"
-              //   className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
-              // >
-              //   Evaluate Now!
-              // </Link>
+                     {/* <Link
+                to="/dashboard/evaluate"
+                className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95"
+              >
+                Evaluate Now!
+              </Link> */}
             </div>
           </>
         )}
