@@ -89,7 +89,7 @@ export default function Assignment({ role }) {
     if (currentUser && currentUser.uid) {
       fetchAssignment();
     }
-  }, [role, currentUser, baseUrl, id, navigate, hasSubmitted]);
+  }, [role, currentUser, baseUrl, id, navigate, hasSubmitted, submissionsCount]);
 
   const handleFileUpload = (event, setFileName, setFileState) => {
     event.preventDefault();
@@ -681,7 +681,7 @@ export default function Assignment({ role }) {
                 </section>
 
                 {role === "teacher" && (
-                  <>
+                  <div className="sm:w-40 lg:w-full mx-auto">
                   {delpress && (
                     <div className="flex flex-row m-auto lg:w-1/4 md:w-full sm:w-full mt-5 justify-center bg-violet-500 p-2 rounded-full mb-5">
                       <svg
@@ -714,9 +714,9 @@ export default function Assignment({ role }) {
                       </svg>
                     </div>
                     )}
-                  </>
+                  </div>
                 )}
-                <div>
+                <div className="sm:w-72 lg:w-full mx-auto">
                   <button
                     className="flex flex-row m-auto lg:w-1/2 md:w-full sm:w-full mt-5 justify-center hover:bg-violet-600 transition-all duration-300 bg-violet-500 p-2 rounded-full mb-5 text-white font-bold"
                     onClick={handleDownload}
@@ -864,7 +864,7 @@ export default function Assignment({ role }) {
         {role === "student" && hasSubmitted && (
           <>
             <div className="bg-gradient-to-b from-purple-100 to-purple-400 rounded-lg shadow-lg p-6 mb-6 text-center">
-              <h1 className="text-violet-800 text-center lg:text-3xl md:text-2xl sm:text-xl font-bold my-4">
+              <h1 className="text-violet-800 text-center lg:text-3xl md:text-2xl sm:text-xl font-bold my-4" data-aos="zoom-in" data-aos-once="true">
                 Your Assignment has been succesfully submitted!
               </h1>
             </div>
@@ -887,7 +887,7 @@ export default function Assignment({ role }) {
                 </p>
               </div>
               <p className="font-bold mb-4 text-violet-700 text-xl text-center">
-                Evaluate quickly with the power of AI
+                Evaluate quickly with the power of AI from "Show Grades".
               </p>
                      {/* <Link
                 to="/dashboard/evaluate"

@@ -39,7 +39,26 @@ const GradesTable = ({role}) => {
       ? "https://repx-ai-backend.vercel.app"
       : "http://localhost:8080";
 
-  
+      const fetchSubmission = async () => {
+        try {
+          const response = await axios.get(
+            `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
+          );
+          if(response.data){
+            //console.log(response.data)
+            if(role==='student'){
+              setSubmissions(response.data);
+            }
+            else if(role==='teacher'){
+              setSubmissions(response.data.submissions)
+              setNotSubmitted(response.data.notSubmittedStudents)
+            }
+          }    
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
       useEffect(() => {
         const fetchAssignment = async () => {
           try {
@@ -59,25 +78,7 @@ const GradesTable = ({role}) => {
             navigate("/assigment-not-found-or-not-registered-in-the-assignment");
           }
         };
-        const fetchSubmission = async () => {
-          try {
-            const response = await axios.get(
-              `${baseUrl}/api/assignments/get-submissions-${role}/${id}?uid=${currentUser.uid}`
-            );
-            if(response.data){
-              //console.log(response.data)
-              if(role==='student'){
-                setSubmissions(response.data);
-              }
-              else if(role==='teacher'){
-                setSubmissions(response.data.submissions)
-                setNotSubmitted(response.data.notSubmittedStudents)
-              }
-            }    
-          } catch (error) {
-            console.log(error)
-          }
-        }
+        
     
         if (currentUser && currentUser.uid) {
           fetchAssignment();
@@ -118,6 +119,7 @@ const GradesTable = ({role}) => {
                         const evaluationResponse = await axios.post(`${baseUrl}/api/assignments/evaluate/${id}` ,evaluationBody) ;    
                         if(evaluationResponse.data){
                           console.log(evaluationResponse.data)
+                          fetchSubmission();
                         }
                       } catch (error) {
                         console.log(error.message)
@@ -141,6 +143,7 @@ const GradesTable = ({role}) => {
         } 
         setEditMarks(0);
         setEditModalVisibility(false);
+        fetchSubmission();
       } catch (error) {
         console.log(error.message)
       }
@@ -223,10 +226,10 @@ const GradesTable = ({role}) => {
                     <div className="student text-gray-900 font-bold items-center">{index+1}. {submission.studentname}</div>
                     <div className="flex">
                     <svg  onClick={() => handleDownload(submission.answerUrl)}  className="w-12 mt-3 transition-all duration-300 hover:fill-violet-800 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
-                    <div className="grade tracking-wide text-white font-bold bg-violet-700 p-2 rounded-md">{submission.marks===null?"Not Evaluated Yet":submission.marks}</div>
-                    { submission.marks!=null && (role==='teacher') &&
+                    <div className="grade tracking-wide items-center flex text-white font-bold bg-violet-700 p-2 rounded-md">{submission.marks===null?"N/E":submission.marks}</div>
+                    {!editModalVisibility && submission.marks!=null && (role==='teacher') &&
                     <svg
-                        className="cursor-pointer hover:fill-violet-600 transition-all"
+                        className="cursor-pointer hover:fill-violet-800 p-2 transition-all duration-200 h-8 w-8 bg-violet-500 rounded-full"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="white"
                         viewBox="0 0 512 512"
@@ -235,11 +238,20 @@ const GradesTable = ({role}) => {
                         <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
                       </svg>
                       }
-                      { submission.marks!=null && (role==='teacher') && editModalVisibility && <>
-                       <input className="w-12 rounded-xl" type="text"  value ={editMarks} onChange={changeEditMarks}/>
-                       <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mx-2" onClick={ () => {handleEditMarks(submission.student) } }>Edit</button>
-                       <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 "  onClick={()=>{setEditModalVisibility(false)}} >Cancel</button>
-                       </>
+                      { submission.marks!=null && (role==='teacher') && editModalVisibility &&
+                       <div className="ml-2 flex">
+                       <input className="w-12 rounded-md text-center border-2 border-violet-600" type="text"  value ={editMarks} onChange={changeEditMarks}/>
+                       <button className="hero-button-gradient rounded-full py-1 px-2 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mx-2" onClick={ () => {handleEditMarks(submission.student) } }>
+                        
+                       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 mx-auto" viewBox="0 0 448 512"><path fill="white" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+
+                        </button>
+                       <button className="hero-button-gradient rounded-full py-1 px-2 lg:w-16 sm:w-16 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 "  onClick={()=>{setEditModalVisibility(false)}} >
+
+                       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 mx-auto" viewBox="0 0 384 512"><path fill="white" d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg>
+
+                       </button>
+                       </div>
                       }      
                     </div>
                   </div>

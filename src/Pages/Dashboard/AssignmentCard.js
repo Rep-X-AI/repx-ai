@@ -35,7 +35,7 @@ const AssignmentCard = ({ code, deadline, title, desc, role, createdBy }) => {
         </div>
       </div> */}
       
-    <div className="max-w-sm p-6 bg-gradient-to-br from-fuchsia-400 to-violet-900 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" data-aos="fade-left" data-aos-duration="700" data-aos-offset="2">
+    <div className="max-w-sm p-6 al bg-gradient-to-br from-fuchsia-400 to-violet-900 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" data-aos="fade-left" data-aos-duration="700" data-aos-offset="2">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title} :</h5>
         <p className="mb-3 font-normal text-lg text-violet-700 dark:text-violet-800">{desc.split(" ").slice(0, 15).join(" ")} ... </p>
         <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Assignment Code :</h1>
