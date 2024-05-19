@@ -157,7 +157,7 @@ export default function CreateAssignment() {
           desc: description,
           questionUrl: qfile ? qfile : "nothing",
           modelAnsUrl: ansfile ? ansfile : "nothing",
-          diagramurl : diagram ? diagram : "nothing",
+          diagramurl : diagram ? diagram : "none",
           createdBy: currentUser?.uid,
           teacherName: currentUser.displayName,
           deadline: selectedDate,

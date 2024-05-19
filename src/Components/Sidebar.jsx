@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+AOS.init();
 
 const Sidebar = ({ role }) => {
   const location = useLocation();
@@ -36,7 +41,7 @@ const Sidebar = ({ role }) => {
 
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700">
+      <nav className="fixed top-0 z-50 w-full border-b bg-gray-800 border-gray-700" data-aos="fade-down" data-aos-duration='800'>
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -99,7 +104,7 @@ const Sidebar = ({ role }) => {
       </nav>
 
       <aside id="logo-sidebar" className={`z-10 w-64 fixed inset-y-0 left-0 pt-[4rem] flex-shrink-0 lg:translate-x-0  bg-gray-900 transition-transform duration-300 ease-in-out transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}>
+        }`} data-aos="fade-right" data-aos-duration='800'>
         <div className="h-full overflow-hidden px-3 pb-4 pt-6 bg-gray-800">
           <ul className="space-y-3 font-medium">
             <CustomLink to="/dashboard">

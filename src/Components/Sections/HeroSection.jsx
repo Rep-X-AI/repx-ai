@@ -30,14 +30,14 @@ const HeroSection = ({ page, getsta }) => {
         <div className="text-center">
           <a
             href="/#"
-            className="hero-subtitle-gradient hover:hero-subtitle-hover relative mb-5 font-medium text-sm inline-flex items-center gap-2 py-2 px-5 rounded-full" data-aos="fade-up" data-aos-duration='500'
+            className="hero-subtitle-gradient hover:hero-subtitle-hover relative mb-5 font-medium text-sm inline-flex items-center gap-2 py-2 px-5 rounded-full" data-aos="fade-up" data-aos-duration='1500'
           >
             <img src="/icon-title.svg" alt="icon" />
             <span className="hero-subtitle-text" >
               Your Ultimate Report Evaluator!
             </span>
           </a>
-          <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl" data-aos="fade-up" data-aos-offset="50">
+          <h1 className="text-white mb-6 text-3xl font-bold sm:text-5xl xl:text-5xl" data-aos="fade-up" data-aos-offset="50" data-aos-duration='1500'>
             Revolutionizing Education
             <br />
             <div className="neww mt-5">
@@ -49,7 +49,7 @@ const HeroSection = ({ page, getsta }) => {
           </h1>
           <p
             className="max-w-[500px] mx-auto mt-12 mb-9 font-medium md:text-lg text-gray-400 relative "
-            id="lild"  data-aos="fade-up"
+            id="lild"  data-aos="fade-up" data-aos-duration='1500'
           >
             Experience education redefined. Our AI analyzes reports with
             precision, offering personalized insights. Elevate learning
