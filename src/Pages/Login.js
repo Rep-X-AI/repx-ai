@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <>
       <div className="bg-gradient-to-t from-indigo-950 to-slate-900 min-h-screen flex flex-col items-center justify-center">
-        <div className="bg-gradient-to-t from-sky-300 to-blue-100 p-8 rounded shadow-md w-96">
+        <div className="bg-gradient-to-t jff from-purple-300 to-blue-100 p-8 rounded shadow-md w-96">
           <h2 className="text-3xl font-bold mb-8 text-center">Log In</h2>
           {error && (
             <div
@@ -148,7 +148,7 @@ const Login = () => {
         </div>
         <div className="text-center text-white mt-4">
           Need an account?{" "}
-          <Link to="/signup" className="text-sky-300 font-bold tracking-wide">
+          <Link to="/signup" className="text-purple-300 font-bold tracking-wide">
             Sign Up
           </Link>
         </div>
