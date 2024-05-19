@@ -1,7 +1,7 @@
 {
   "name": "repx-ai",
   "version": "0.1.0",
-  "proxy": "http://34.30.189.207",
+  "proxy": "http://130.211.227.175/",
   "private": true,
   "dependencies": {
     "@dotmind/react-use-pwa": "^1.0.4",
