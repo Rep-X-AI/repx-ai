@@ -18,7 +18,7 @@ const ChangelogPage = () => {
           </p>
           <hr className="h-px my-8 mt-1 bg-gray-700 border-0" />
 
-        <section className="text-gray-600 " data-aos="slide-up" data-aos-duration="700" data-aos-offset="2">
+        <section className="text-gray-600 " data-aos="fade-up" data-aos-duration="700" data-aos-offset="2">
           <div className="container mx-auto py-12">
             <div className="flex flex-col items-start rounded-xl  sm:items-center">
               <ol className="relative w-full border-l border-gray-200 dark:border-gray-700">

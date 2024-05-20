@@ -879,10 +879,10 @@ export default function Assignment({ role }) {
             </h1>
             <div className="flex flex-col px-5 mb-10 mx-auto max-w-full lg:text-center md:text-cecnter sm:text-left bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg py-5">
               <div className="mb-5 grid lg:grid-cols-2 md:grid-cols-1 sm:-grid-cols-1 ">
-                <p className="font-semibold mb-4 text-xl">
+                <p className="mb-4 text-violet-600 text-2xl font-bold">
                   Assignments Filed : {submissionsCount}
                 </p>
-                <p className="font-semibold mb-4 text-xl">
+                <p className="mb-4 text-violet-600 text-2xl font-bold">
                   Assignments Due : {pendingCount}
                 </p>
               </div>

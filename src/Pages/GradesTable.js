@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Alert from "../../src/Components/Alert"
 
 
 AOS.init();
@@ -31,6 +32,7 @@ const GradesTable = ({role}) => {
   const [notSubmitted , setNotSubmitted] = useState([])
   const [editMarks,setEditMarks] = useState(0)
   const [editModalVisibility , setEditModalVisibility ] = useState(false) ;
+  const [alert, setAlert] = useState(false);
 
 
   const nodeEnv = process.env.REACT_APP_NODE_ENV;
@@ -102,6 +104,7 @@ const GradesTable = ({role}) => {
 
       const handleEvaluateMLServer = async () => {
         try {
+            setAlert(true);
             await Promise.all(submissions.map(async (submission) => {
                 const data = {
                     studentAnswer: submission.answerUrl,
@@ -118,6 +121,7 @@ const GradesTable = ({role}) => {
                         console.log(evaluationBody)
                         const evaluationResponse = await axios.post(`${baseUrl}/api/assignments/evaluate/${id}` ,evaluationBody) ;    
                         if(evaluationResponse.data){
+                          setAlert(false);
                           console.log(evaluationResponse.data)
                           fetchSubmission();
                         }
@@ -175,33 +179,39 @@ const GradesTable = ({role}) => {
             <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white lg:text-center md:text-center sm:text-center">Assignment Details</h2>
         <div className="flex flex-col mb-10 p-6 mx-auto max-w-full text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
           <section className="m-auto">
-            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
+            <li className="assignment mb-4 px-4 list-none">
               <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Title</h3>
               <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{assignmentName}</p>
             </li>
-            <li className="assignment mb-4 px-4 lg:list-none sm:list-disc md:list-disc">
+            <li className="assignment mb-4 px-4 list-none">
               <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 text-2xl font-bold mb-3 lg:text-left sm:text-center md:text-center">Assignment Details</h3>
               <p className="text-violet-800 md:text-center lg:text-left font-semibold sm:-text-center text-xl lg:ml-4">{description}</p>
             </li>
             <div className="grid lg:mt-8 lg:grid-cols-3 sm:mt-5 md:mt-5 sm:grid-cols-2 md:grid-cols-2">
-              <li className="assignment mb-4 px-4 lg:list-none sm:list-disc">
+              <li className="assignment mb-4 px-4 list-none">
                 <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Teacher Name</h3>
                 <p className="text-violet-800 font-semibold text-lg">{teacher}</p>
               </li>
-              <li className="deadline mb-4 px-4 lg:list-none sm:list-disc">
+              <li className="deadline mb-4 px-4 list-none">
                 <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Deadline</h3>
                 <p className="text-violet-800 font-semibold text-lg">{selectedDate.toLocaleDateString()}</p>
               </li>
-              <li className="marks mb-4 px-4 lg:list-none sm:list-disc">
+              <li className="marks mb-4 px-4 list-none">
                 <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 to-violet-800 font-bold text-2xl lg:text-center md:text-left sm:text-left">Total Marks</h3>
                 <p className="text-violet-800 font-semibold text-lg">{marks}</p>
               </li>
             </div>
           </section>
 
-          {role==='teacher' && <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95" onClick={handleEvaluateMLServer}>
-            Evaluate Now!
-          </button>}
+          {role==='teacher' && !alert &&  
+              <button className="hero-button-gradient rounded-lg py-3 px-3 lg:w-96 sm:w-80 m-auto text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95" onClick={handleEvaluateMLServer}>
+                Evaluate Now!
+              </button>
+          }
+
+          {role==='teacher' && alert &&  
+              <Alert title={"Hold Tight !"} desc={"AI is evaluating all the submissions !!"}/>
+          }
 
         </div>
 

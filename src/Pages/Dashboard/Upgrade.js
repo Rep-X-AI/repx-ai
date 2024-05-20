@@ -18,7 +18,9 @@ export default function Upgrade() {
                   <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">Effortless Engagement & Organization For Pros</h2>
           </div>
           <div className="space-y-8 lg:grid lg:grid-cols-2 sm:gap-6 xl:gap-10 lg:space-y-0"> 
-            <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
+            <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg"
+            data-aos="fade-right"
+            >
                 <h3 className="mb-4 text-2xl font-bold">Monthly</h3>
                 <p className="font-light text-gray-900 sm:text-lg dark:text-gray-900">Ditch the chaos : Stay organized & connected with your class with this monthly plan.</p>
                 <div className="flex justify-center items-baseline my-8">
@@ -46,7 +48,9 @@ export default function Upgrade() {
                 <Link to='/' className="hero-button-gradient rounded-lg py-3 px-7 text-white font-medium tracking-wide transition-all duration-300 ease-in-out hover:opacity-80 hover:scale-95 mt-16">Get started</Link>
             </div>
             
-            <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg">
+            <div className="flex flex-col p-6 mx-auto max-w-lg text-center bg-gradient-to-b from-purple-100 to-purple-400 text-black border-2 rounded-lg"
+            data-aos="fade-left"
+            >
                 <h3 className="mb-4 text-2xl font-bold">Yearly</h3>
                 <p className="font-light text-gray-900 sm:text-lg dark:text-gray-900">Ditch the chaos : Stay organized & connected with your class with this yearly plan.</p>
                 <div className="flex justify-center items-baseline my-8">
